@@ -2,6 +2,7 @@
   <div class="root-container">
     <HeaderContainer title="大屏系统调研" />
 
+    <!-- 布局  -->
     <PageLayout>
       <template #left>
         <ModuleCard  v-for="(item, index) in layoutList.left"
@@ -18,10 +19,14 @@
         </ModuleCard>
       </template>
     </PageLayout>
+
+    <!--  天地图  -->
+    <MapContainer />
   </div>
 </template>
 <script>
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
+import MapContainer from '@/components/MapContainer/index.vue'
 import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
 import Module1 from '@/components/Module/Module1/index.vue'
@@ -31,6 +36,7 @@ import Module2 from '@/components/Module/Module2/index.vue'
 export default {
   components: {
     HeaderContainer,
+    MapContainer,
     ModuleCard,
     PageLayout,
     Module1,
