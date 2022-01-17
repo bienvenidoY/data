@@ -31,7 +31,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header-container {
-  height: 80px;
+  height: var(--header-height);
   background: #42b983;
 }
 .header-title {

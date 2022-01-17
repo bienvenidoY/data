@@ -3,19 +3,27 @@
     <HeaderContainer title="大屏系统调研" />
 
     <!-- 布局  -->
-    <PageLayout>
+    <PageLayout
+      @warning="onWarning"
+      @error="onError"
+      @info="onInfo"
+    >
       <template #left>
-        <ModuleCard  v-for="(item, index) in layoutList.left"
-                     :title="item.title"
-                     :key="index">
+        <ModuleCard
+          v-for="(item, index) in layoutList.left"
+          :key="index"
+          :title="item.title"
+        >
           <components :is="item.key" />
         </ModuleCard>
       </template>
       <template #right>
-        <ModuleCard  v-for="(item, index) in layoutList.right"
-                     :title="item.title"
-                     :key="index">
-          <components :is="item.key"  />
+        <ModuleCard
+          v-for="(item, index) in layoutList.right"
+          :key="index"
+          :title="item.title"
+        >
+          <components :is="item.key" />
         </ModuleCard>
       </template>
     </PageLayout>
@@ -89,6 +97,14 @@ export default {
       }
     }
   },
+  methods: {
+    onWarning() {
+    },
+    onError() {
+    },
+    onInfo() {
+    },
+  }
 }
 </script>
 <style lang="scss" scoped>
