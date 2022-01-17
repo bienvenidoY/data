@@ -41,6 +41,12 @@ import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
 import Module1 from '@/components/Module/Module1/index.vue'
 import Module2 from '@/components/Module/Module2/index.vue'
+import Module3 from '@/components/Module/Module3/index.vue'
+import Module4 from '@/components/Module/Module4/index.vue'
+import Module5 from '@/components/Module/Module5/index.vue'
+import Module6 from '@/components/Module/Module6/index.vue'
+import Module7 from '@/components/Module/Module7/index.vue'
+import Module8 from '@/components/Module/Module8/index.vue'
 
 export default {
   components: {
@@ -50,6 +56,12 @@ export default {
     PageLayout,
     Module1,
     Module2,
+    Module3,
+    Module4,
+    Module5,
+    Module6,
+    Module7,
+    Module8,
   },
   data() {
     return {
@@ -64,27 +76,27 @@ export default {
         },
         {
           title: '设备概况',
-          key: 'Module1',
+          key: 'Module3',
         },
         {
           title: '巡检维护',
-          key: 'Module1',
+          key: 'Module4',
         },
         {
           title: '河道水质',
-          key: 'Module1',
+          key: 'Module5',
         },
         {
           title: '异常情况',
-          key: 'Module1',
+          key: 'Module6',
         },
         {
           title: '协同处置',
-          key: 'Module1',
+          key: 'Module7',
         },
         {
           title: '事件存档',
-          key: 'Module1',
+          key: 'Module8',
         },
       ]
     }

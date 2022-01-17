@@ -59,7 +59,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$pageLayout-item: 200px;
+$pageLayout-item: 400px;
 // 天地图zIndex 400
 $pageLayout-index: 499;
 
@@ -72,7 +72,7 @@ $pageLayout-index: 499;
   .page-layout-item {
     width: $pageLayout-item;
     height: 100%;
-    background-color: rgb(244, 221, 0, 0.5);
+    background-color: rgb(244, 221, 0, 0.7);
   }
   .page-layout-header {
     position: absolute;
