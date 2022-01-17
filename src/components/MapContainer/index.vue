@@ -1,7 +1,10 @@
 <template>
   <div class="map-container">
-    引入天地图
-    <!--    <tdt-map />-->
+    <!-- 引入天地图-->
+    <tdt-map
+      :center="state.center"
+      :zoom="state.zoom"
+    />
   </div>
 </template>
 <script>
@@ -13,7 +16,12 @@ export default {
   props: {
   },
   data() {
-    return {}
+    return {
+      state: {
+        center: [113.280637, 23.125178],
+        zoom: 12,
+      }
+    }
   },
   methods: {},
 }

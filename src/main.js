@@ -19,7 +19,7 @@ Vue.use(VueCompositionApi)
 
 Vue.use(VueTianditu, {
   v: '4.0',
-  tk: 'your map token'
+  tk: '228fac3f70384e8c8cbcedf2c25e2049'
 });
 new Vue({
   render: h => h(App),

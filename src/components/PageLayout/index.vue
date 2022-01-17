@@ -1,6 +1,6 @@
 <template>
   <div class="page-layout">
-    <div>
+    <div class="page-layout-header">
       <slot name="header" />
     </div>
     <div class="page-layout-left page-layout-container">
@@ -60,14 +60,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 $pageLayout-item: 200px;
+// 天地图zIndex 400
+$pageLayout-index: 499;
 
 .page-layout {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 9;
-  width: 100%;
-  height: 100%;
 
   .page-layout-container {
     height: calc(100vh - var(--header-height));
@@ -76,17 +72,26 @@ $pageLayout-item: 200px;
   .page-layout-item {
     width: $pageLayout-item;
     height: 100%;
-    background-color: rgb(244, 221, 0);
+    background-color: rgb(244, 221, 0, 0.5);
+  }
+  .page-layout-header {
+    position: absolute;
+    left: 0;
+    height: var(--header-height);
+    width: 100%;
+    z-index: $pageLayout-index;
   }
 
   .page-layout-left {
     position: absolute;
     left: 0;
+    z-index: $pageLayout-index;
     top: var(--header-height);
   }
   .page-layout-right {
     position: absolute;
     right: 0;
+    z-index: 499;
     top: var(--header-height);
   }
 
