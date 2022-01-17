@@ -5,6 +5,7 @@
       @warning="onWarning"
       @error="onError"
       @info="onInfo"
+      @changeType="onChangeType"
     >
       <template #header>
         <HeaderContainer title="大屏系统调研" />
@@ -103,6 +104,8 @@ export default {
     onError() {
     },
     onInfo() {
+    },
+    onChangeType() {
     },
   }
 }

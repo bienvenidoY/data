@@ -9,10 +9,16 @@
       </div>
       <div class="left-item left-action">
         <div
+          class="left-item--select"
+          @click="$emit('changeType')"
+        >
+          选择器
+        </div>
+        <div
           class="left-item--btn"
           @click="$emit('info')"
         >
-          点
+          <el-button>会话</el-button>
         </div>
       </div>
     </div>
@@ -53,6 +59,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+$pageLayout-item: 200px;
+
 .page-layout {
   position: fixed;
   left: 0;
@@ -66,9 +74,9 @@ export default {
   }
 
   .page-layout-item {
-    width: 200px;
+    width: $pageLayout-item;
     height: 100%;
-    background-color: rgba(0,0 ,0, 0.1);
+    background-color: rgb(244, 221, 0);
   }
 
   .page-layout-left {
@@ -93,7 +101,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: end;
+    justify-content: space-between;
   }
 }
 </style>
