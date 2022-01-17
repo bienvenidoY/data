@@ -15,10 +15,12 @@
     ]
   },
   "dependencies": {
+    "@vue/composition-api": "^1.4.4",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
     "element-ui": "^2.15.6",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-tianditu": "^2.7.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
