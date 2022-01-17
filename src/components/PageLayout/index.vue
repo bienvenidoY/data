@@ -5,7 +5,12 @@
         <slot name="left" />
       </div>
       <div class="left-item left-action">
-        <div class="left-item--btn" @click="$emit('info')">点</div>
+        <div
+          class="left-item--btn"
+          @click="$emit('info')"
+        >
+          点
+        </div>
       </div>
     </div>
     <div class="page-layout-right page-layout-container">
@@ -13,8 +18,18 @@
         <slot name="right" />
       </div>
       <div class="right-item">
-        <div class="right-item--btn right-item--btn1" @click="$emit('warning')">设备告警</div>
-        <div class="right-item--btn right-item--btn2" @click="$emit('error')">问题上报</div>
+        <div
+          class="right-item--btn right-item--btn1"
+          @click="$emit('warning')"
+        >
+          设备告警
+        </div>
+        <div
+          class="right-item--btn right-item--btn2"
+          @click="$emit('error')"
+        >
+          问题上报
+        </div>
       </div>
     </div>
   </div>

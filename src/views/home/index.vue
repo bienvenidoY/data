@@ -40,7 +40,6 @@ import ModuleCard from '@/components/ModuleCard/index.vue'
 import Module1 from '@/components/Module/Module1/index.vue'
 import Module2 from '@/components/Module/Module2/index.vue'
 
-
 export default {
   components: {
     HeaderContainer,

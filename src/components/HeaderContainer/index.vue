@@ -1,12 +1,14 @@
 <template>
   <div class="header-container">
-    <div class="header-title flex-center">{{ title }}
+    <div class="header-title flex-center">
+      {{ title }}
       <div class="header-weather">
-        <div class="weather">多云转晴</div>
+        <div class="weather">
+          多云转晴
+        </div>
         <CurrentTime />
       </div>
     </div>
-
   </div>
 </template>
 <script>
