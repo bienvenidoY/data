@@ -1,5 +1,8 @@
 <template>
   <div class="page-layout">
+    <div>
+      <slot name="header" />
+    </div>
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item left-item">
         <slot name="left" />
@@ -51,7 +54,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-layout {
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
 
   .page-layout-container {
     height: calc(100vh - var(--header-height));
@@ -60,16 +68,18 @@ export default {
   .page-layout-item {
     width: 200px;
     height: 100%;
-    background-color: #ffff00;
+    background-color: rgba(0,0 ,0, 0.1);
   }
 
   .page-layout-left {
     position: absolute;
     left: 0;
+    top: var(--header-height);
   }
   .page-layout-right {
     position: absolute;
     right: 0;
+    top: var(--header-height);
   }
 
   .left-item {

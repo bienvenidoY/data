@@ -1,13 +1,14 @@
 <template>
   <div class="root-container">
-    <HeaderContainer title="大屏系统调研" />
-
     <!-- 布局  -->
     <PageLayout
       @warning="onWarning"
       @error="onError"
       @info="onInfo"
     >
+      <template #header>
+        <HeaderContainer title="大屏系统调研" />
+      </template>
       <template #left>
         <ModuleCard
           v-for="(item, index) in layoutList.left"
@@ -108,6 +109,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .root-container {
-
+  height: 100%;
+  width: 100%;
 }
 </style>
