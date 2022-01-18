@@ -1,6 +1,32 @@
 <template>
-  <div className="module3">
-    做一个布局模块
+  <div class="module3 flex">
+    <div
+      v-for="(item, index) in options"
+      :key="index"
+      class="module3-column"
+    >
+      <div class="module3-column-item--title">
+        {{ item.title }}
+      </div>
+      <div
+        v-for="(chunk, chunkIndex) in item.column"
+        :key="chunkIndex"
+        class="module3-column-item flex-center"
+      >
+        <div
+          class="column-item--icon"
+          :style="{ backgroundImage: `url(${chunk.icon})` }"
+        />
+        <div class="column-item-chunk flex-col-between">
+          <div class="column-item--label">
+            {{ chunk.label }}
+          </div>
+          <div class="column-item--value">
+            {{ data[chunk.prop] || 0 }}{{ chunk.suffix }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -11,43 +37,52 @@ export default {
   },
   data() {
     return {
-      chartOpt: {
-        tooltip: {
-          trigger: 'item'
+      options: [
+        {
+          title: '管网概况',
+          column: [
+            {
+              label: '雨水管网',
+              icon: '',
+              prop: '',
+              suffix: '公里',
+            },{
+              label: '污水管网',
+              icon: '',
+              prop: '',
+              suffix: '公里',
+            },{
+              label: '感知点位',
+              icon: '',
+              prop: '',
+              suffix: '个',
+            },
+          ]
         },
-        legend: {
-          top: '5%',
-          left: 'center'
+        {
+          title: '排口概况',
+          column: [
+            {
+              label: '雨水排口',
+              icon: '',
+              prop: '',
+              suffix: '个',
+            },{
+              label: '污水排口',
+              icon: '',
+              prop: '',
+              suffix: '个',
+            },{
+              label: '感知点位',
+              icon: '',
+              prop: '',
+              suffix: '个',
+            },
+          ]
         },
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '40',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: 1048, name: 'Search Engine' },
-              { value: 735, name: 'Direct' },
-              { value: 580, name: 'Email' },
-              { value: 484, name: 'Union Ads' },
-              { value: 300, name: 'Video Ads' }
-            ]
-          }
-        ]
+      ],
+      data: {
+
       }
     }
   },
@@ -60,5 +95,23 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+.module3-column {
+  width: 50%;
+  .module3-column-item--title {
+    text-align: center;
+  }
+  .module3-column-item {
+    margin-top: 20px;
+    .column-item--icon {
+      width: 60px;
+      height: 60px;
+      background: black;
+      margin-right: 10px;
+    }
+    .column-item--chunk {
+      height: 100%;
+    }
+  }
+}
 </style>
 

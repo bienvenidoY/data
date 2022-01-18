@@ -4,6 +4,7 @@
       indicator-position="none"
       arrow="never"
       :interval="10000"
+      height="200px"
     >
       <el-carousel-item
         v-for="item in 4"
