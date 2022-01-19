@@ -1,54 +1,52 @@
 <template>
-  <div className="module3">
-    做一个布局模块
+  <div class="module6 flex">
+    <div
+      v-for="item in column"
+      :key="item.prop"
+      class="module6-item"
+    >
+      <div class="module6-item-label">
+        {{ item.label }}
+      </div>
+      <div class="module6-item-value">
+        {{ data[item.prop] }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
 
 export default {
-  name: 'Module3',
-  components: {
-  },
+  name: 'Module6',
+  components: {},
   data() {
     return {
-      chartOpt: {
-        tooltip: {
-          trigger: 'item'
+      column: [
+        {
+          label: '管网告警',
+          prop: 'a',
         },
-        legend: {
-          top: '5%',
-          left: 'center'
+        {
+          label: '排口告警',
+          prop: 'b',
+        }, {
+          label: '河道告警',
+          prop: 'c',
+        }, {
+          label: '巡检问题',
+          prop: 'd',
+        }, {
+          label: '监管问题',
+          prop: 'e',
         },
-        series: [
-          {
-            name: 'Access From',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-              show: false,
-              position: 'center'
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '40',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: 1048, name: 'Search Engine' },
-              { value: 735, name: 'Direct' },
-              { value: 580, name: 'Email' },
-              { value: 484, name: 'Union Ads' },
-              { value: 300, name: 'Video Ads' }
-            ]
-          }
-        ]
-      }
+      ],
+      data: {
+        a: '1',
+        b: '2',
+        c: '2',
+        d: '2',
+        e: '2',
+      },
     }
   },
   mounted() {
@@ -59,6 +57,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.module6 {
+  flex-wrap: wrap;
+}
+.module6-item {
+  width: 150px;
+}
 </style>
 

@@ -18,6 +18,7 @@ import {
 } from 'echarts/charts'
 // 引入提示框，标题，直角坐标系组件，组件后缀都为 Component
 import {
+  DatasetComponent,
   TitleComponent,
   TooltipComponent,
   GridComponent,
@@ -32,6 +33,7 @@ import {
 echarts.use(
   [TitleComponent, TooltipComponent,
     LegendComponent,
+    DatasetComponent,
     GridComponent, BarChart,  LineChart,
     PieChart,CanvasRenderer]
 )

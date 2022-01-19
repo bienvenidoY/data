@@ -4,7 +4,7 @@
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="100%"
+      height="200px"
     />
   </div>
 </template>
@@ -12,29 +12,58 @@
 import ChartView from '@/components/ChartView/index.vue'
 
 export default {
-  name: 'Module1',
+  name: 'Module7',
   components: {
     ChartView,
   },
   data() {
     return {
       chartOpt: {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          top: 'bottom',
+
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: 40,
+          containLabel: true
+        },
         xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          type: 'value',
+          boundaryGap: [0, 0.01]
         },
         yAxis: {
-          type: 'value'
+          type: 'category',
+          data: ['问题上报事件', '设备告警事件']
         },
         series: [
           {
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: 'line',
-            areaStyle: {}
+            name: '待处置',
+            type: 'bar',
+            stack: 'total',
+            data: [103, 489]
+          },
+          {
+            name: '处置中',
+            type: 'bar',
+            stack: 'total',
+            data: [195, 438]
+          },
+          {
+            name: '已完成',
+            type: 'bar',
+            stack: 'total',
+            data: [195, 238]
           }
         ]
-      },
+      }
     }
   },
   mounted() {

@@ -35,18 +35,24 @@
   </div>
 </template>
 <script>
+import { options, largeOptions } from './options'
+/* es6 import 解构失败 https://www.jianshu.com/p/ba6f582d5249 */
+import ModuleComponents from '@/components/Module/index'
+const {
+  Module1,
+  Module2,
+  Module3,
+  Module4,
+  Module5,
+  Module6,
+  Module7,
+  Module8,
+} = ModuleComponents
+
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
 import MapContainer from '@/components/MapContainer/index.vue'
 import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
-import Module1 from '@/components/Module/Module1/index.vue'
-import Module2 from '@/components/Module/Module2/index.vue'
-import Module3 from '@/components/Module/Module3/index.vue'
-import Module4 from '@/components/Module/Module4/index.vue'
-import Module5 from '@/components/Module/Module5/index.vue'
-import Module6 from '@/components/Module/Module6/index.vue'
-import Module7 from '@/components/Module/Module7/index.vue'
-import Module8 from '@/components/Module/Module8/index.vue'
 
 export default {
   components: {
@@ -65,48 +71,27 @@ export default {
   },
   data() {
     return {
-      options: [
-        {
-          title: '企业概况',
-          key: 'Module1',
-        },
-        {
-          title: '智能感知',
-          key: 'Module2',
-        },
-        {
-          title: '设备概况',
-          key: 'Module3',
-        },
-        {
-          title: '巡检维护',
-          key: 'Module4',
-        },
-        {
-          title: '河道水质',
-          key: 'Module5',
-        },
-        {
-          title: '异常情况',
-          key: 'Module6',
-        },
-        {
-          title: '协同处置',
-          key: 'Module7',
-        },
-        {
-          title: '事件存档',
-          key: 'Module8',
-        },
-      ]
     }
   },
   computed: {
     layoutList() {
-      const limit = 4
+      // 0 1980尺寸，1 大屏尺寸
+      const layoutType = 0
+      const obj = {
+        0: {
+          list: options,
+          limit: 4,
+        },
+        1: {
+          list: largeOptions,
+          limit: 8,
+        }
+      }
+      const { list, limit } = obj[layoutType]
+
       return {
-        left: this.options.slice(0, limit),
-        right: this.options.slice(limit, this.options.length)
+        left: list.slice(0, limit),
+        right: options.slice(limit, list.length)
       }
     }
   },
