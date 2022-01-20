@@ -59,10 +59,6 @@ export const largeOptions =  [
     key: 'Module4',
   },
   {
-    title: '设备概况',
-    key: 'Module3',
-  },
-  {
     title: '设备告警',
     key: 'Module11',
   },

@@ -96,14 +96,14 @@ export default {
         },
         1: {
           list: largeOptions,
-          limit: 8,
+          limit: 6,
         }
       }
       const { list, limit } = obj[layoutType]
 
       return {
         left: list.slice(0, limit),
-        right: options.slice(limit, list.length)
+        right: list.slice(limit, list.length)
       }
     }
   },
