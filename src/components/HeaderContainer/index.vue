@@ -1,10 +1,13 @@
 <template>
   <div class="header-container">
     <div class="header-title flex-center">
-      {{ title }}
+      <div class="header-title-image" />
       <div class="header-weather">
-        <div class="weather">
-          多云转晴
+        <div class="weather flex-center">
+          <div class="weather-icon" />
+          <div class="weather-text">
+            20~28℃ 多云转晴
+          </div>
         </div>
         <CurrentTime />
       </div>
@@ -34,20 +37,39 @@ export default {
 <style lang="scss" scoped>
 .header-container {
   height: var(--header-height);
-  background: #42b983;
+  background: url(./bg_top@2x.png) no-repeat;
+  background-size: cover;
 }
 .header-title {
-  font-weight: 400;
-  text-align: center;
-  width: 400px;
   position: relative;
-  background: red;
   height: 100%;
   margin: 0 auto;
+  width: 345px;
+}
+.header-title-image {
+  width: 100%;
+  height: 22px;
+  background: url(./title@2x.png) no-repeat;
+  background-size: cover;
 }
 .header-weather {
   position: absolute;
-  left: 100%;
-  width: 150px;
+  top: 5px;
+  right: -304px;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #EBFFEE;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+.weather {
+  margin-bottom: 9px;
+  .weather-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 12px;
+    background: red;
+  }
 }
 </style>

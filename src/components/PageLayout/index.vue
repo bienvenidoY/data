@@ -74,7 +74,6 @@ $pageLayout-item: 400px;
 $pageLayout-index: 499;
 
 .page-layout {
-
   .page-layout-container {
     height: calc(100vh - var(--header-height));
   }
@@ -89,6 +88,7 @@ $pageLayout-index: 499;
     left: 0;
     height: var(--header-height);
     width: 100%;
+    min-width: 1980px;
     z-index: $pageLayout-index;
   }
 

@@ -88,7 +88,7 @@ export default {
   computed: {
     layoutList() {
       // 0 1980尺寸，1 大屏尺寸
-      const layoutType = 1
+      const layoutType = 0
       const obj = {
         0: {
           list: options,
@@ -124,6 +124,6 @@ export default {
 <style lang="scss" scoped>
 .root-container {
   height: 100%;
-  width: 100%;
+  min-width: 1980px;
 }
 </style>
