@@ -2,6 +2,7 @@
   <div class="root-container">
     <!-- 布局  -->
     <PageLayout
+      :layout-type="0"
       @warning="onWarning"
       @error="onError"
       @info="onInfo"
@@ -17,6 +18,7 @@
         <ModuleCard
           v-for="(item, index) in layoutList.left"
           :key="index"
+          class="module-card-wrapper"
           :title="item.title"
         >
           <components :is="item.key" />
@@ -26,6 +28,7 @@
         <ModuleCard
           v-for="(item, index) in layoutList.right"
           :key="index"
+          class="module-card-wrapper"
           :title="item.title"
         >
           <components :is="item.key" />
@@ -37,7 +40,7 @@
     <MapContainer />
 
     <ModuleCard>
-      <div style="height: 100px; width: 100px" />
+      <div style="height: 300px; width: 300px" />
     </ModuleCard>
   </div>
 </template>
@@ -134,5 +137,9 @@ export default {
 .root-container {
   height: 100%;
   min-width: 1980px;
+}
+
+.module-card-wrapper + .module-card-wrapper{
+  margin-top: 19px;
 }
 </style>

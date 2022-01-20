@@ -1,5 +1,8 @@
 <template>
-  <div class="page-layout">
+  <div
+    class="page-layout"
+    :class="[layoutType === 0 ? 'small' : 'large' ]"
+  >
     <div class="page-layout-header header-container">
       <slot name="header" />
     </div>
@@ -58,10 +61,10 @@
 export default {
   name: 'PageLayout',
   props: {
-    title: {
-      type: String,
-      default: '标题',
-    },
+    layoutType: {
+      type: Number,
+      default: 0,
+    }
   },
   data() {
     return {
@@ -73,7 +76,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$pageLayoutItem: 400px;
+$pageLayoutItemSmall: 400px;
 // 天地图zIndex 400
 $pageLayoutIndex: 499;
 $pageLayoutBg: rgba(7, 15, 3, 0.8);
@@ -110,9 +113,9 @@ $pageMinWidth: 1920px;
   }
 
   .page-layout-item {
-    width: $pageLayoutItem;
     height: 100%;
-    background: var(--container-bg);
+    box-sizing: border-box;
+    background:  rgba(7, 15, 3, 0.8);
   }
 
   .page-layout-left {
@@ -135,5 +138,25 @@ $pageMinWidth: 1920px;
     height: 100%;
     justify-content: space-between;
   }
+
+}
+
+// 响应式小屏幕下左右宽度
+.small {
+  .page-layout-left {
+    .page-layout-item {
+      width: $pageLayoutItemSmall;
+      padding-right: 19px;
+      padding-left: 37px;
+    }
+  }
+  .page-layout-right {
+    .page-layout-item {
+      width: $pageLayoutItemSmall;
+      padding-left: 12px;
+      padding-right: 44px;
+    }
+  }
+
 }
 </style>

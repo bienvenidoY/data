@@ -2,17 +2,17 @@
   <div class="module1">
     <div class="module-top">
       <div class="module-top-item">
-        废水排放  55家
+        废水排放<span>55家</span>
       </div>
       <div class="module-top-item">
-        废水排放  55家
+        废水排放<span>55家</span>
       </div>
     </div>
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="300px"
+      height="163px"
     />
   </div>
 </template>
@@ -38,22 +38,23 @@ export default {
         },
         legend: {
           top: 'bottom',
-          data: ['Email', 'Union Ads', 'Video Ads',],
+          data: ['红码', '黄码', '绿码',],
           type: 'plain',
           icon: 'rect',
+          color: '#fff',
         },
         grid: {
-          top: '25',
-          left: '3%',
-          right: '4%',
-          bottom: '40',
+          top: '23',
+          left: '0',
+          right: '0',
+          bottom: '30',
           containLabel: true
         },
         xAxis: [
           {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['12.16', '12.17', '12.18', '12.19', '12.20', '12.21', '12.22']
           }
         ],
         yAxis: [
@@ -63,7 +64,7 @@ export default {
         ],
         series: [
           {
-            name: 'Email',
+            name: '红码',
             smooth: true,
             type: 'line',
             stack: 'Total',
@@ -74,7 +75,7 @@ export default {
             data: [120, 132, 101, 134, 90, 230, 210]
           },
           {
-            name: 'Union Ads',
+            name: '黄码',
             type: 'line',
             smooth: true,
             stack: 'Total',
@@ -85,7 +86,7 @@ export default {
             data: [220, 182, 191, 234, 290, 330, 310]
           },
           {
-            name: 'Video Ads',
+            name: '绿码',
             type: 'line',
             smooth: true,
             stack: 'Total',
@@ -113,8 +114,36 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-top: 13px;
+  padding-right: 31px;
   &-item {
     font-size: 14px;
+    position: relative;
+    padding-left: 4px;
+    &:before {
+      position: absolute;
+      content: ' ';
+      width: 2px;
+      height: 2px;
+      background: #C8F9CE;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2px;
+    }
+    span {
+      margin-left: 12px;
+    }
+  }
+}
+.module1 {
+  margin-left: 29px;
+  padding-bottom: 16px;
+  .chart-content {
+    margin-right: 14px;
   }
 }
 </style>
