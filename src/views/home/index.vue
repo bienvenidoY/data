@@ -8,7 +8,10 @@
       @changeType="onChangeType"
     >
       <template #header>
-        <HeaderContainer title="大屏系统调研" />
+        <HeaderContainer />
+      </template>
+      <template #footer>
+        <FooterContainer />
       </template>
       <template #left>
         <ModuleCard
@@ -32,6 +35,10 @@
 
     <!--  天地图  -->
     <MapContainer />
+
+    <ModuleCard>
+      <div style="height: 100px; width: 100px" />
+    </ModuleCard>
   </div>
 </template>
 <script>
@@ -56,6 +63,7 @@ const {
 } = ModuleComponents
 
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
+import FooterContainer from '@/components/FooterContainer/index.vue'
 import MapContainer from '@/components/MapContainer/index.vue'
 import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
@@ -63,6 +71,7 @@ import ModuleCard from '@/components/ModuleCard/index.vue'
 export default {
   components: {
     HeaderContainer,
+    FooterContainer,
     MapContainer,
     ModuleCard,
     PageLayout,

@@ -1,8 +1,12 @@
 <template>
   <div class="page-layout">
-    <div class="page-layout-header">
+    <div class="page-layout-header header-container">
       <slot name="header" />
     </div>
+    <div class="page-layout-footer footer-container">
+      <slot name="footer" />
+    </div>
+
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item left-item">
         <slot name="left" />
@@ -69,40 +73,53 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$pageLayout-item: 400px;
+$pageLayoutItem: 400px;
 // 天地图zIndex 400
-$pageLayout-index: 499;
+$pageLayoutIndex: 499;
+$pageLayoutBg: rgba(7, 15, 3, 0.8);
+$pageLayoutTop: 34px;
+$pageMinWidth: 1920px;
 
 .page-layout {
+  position: relative;
+  width: 100%;
+  /* 上下布局 start */
+  .page-layout-header, .page-layout-footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    min-width: 1980px;
+    background: $pageLayoutBg;
+    z-index: $pageLayoutIndex;
+  }
+  .header-container {
+    top: 0;
+    height: var(--header-height);
+  }
+  .footer-container {
+    top: calc(1080px - var(--header-height) - var(--footer-height));
+    height: var(--footer-height);
+  }
+  /* 上下布局 end */
+
   .page-layout-container {
-    height: calc(100vh - var(--header-height));
+    position: absolute;
+    height: calc(1080px - var(--header-height) - var(--footer-height));
+    z-index: $pageLayoutIndex;
+    top: calc(var(--header-height) - $pageLayoutTop);
   }
 
   .page-layout-item {
-    width: $pageLayout-item;
+    width: $pageLayoutItem;
     height: 100%;
-    background-color: rgb(244, 221, 0, 0.7);
-  }
-  .page-layout-header {
-    position: absolute;
-    left: 0;
-    height: var(--header-height);
-    width: 100%;
-    min-width: 1980px;
-    z-index: $pageLayout-index;
+    background: var(--container-bg);
   }
 
   .page-layout-left {
-    position: absolute;
     left: 0;
-    z-index: $pageLayout-index;
-    top: var(--header-height);
   }
   .page-layout-right {
-    position: absolute;
     right: 0;
-    z-index: 499;
-    top: var(--header-height);
   }
 
   .left-item {

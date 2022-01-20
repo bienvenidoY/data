@@ -37,7 +37,7 @@ export default {
 <style lang="scss" scoped>
 .header-container {
   height: var(--header-height);
-  background: url(./bg_top@2x.png) no-repeat;
+  background: url(./bg_top@2x.png) no-repeat, var(--container-bg);
   background-size: cover;
 }
 .header-title {
