@@ -10,7 +10,7 @@
 import ModuleCellCard from '@/components/ModuleCellCard/index.vue'
 
 export default {
-  name: 'Module6',
+  name: 'Module12',
   components: {
     ModuleCellCard,
   },

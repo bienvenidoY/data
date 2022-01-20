@@ -47,6 +47,12 @@ const {
   Module6,
   Module7,
   Module8,
+  Module9,
+  Module10,
+  Module11,
+  Module12,
+  Module13,
+  Module14,
 } = ModuleComponents
 
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
@@ -68,6 +74,12 @@ export default {
     Module6,
     Module7,
     Module8,
+    Module9,
+    Module10,
+    Module11,
+    Module12,
+    Module13,
+    Module14,
   },
   data() {
     return {
@@ -76,7 +88,7 @@ export default {
   computed: {
     layoutList() {
       // 0 1980尺寸，1 大屏尺寸
-      const layoutType = 0
+      const layoutType = 1
       const obj = {
         0: {
           list: options,
@@ -103,6 +115,8 @@ export default {
     onInfo() {
     },
     onChangeType() {
+      //
+      console.log('触发类别修改')
     },
   }
 }

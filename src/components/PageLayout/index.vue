@@ -10,15 +10,22 @@
       <div class="left-item left-action">
         <div
           class="left-item--select"
-          @click="$emit('changeType')"
+          @click="$emit('changeType', type)"
         >
-          选择器
+          <el-select v-model="type">
+            <el-option
+              v-for="item in typeOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </div>
         <div
           class="left-item--btn"
           @click="$emit('info')"
         >
-          <el-button>会话</el-button>
+          <el-button>icon</el-button>
         </div>
       </div>
     </div>
@@ -53,7 +60,10 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      type: '',
+      typeOptions: [],
+    }
   },
   methods: {},
 }

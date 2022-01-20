@@ -10,7 +10,7 @@
 import ModuleCellCard from '@/components/ModuleCellCard/index.vue'
 
 export default {
-  name: 'Module6',
+  name: 'Module11',
   components: {
     ModuleCellCard,
   },
@@ -37,6 +37,10 @@ export default {
           label: '监管问题',
           prop: 'e',
         },
+        {
+          label: '监管问题',
+          prop: 'f',
+        },
       ],
       data: {
         a: '1',
@@ -44,6 +48,7 @@ export default {
         c: '2',
         d: '2',
         e: '2',
+        f: '24',
       },
     }
   },

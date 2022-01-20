@@ -79,9 +79,6 @@ export const largeOptions =  [
     key: 'Module8',
   },
   {
-    title: '事件存档',
-    key: 'Module8',
-  },  {
     title: '水量统计',
     key: 'Module13',
   },  {
