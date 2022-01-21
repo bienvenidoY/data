@@ -29,6 +29,7 @@
           v-for="(item, index) in layoutList.right"
           :key="index"
           class="module-card-wrapper"
+          :class="{'small-right-first' : index === 0}"
           :title="item.title"
         >
           <components :is="item.key" />
@@ -37,11 +38,7 @@
     </PageLayout>
 
     <!--  天地图  -->
-    <MapContainer />
-
-    <ModuleCard>
-      <div style="height: 300px; width: 300px" />
-    </ModuleCard>
+    <!--    <MapContainer />-->
   </div>
 </template>
 <script>
@@ -141,5 +138,9 @@ export default {
 
 .module-card-wrapper + .module-card-wrapper{
   margin-top: 19px;
+}
+
+.small-right-first {
+  margin-top: -8px;
 }
 </style>

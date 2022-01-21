@@ -4,20 +4,28 @@
       indicator-position="none"
       arrow="never"
       :interval="10000"
-      height="200px"
+      height="172px"
     >
       <el-carousel-item
-        v-for="item in 4"
-        :key="item"
+        v-for="(item, index) in options"
+        :key="index"
       >
         <div class="flex-center">
-          <div>排口感知</div>
+          <div>
+            <div
+              class="module2-icon"
+              :style="{ backgroundImage: `url(${item.image})` }"
+            />
+            <div class="module2-text">
+              {{ item.label }}
+            </div>
+          </div>
           <ChartView
             class="chart-content"
             :chart-option="chartOpt"
             :auto-resize="true"
-            height="200px"
-            width="250px"
+            height="114px"
+            width="211px"
           />
         </div>
       </el-carousel-item>
@@ -43,6 +51,9 @@ export default {
           right: 0,
           top: 'middle',
           icon: 'circle',
+          textStyle: {
+            color: '#979797',
+          },
         },
         series: [
           {
@@ -80,6 +91,31 @@ export default {
       }
     }
   },
+  computed: {
+    options() {
+      return [
+        {
+          label: '排口感知',
+          image: require('./image1.png')
+        },
+        {
+          label: '排口感知',
+          image: require('./image2.png')
+        },
+        {
+          label: '排口感知',
+          image: require('./image3.png')
+        },
+        {
+          label: '排口感知',
+          image: require('./image4.png')
+        },
+      ].map(v =>  {
+        v.chartOpt = this.chartOpt
+        return v
+      })
+    }
+  },
   mounted() {
 
   },
@@ -88,6 +124,23 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.module2 {
+  padding-top: 9px;
+  padding-left: 39px;
+  padding-right: 26px;
+}
+.module2-icon {
+  height: 61px;
+  width: 61px;
+  background-size: cover;
+}
+.module2-text {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #C8F9CE;
+  line-height: 20px;
+  margin-top: 10px;
+}
 </style>
 

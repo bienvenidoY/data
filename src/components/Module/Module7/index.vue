@@ -1,10 +1,10 @@
 <template>
-  <div class="module1">
+  <div class="module7">
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="200px"
+      height="140px"
     />
   </div>
 </template>
@@ -27,12 +27,17 @@ export default {
         },
         legend: {
           top: 'bottom',
-
+          itemWidth: 12,
+          itemHeight: 12,
+          textStyle: {
+            color: '#979797',
+          },
         },
         grid: {
-          left: '3%',
-          right: '4%',
-          bottom: 40,
+          left: '0',
+          right: '0',
+          bottom: 30,
+          top: 10,
           containLabel: true
         },
         xAxis: {
@@ -76,6 +81,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.module7 {
+  padding: 0 22px 22px;
+}
 </style>
 

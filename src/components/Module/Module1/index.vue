@@ -41,7 +41,11 @@ export default {
           data: ['红码', '黄码', '绿码',],
           type: 'plain',
           icon: 'rect',
-          color: '#fff',
+          itemWidth: 16,
+          itemHeight: 14,
+          textStyle: {
+            color: '#979797',
+          },
         },
         grid: {
           top: '23',

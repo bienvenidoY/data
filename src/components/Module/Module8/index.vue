@@ -1,10 +1,10 @@
 <template>
-  <div class="module1">
+  <div class="module8">
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="400px"
+      height="200px"
     />
   </div>
 </template>
@@ -19,10 +19,16 @@ export default {
   data() {
     return {
       chartOpt: {
+        tooltip: {},
         legend: {
           top: 'bottom',
+          itemWidth: 12,
+          itemHeight: 12,
+          textStyle: {
+            color: '#979797',
+          },
         },
-        tooltip: {},
+        grid: [{top: '0', right: '53%', bottom: 50}, {top: '0',left: '51%',  bottom: 50}],
         dataset: {
           source: {
             product: [
@@ -39,8 +45,8 @@ export default {
               '11月',
               '12月'
             ],
-            '归档事件数': [823, 235, 1042, 988, 91.2, 76.9, 235, 1042, 988, 81.4, 988, 81.4],
-            '事件平均处理时效': [95.8, 81.4, 91.2, 76.9, 235, 1042, 988, 76.9, 235, 81.4, 988, 81.4]
+            '归档事件数': [23, 5, 12, 8, 9.2, 6.9, 235, 12, 8, 1.4, 8, 1.4],
+            '事件平均处理时效': [5.8, 1.4, 91.2, 6.9, 25, 12, 8, 76.9, 5, 1.4, 8, 1.4]
           }
         },
         xAxis: [{gridIndex: 0, inverse: true}, {gridIndex: 1,}],
@@ -62,7 +68,6 @@ export default {
             splitLine: {show: false}
           }
         ],
-        grid: [{right: '53%'}, {left: '51%'}],
         series: [
           // These series are in the first grid.
           {type: 'bar'},
@@ -82,6 +87,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
+.module8 {
+  padding: 9px 28px 14px 26px;
+}
 </style>
 

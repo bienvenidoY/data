@@ -20,22 +20,27 @@ export default {
         {
           label: '管网告警',
           prop: 'a',
+          suffix: '起'
         },
         {
           label: '排口告警',
           prop: 'b',
+          suffix: '起'
         },
         {
           label: '河道告警',
           prop: 'c',
+          suffix: '起'
         },
         {
           label: '巡检问题',
           prop: 'd',
+          suffix: '起'
         },
         {
           label: '监管问题',
           prop: 'e',
+          suffix: '起'
         },
       ],
       data: {

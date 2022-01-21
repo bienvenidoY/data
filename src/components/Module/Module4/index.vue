@@ -2,17 +2,17 @@
   <div class="module4">
     <div class="module-top">
       <div class="module-top-item">
-        废水排放 55家
+        废水排放<span>55家</span>
       </div>
       <div class="module-top-item">
-        废水排放 55家
+        废水排放<span>55家</span>
       </div>
     </div>
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="300px"
+      height="126px"
     />
   </div>
 </template>
@@ -32,9 +32,10 @@ export default {
           top: 'bottom',
         },
         grid: {
-          left: '3%',
-          right: '4%',
-          bottom: 60,
+          left: '0',
+          right: '0',
+          bottom: 20,
+          top: 20,
           containLabel: true
         },
         tooltip: {},
@@ -101,9 +102,37 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 1px;
+  margin-top: 13px;
+  padding-right: 31px;
   &-item {
     font-size: 14px;
+    position: relative;
+    padding-left: 4px;
+    &:before {
+      position: absolute;
+      content: ' ';
+      width: 2px;
+      height: 2px;
+      background: #C8F9CE;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2px;
+    }
+    span {
+      margin-left: 12px;
+    }
+  }
+}
+
+.module4 {
+  margin-left: 29px;
+  padding-bottom: 16px;
+  .chart-content {
+    padding-right: 36px;
   }
 }
 </style>

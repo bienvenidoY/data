@@ -17,7 +17,7 @@
           class="column-item--icon"
           :style="{ backgroundImage: `url(${chunk.icon})` }"
         />
-        <div class="column-item-chunk flex-col-between">
+        <div class="column-item--chunk flex-col-between">
           <div class="column-item--label">
             {{ chunk.label }}
           </div>
@@ -43,17 +43,17 @@ export default {
           column: [
             {
               label: '雨水管网',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '公里',
             },{
               label: '污水管网',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '公里',
             },{
               label: '感知点位',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '个',
             },
@@ -64,17 +64,17 @@ export default {
           column: [
             {
               label: '雨水排口',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '个',
             },{
               label: '污水排口',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '个',
             },{
               label: '感知点位',
-              icon: '',
+              icon: require('./iamge1.png'),
               prop: '',
               suffix: '个',
             },
@@ -94,22 +94,41 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.module3 {
+  margin-top: 8px;
+}
 
 .module3-column {
   width: 50%;
   .module3-column-item--title {
     text-align: center;
+    font-size: 14px;
+    font-family: PingFangSC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #34B84A;
+    line-height: 20px;
+    letter-spacing: 1px;
   }
   .module3-column-item {
     margin-top: 20px;
     .column-item--icon {
-      width: 60px;
-      height: 60px;
-      background: black;
+      width: 40px;
+      height: 40px;
+      background-size: cover;
       margin-right: 10px;
     }
     .column-item--chunk {
-      height: 100%;
+      height: 40px;
+      font-size: 12px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #EBFFEE;
+      line-height: 17px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .column-item--label {}
+      .column-item--value {}
     }
   }
 }

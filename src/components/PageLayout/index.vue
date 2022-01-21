@@ -37,7 +37,9 @@
       </div>
     </div>
     <div class="page-layout-right page-layout-container">
-      <div class="page-layout-item right-item">
+      <div
+        class="page-layout-item right-item"
+      >
         <slot name="right" />
       </div>
       <div class="right-item">
@@ -100,16 +102,14 @@ $pageMinWidth: 1920px;
     height: var(--header-height);
   }
   .footer-container {
-    top: calc(1080px - var(--header-height) - var(--footer-height));
+    top: calc(1080px - var(--footer-height));
     height: var(--footer-height);
   }
   /* 上下布局 end */
 
   .page-layout-container {
     position: absolute;
-    height: calc(1080px - var(--header-height) - var(--footer-height));
     z-index: $pageLayoutIndex;
-    top: calc(var(--header-height) - $pageLayoutTop);
   }
 
   .page-layout-item {
@@ -120,9 +120,20 @@ $pageMinWidth: 1920px;
 
   .page-layout-left {
     left: 0;
+    top: calc(var(--header-height) - $pageLayoutTop);
+    height: calc(1080px - var(--header-height) - var(--footer-height) + $pageLayoutTop);
   }
   .page-layout-right {
     right: 0;
+    top: calc(var(--header-height) - 8px);
+    background: url('./bg_you@2x@2x.png');
+    background-size: 44px auto;
+    background-repeat: no-repeat;
+    background-position: right 7px;
+    padding-right: 44px;
+    // 左侧857 图片865, 所一需要865
+    height: calc(1080px - var(--header-height) - var(--footer-height));
+    padding-top: 8px;
   }
 
   .left-item {
