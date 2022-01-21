@@ -39,34 +39,23 @@
 
     <!--  天地图  -->
     <!--    <MapContainer />-->
+
+    <WarningDialog ref="WarningDialog" />
+    <ErrorDialog ref="ErrorDialog" />
+    <InfoDialog ref="ErrorDialog" />
   </div>
 </template>
 <script>
 import { options, largeOptions } from './options'
-/* es6 import 解构失败 https://www.jianshu.com/p/ba6f582d5249 */
 import ModuleComponents from '@/components/Module/index'
-const {
-  Module1,
-  Module2,
-  Module3,
-  Module4,
-  Module5,
-  Module6,
-  Module7,
-  Module8,
-  Module9,
-  Module10,
-  Module11,
-  Module12,
-  Module13,
-  Module14,
-} = ModuleComponents
-
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
 import FooterContainer from '@/components/FooterContainer/index.vue'
 import MapContainer from '@/components/MapContainer/index.vue'
 import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
+import WarningDialog from '@/components/WarningDialog/index.vue'
+import ErrorDialog from '@/components/ErrorDialog/index.vue'
+import InfoDialog from '@/components/InfoDialog/index.vue'
 
 export default {
   components: {
@@ -75,20 +64,10 @@ export default {
     MapContainer,
     ModuleCard,
     PageLayout,
-    Module1,
-    Module2,
-    Module3,
-    Module4,
-    Module5,
-    Module6,
-    Module7,
-    Module8,
-    Module9,
-    Module10,
-    Module11,
-    Module12,
-    Module13,
-    Module14,
+    WarningDialog,
+    ErrorDialog,
+    InfoDialog,
+    ...ModuleComponents,
   },
   data() {
     return {
@@ -118,10 +97,13 @@ export default {
   },
   methods: {
     onWarning() {
+      this.$refs.WarningDialog.show()
     },
     onError() {
+      this.$refs.ErrorDialog.show()
     },
     onInfo() {
+      this.$refs.ErrorDialog.show()
     },
     onChangeType() {
       //

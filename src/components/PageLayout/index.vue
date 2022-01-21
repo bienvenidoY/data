@@ -11,10 +11,10 @@
     </div>
 
     <div class="page-layout-left page-layout-container">
-      <div class="page-layout-item left-item">
+      <div class="page-layout-item fl">
         <slot name="left" />
       </div>
-      <div class="left-item left-action">
+      <div class="fl left-action">
         <div
           class="left-item--select"
           @click="$emit('changeType', type)"
@@ -38,11 +38,11 @@
     </div>
     <div class="page-layout-right page-layout-container">
       <div
-        class="page-layout-item right-item"
+        class="page-layout-item fr"
       >
         <slot name="right" />
       </div>
-      <div class="right-item">
+      <div class="fr right-action">
         <div
           class="right-item--btn right-item--btn1"
           @click="$emit('warning')"
@@ -136,20 +136,34 @@ $pageMinWidth: 1920px;
     padding-top: 8px;
   }
 
-  .left-item {
-    float: left;
-  }
-  .right-item {
-    float: right;
-  }
-
+  /* 左侧操作区域 start */
   .left-action {
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
+    margin-left: 15px;
   }
 
+
+  .left-item--select {
+    margin-top: 60px;
+  }
+  /* 左侧操作区域 end */
+
+  /* 右侧操作区域 end */
+  .right-action {
+    margin-top: 56px;
+  }
+  .right-item--btn {
+    width: 130px;
+    height: 43px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+  .right-item--btn1, .right-item--btn2 {
+    background-color: #ffff00;
+  }
 }
 
 // 响应式小屏幕下左右宽度
