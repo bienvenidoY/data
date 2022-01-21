@@ -12,7 +12,9 @@
 
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item fl">
-        <slot name="left" />
+        <div class="page-layout-item-bg">
+          <slot name="left" />
+        </div>
       </div>
       <div class="fl left-action">
         <div
@@ -40,7 +42,9 @@
       <div
         class="page-layout-item fr"
       >
-        <slot name="right" />
+        <div class="page-layout-item-bg">
+          <slot name="right" />
+        </div>
       </div>
       <div class="fr right-action">
         <div
@@ -115,7 +119,13 @@ $pageMinWidth: 1920px;
   .page-layout-item {
     height: 100%;
     box-sizing: border-box;
-    background:  rgba(7, 15, 3, 0.8);
+    background: rgba(7, 15, 3, 0.8) ;
+    // /
+  }
+
+  .page-layout-item-bg {
+    background: var(--container-bg);
+    box-sizing: border-box;
   }
 
   .page-layout-left {
@@ -169,14 +179,14 @@ $pageMinWidth: 1920px;
 // 响应式小屏幕下左右宽度
 .small {
   .page-layout-left {
-    .page-layout-item {
+    .page-layout-item-bg {
       width: $pageLayoutItemSmall;
       padding-right: 19px;
       padding-left: 37px;
     }
   }
   .page-layout-right {
-    .page-layout-item {
+    .page-layout-item-bg {
       width: $pageLayoutItemSmall;
       padding-left: 12px;
       padding-right: 44px;

@@ -58,12 +58,25 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
+            axisLabel: {
+              color: '#ffffff'
+            },
             data: ['12.16', '12.17', '12.18', '12.19', '12.20', '12.21', '12.22']
           }
         ],
         yAxis: [
           {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+              lineStyle: {
+                color: ['#404040'],
+              }
+            },
+            axisLine: {
+              lineStyle: {
+                color: '#ffffff'
+              }
+            },
           }
         ],
         series: [
@@ -73,6 +86,7 @@ export default {
             type: 'line',
             stack: 'Total',
             areaStyle: {},
+            symbolSize: 0,
             emphasis: {
               focus: 'series'
             },
@@ -84,6 +98,7 @@ export default {
             smooth: true,
             stack: 'Total',
             areaStyle: {},
+            symbolSize: 0,
             emphasis: {
               focus: 'series'
             },
@@ -95,6 +110,7 @@ export default {
             smooth: true,
             stack: 'Total',
             areaStyle: {},
+            symbolSize: 0,
             emphasis: {
               focus: 'series'
             },

@@ -28,8 +28,14 @@ export default {
     return {
       chartOpt: {
         legend: {
-          data: ['累计巡检次数', '本年巡检'],
+          data: ['累计巡检次数', '本年巡检次数'],
           top: 'bottom',
+          icon: 'rect',
+          itemWidth: 12,
+          itemHeight: 2,
+          textStyle: {
+            color: '#ffffff',
+          },
         },
         grid: {
           left: '0',
@@ -42,13 +48,24 @@ export default {
         xAxis: {
           type: 'time',
           axisLabel: {
-            rotate: 60,
+            rotate: -45,
             formatter: '{MMM}',
             hideOverlap: true,
-          }
+            color: '#ffffff'
+          },
         },
         yAxis: {
-          type: 'value'
+          type: 'value',
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff'
+            }
+          },
         },
 
         series: [
@@ -66,13 +83,13 @@ export default {
               ['2017-10', 4]
             ],
             lineStyle: {
-              width: 0.5
+              width: 1.5
             }
           },
           {
             symbol: 'circle',
             symbolSize: 10,
-            name: '本年巡检',
+            name: '本年巡检次数',
             type: 'line',
 
             data: [
@@ -83,7 +100,7 @@ export default {
               ['2017-10', 5]
             ],
             lineStyle: {
-              width: 0.5
+              width: 1.5
             }
           }
         ]
@@ -131,6 +148,9 @@ export default {
 .module4 {
   margin-left: 29px;
   padding-bottom: 16px;
+  .module-top {
+    margin-bottom: 8px;
+  }
   .chart-content {
     padding-right: 36px;
   }

@@ -11,7 +11,7 @@
       <div
         v-for="(chunk, chunkIndex) in item.column"
         :key="chunkIndex"
-        class="module3-column-item flex-center"
+        class="module3-column-item flex"
       >
         <div
           class="column-item--icon"
@@ -43,17 +43,17 @@ export default {
           column: [
             {
               label: '雨水管网',
-              icon: require('./iamge1.png'),
+              icon: require('./image1.png'),
               prop: '',
               suffix: '公里',
             },{
               label: '污水管网',
-              icon: require('./iamge1.png'),
+              icon: require('./image2.png'),
               prop: '',
               suffix: '公里',
             },{
               label: '感知点位',
-              icon: require('./iamge1.png'),
+              icon: require('./image3.png'),
               prop: '',
               suffix: '个',
             },
@@ -64,17 +64,17 @@ export default {
           column: [
             {
               label: '雨水排口',
-              icon: require('./iamge1.png'),
+              icon: require('./image4.png'),
               prop: '',
               suffix: '个',
             },{
               label: '污水排口',
-              icon: require('./iamge1.png'),
+              icon: require('./image4.png'),
               prop: '',
               suffix: '个',
             },{
               label: '感知点位',
-              icon: require('./iamge1.png'),
+              icon: require('./image3.png'),
               prop: '',
               suffix: '个',
             },
@@ -95,22 +95,23 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module3 {
-  margin-top: 8px;
+  margin-left: 46px;
+  padding-bottom: 27px;
 }
 
 .module3-column {
-  width: 50%;
+  width: 144px;
   .module3-column-item--title {
-    text-align: center;
     font-size: 14px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: #34B84A;
     line-height: 20px;
-    letter-spacing: 1px;
+    padding-left: 21px;
+    padding-top: 8px;
   }
   .module3-column-item {
-    margin-top: 20px;
+    margin-top: 15px;
     .column-item--icon {
       width: 40px;
       height: 40px;

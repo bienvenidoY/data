@@ -1,10 +1,10 @@
 <template>
-  <div className="module2">
+  <div class="module2">
     <el-carousel
-      indicator-position="none"
-      arrow="never"
+      class="swiper-container"
       :interval="10000"
-      height="172px"
+      height="140px"
+      arrow="never"
     >
       <el-carousel-item
         v-for="(item, index) in options"
@@ -57,18 +57,18 @@ export default {
         },
         series: [
           {
-            name: 'Access From',
             type: 'pie',
             top: 'middle',
             left: 0,
-            radius: ['45%', '60%'],
+            radius: ['70%', '90%'],
             avoidLabelOverlap: true,
-            center: ['40%', 'center'],
+            center: ['35%', 'center'],
             label: {
               alignTo: 'none',
               minMargin: 5,
               edgeDistance: 10,
               lineHeight: 15,
+              fontSize: 10,
             },
             emphasis: {
               label: {
@@ -95,19 +95,19 @@ export default {
     options() {
       return [
         {
-          label: '排口感知',
-          image: require('./image1.png')
-        },
-        {
-          label: '排口感知',
+          label: '管网感知',
           image: require('./image2.png')
         },
         {
           label: '排口感知',
+          image: require('./image1.png')
+        },
+        {
+          label: '河道感知',
           image: require('./image3.png')
         },
         {
-          label: '排口感知',
+          label: '视频监控',
           image: require('./image4.png')
         },
       ].map(v =>  {
@@ -125,14 +125,35 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module2 {
-  padding-top: 9px;
   padding-left: 39px;
   padding-right: 26px;
+
+
 }
+
+.swiper-container {
+  padding-top: 9px;
+  ::v-deep .el-carousel__indicators {
+    .el-carousel__button {
+      width: 6px;
+      height: 6px;
+      background: #D8D8D8;
+      border-radius: 50%;
+    }
+  }
+  .el-carousel__indicator--horizontal {
+    padding: 0 4px;
+  }
+  .el-carousel__indicators--horizontal {
+    bottom: 8px;
+  }
+}
+
 .module2-icon {
   height: 61px;
   width: 61px;
   background-size: cover;
+  margin-right: 7px;
 }
 .module2-text {
   font-size: 14px;

@@ -42,7 +42,7 @@ url(./kuang_foot_1@2x@2x.png);
   line-height: 25px;
   letter-spacing: 2px;
   margin-left: 66px;
-  padding-top: 6px;
+  padding-top: 4px;
 }
 
 </style>

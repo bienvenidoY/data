@@ -33,7 +33,10 @@ export default {
     chartOption: {
       deep: true,
       handler(newVal) {
-        this.setOptions(newVal)
+        this.setOptions({
+          backgroundColor: '#0b120a',
+          ...newVal,
+        })
       }
     }
   },
@@ -61,7 +64,10 @@ export default {
       this.chart = echarts.init(this.$refs.chart, '', {
         renderer: this.type
       })
-      this.chart.setOption(this.chartOption)
+      this.chart.setOption({
+        backgroundColor: '#0b120a',
+        ...this.chartOption,
+      })
       this.chart.on('click', this.handleClick)
     },
     handleClick(params) {
@@ -75,7 +81,10 @@ export default {
       }
     },
     refresh() {
-      this.setOptions(this.chartOption)
+      this.setOptions({
+        backgroundColor: '#0b120a',
+        ...this.chartOption,
+      })
     },
     clearChart() {
       this.chart && this.chart.clear()
