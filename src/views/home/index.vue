@@ -42,7 +42,7 @@
 
     <WarningDialog ref="WarningDialog" />
     <ErrorDialog ref="ErrorDialog" />
-    <InfoDialog ref="ErrorDialog" />
+    <InfoDialog ref="InfoDialog" />
   </div>
 </template>
 <script>
@@ -103,7 +103,7 @@ export default {
       this.$refs.ErrorDialog.show()
     },
     onInfo() {
-      this.$refs.ErrorDialog.show()
+      this.$refs.InfoDialog.show()
     },
     onChangeType() {
       //

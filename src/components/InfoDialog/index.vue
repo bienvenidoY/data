@@ -8,47 +8,7 @@
     width="60%"
     @close="closeDialog"
   >
-    <el-row :gutter="20">
-      <el-form
-        ref="form"
-        :model="form"
-        :rules="formRules"
-        label-width="120px"
-        label-position="right"
-      >
-        <el-col :span="formLayout.span">
-          <el-form-item label="标题">
-            <el-select v-model="form.staff">
-              <el-option
-                v-for="item in options"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-form>
-    </el-row>
-    <!-- 底部插槽 -->
-    <div
-      slot="footer"
-      class="dialog-footer"
-    >
-      <el-button
-        icon="el-icon-close"
-        @click="hide"
-      >
-        取 消
-      </el-button>
-      <el-button
-        type="primary"
-        icon="el-icon-check"
-        @click="confirm"
-      >
-        确 定
-      </el-button>
-    </div>
+    1111
   </el-dialog>
 </template>
 <script>

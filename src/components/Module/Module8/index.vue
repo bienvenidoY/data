@@ -28,7 +28,7 @@ export default {
             color: '#979797',
           },
         },
-        grid: [{top: '0', right: '53%', bottom: 50}, {top: '0',left: '51%',  bottom: 50}],
+        grid: [{top: '0', right: 160, bottom: 50}, {top: '0', left: 170, bottom: 50}],
         dataset: {
           source: {
             product: [
@@ -49,7 +49,27 @@ export default {
             '事件平均处理时效': [5.8, 1.4, 91.2, 6.9, 25, 12, 8, 76.9, 5, 1.4, 8, 1.4]
           }
         },
-        xAxis: [{gridIndex: 0, inverse: true}, {gridIndex: 1,}],
+        xAxis: [{
+          gridIndex: 0, inverse: true,
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
+          axisLabel: {
+            color: '#ffffff'
+          }
+        }, {
+          gridIndex: 1,
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
+          axisLabel: {
+            color: '#ffffff'
+          }
+        }],
         yAxis: [
           {
             type: 'category',
@@ -63,7 +83,7 @@ export default {
             type: 'category',
             gridIndex: 1,
             axisLine: {show: false},
-            axisLabel: {show: true},
+            axisLabel: {show: true, color: '#ffffff'},
             axisTick: {show: false},
             splitLine: {show: false}
           }
@@ -80,15 +100,13 @@ export default {
   mounted() {
 
   },
-  methods: {
-
-  },
+  methods: {},
 
 }
 </script>
 <style lang="scss" scoped>
 .module8 {
-  padding: 9px 28px 14px 26px;
+  padding: 9px 28px 16px 26px;
 }
 </style>
 

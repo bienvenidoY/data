@@ -42,11 +42,19 @@ export default {
         },
         xAxis: {
           type: 'value',
-          boundaryGap: [0, 0.01]
+          boundaryGap: [0, 0.01],
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
         },
         yAxis: {
           type: 'category',
-          data: ['问题上报事件', '设备告警事件']
+          data: ['设备告警事件', '问题上报事件'],
+          axisLabel: {
+            color: '#ffffff'
+          },
         },
         series: [
           {
@@ -82,7 +90,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module7 {
-  padding: 0 22px 22px;
+  padding: 2px 22px 22px;
 }
 </style>
 

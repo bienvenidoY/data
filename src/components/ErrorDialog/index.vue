@@ -1,58 +1,21 @@
 <template>
-  <el-dialog
-    :title="title"
-    :visible.sync="isShowDialog"
-    :close-on-click-modal="false"
-    append-to-body
-    class="avue-dialog"
-    width="60%"
+  <Dialog
+    ref="dialog"
+    title="转为误报"
     @close="closeDialog"
   >
-    <el-row :gutter="20">
-      <el-form
-        ref="form"
-        :model="form"
-        :rules="formRules"
-        label-width="120px"
-        label-position="right"
-      >
-        <el-col :span="formLayout.span">
-          <el-form-item label="标题">
-            <el-select v-model="form.staff">
-              <el-option
-                v-for="item in options"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id"
-              />
-            </el-select>
-          </el-form-item>
-        </el-col>
-      </el-form>
-    </el-row>
-    <!-- 底部插槽 -->
-    <div
-      slot="footer"
-      class="dialog-footer"
-    >
-      <el-button
-        icon="el-icon-close"
-        @click="hide"
-      >
-        取 消
-      </el-button>
-      <el-button
-        type="primary"
-        icon="el-icon-check"
-        @click="confirm"
-      >
-        确 定
-      </el-button>
+    <div style="margin-left: 20px">
+      是否将浸膏初值为维保
     </div>
-  </el-dialog>
+  </Dialog>
 </template>
 <script>
+import Dialog from '@/components/Dialog/index.vue'
+
 export default {
+  components: {
+    Dialog,
+  },
   props: {
     title: {
       type: String,
@@ -77,7 +40,7 @@ export default {
   methods: {
     // 弹窗打开事件
     show() {
-      this.isShowDialog = true
+      this.$refs.dialog.show()
     },
     // 弹窗确认事件
     confirm() {
@@ -94,20 +57,18 @@ export default {
     // 完成事件 传递给外部使用
     done() {
       this.loading()
-      this.$refs.form.resetFields()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
     // 取消事件 关闭弹窗
     hide() {
       this.loading()
       // 关闭且清空表单
-      this.$refs.form.resetFields()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
     // 弹窗关闭按钮 关闭弹窗
     closeDialog() {
       this.loading()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
   },
 }
