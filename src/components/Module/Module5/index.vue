@@ -103,6 +103,7 @@ export default {
   background: rgba(105, 178, 61, 0.15);
 }
 .module5-cell {
+  display: flex;
   height: 25px;
   align-items: center;
   justify-content: center;

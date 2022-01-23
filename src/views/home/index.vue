@@ -40,9 +40,20 @@
     <!--  天地图  -->
     <!--    <MapContainer />-->
 
-    <WarningDialog ref="WarningDialog" />
-    <ErrorDialog ref="ErrorDialog" />
+    <WarningDialog
+      ref="WarningDialog"
+      @report="$refs.ErrorReportDialog.show()"
+      @assign="$refs.AssignStaffDialog.show()"
+    />
+    <ErrorDialog
+      ref="ErrorDialog"
+      @report="$refs.ErrorReportDialog.show()"
+      @assign="$refs.AssignStaffDialog.show()"
+    />
     <InfoDialog ref="InfoDialog" />
+    <!--  弹窗内事件  -->
+    <ErrorReportDialog ref="ErrorReportDialog" />
+    <AssignStaffDialog ref="AssignStaffDialog" />
   </div>
 </template>
 <script>
@@ -53,9 +64,11 @@ import FooterContainer from '@/components/FooterContainer/index.vue'
 import MapContainer from '@/components/MapContainer/index.vue'
 import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
-import WarningDialog from '@/components/WarningDialog/index.vue'
-import ErrorDialog from '@/components/ErrorDialog/index.vue'
-import InfoDialog from '@/components/InfoDialog/index.vue'
+import WarningDialog from '@/components/DialogGroup/WarningDialog/index.vue'
+import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
+import InfoDialog from '@/components/DialogGroup/InfoDialog/index.vue'
+import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
+import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
 
 export default {
   components: {
@@ -67,6 +80,8 @@ export default {
     WarningDialog,
     ErrorDialog,
     InfoDialog,
+    ErrorReportDialog,
+    AssignStaffDialog,
     ...ModuleComponents,
   },
   data() {

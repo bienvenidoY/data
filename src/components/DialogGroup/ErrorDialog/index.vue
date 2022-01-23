@@ -1,7 +1,7 @@
 <template>
   <Dialog
     ref="dialog"
-    title="转为误报"
+    title="设备告警"
     @close="closeDialog"
   >
     <div style="margin-left: 20px">
@@ -10,7 +10,7 @@
   </Dialog>
 </template>
 <script>
-import Dialog from '@/components/Dialog/index.vue'
+import Dialog from '@/components/DialogBase/SmallDialog/index.vue'
 
 export default {
   components: {

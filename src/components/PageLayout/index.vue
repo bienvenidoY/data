@@ -50,15 +50,11 @@
         <div
           class="right-item--btn right-item--btn1"
           @click="$emit('warning')"
-        >
-          设备告警
-        </div>
+        />
         <div
           class="right-item--btn right-item--btn2"
           @click="$emit('error')"
-        >
-          问题上报
-        </div>
+        />
       </div>
     </div>
   </div>
@@ -163,16 +159,22 @@ $pageMinWidth: 1920px;
 
   /* 右侧操作区域 end */
   .right-action {
-    margin-top: 56px;
+    margin-top: 11px;
   }
   .right-item--btn {
     width: 130px;
     height: 43px;
     margin-bottom: 10px;
     margin-right: 20px;
+    cursor: pointer;
   }
-  .right-item--btn1, .right-item--btn2 {
-    background-color: #ffff00;
+  .right-item--btn1 {
+    background: url('./sbgj@2x.png') no-repeat;
+    background-size: cover;
+  }
+  .right-item--btn2 {
+    background: url('./wtsb@2x.png') no-repeat;
+    background-size: cover;
   }
 }
 

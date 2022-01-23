@@ -4,23 +4,22 @@
       <div class="header-title-image" />
       <div class="header-weather">
         <div class="weather flex-center">
-          <div class="weather-icon" />
-          <div class="weather-text">
-            20~28℃ 多云转晴
-          </div>
+          <Weather ref="Weather" />
         </div>
-        <CurrentTime />
+        <CurrentTime @updateWeather="updateWeather" />
       </div>
     </div>
   </div>
 </template>
 <script>
 import CurrentTime from '@/components/CurrentTime/index.vue'
+import Weather from '@/components/Weather/index.vue'
 
 export default {
   name: 'HeaderContainer',
   components: {
     CurrentTime,
+    Weather,
   },
   props: {
     title: {
@@ -31,7 +30,11 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    updateWeather(hour) {
+      this.$refs.Weather.update(hour)
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -65,11 +68,5 @@ export default {
 }
 .weather {
   margin-bottom: 9px;
-  .weather-icon {
-    height: 30px;
-    width: 30px;
-    margin-right: 12px;
-    background: red;
-  }
 }
 </style>

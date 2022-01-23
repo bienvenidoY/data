@@ -1,6 +1,6 @@
 <template>
   <div class="current-time">
-      {{ dayText }}
+    {{ dayText }}
   </div>
 </template>
 <script>
@@ -19,15 +19,19 @@ export default {
       this.updateTime()
     }, 1000)
   },
-  methods: {
-    updateTime() {
-      this.dayText = dayjs().format('YYYY-MM-DD HH:mm:ss')
-    }
-  },
   beforeDestroy() {
     if(this.timer) {
       clearInterval(this.timer)
       this.timer = null
+    }
+  },
+  methods: {
+    updateTime() {
+      this.dayText = dayjs().format('YYYY-MM-DD HH:mm:ss')
+      // 0点和12点更新 天气
+      if(+dayjs().format('hh') === '12') {
+        this.$emit('updateWeather', dayjs().format('hh'))
+      }
     }
   }
 }
