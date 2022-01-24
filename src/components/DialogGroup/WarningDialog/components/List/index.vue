@@ -28,7 +28,9 @@ export default {
     }
   },
   data() {
+    return {
 
+    }
   },
   methods: {
     dayjs,

@@ -1,0 +1,20 @@
+.el-input.is-active .el-input__inner, .el-input__inner:focus {
+  border-color: #34B84A;
+}
+
+.el-input.is-focus .el-input__inner {
+  border-color: #34B84A;
+}
+.el-input__inner {
+  background: rgba(35, 66, 3, 0.5);
+  font-size: 12px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #EBFFEE;
+  border: 1px solid #34B84A;
+  border-radius: 5px;
+  line-height: 17px;
+}
+.el-input__prefix, .el-input__suffix {
+  color: #EBFFEE;
+}

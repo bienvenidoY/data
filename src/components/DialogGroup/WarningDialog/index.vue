@@ -140,7 +140,7 @@ export default {
     content: ' ';
     width: 1px;
     height: 371px;
-    top: 30px;
+    top: 2px;
     background: #34B84A;
   }
 }

@@ -4,16 +4,16 @@
     :class="[layoutType === 0 ? 'small' : 'large' ]"
   >
     <div class="page-layout-header header-container">
-      <slot name="header" />
+      <!--      <slot name="header" />-->
     </div>
     <div class="page-layout-footer footer-container">
-      <slot name="footer" />
+      <!--      <slot name="footer" />-->
     </div>
 
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item fl">
         <div class="page-layout-item-bg">
-          <slot name="left" />
+          <!--          <slot name="left" />-->
         </div>
       </div>
       <div class="fl left-action">
@@ -43,7 +43,7 @@
         class="page-layout-item fr"
       >
         <div class="page-layout-item-bg">
-          <slot name="right" />
+          <!--          <slot name="right" />-->
         </div>
       </div>
       <div class="fr right-action">

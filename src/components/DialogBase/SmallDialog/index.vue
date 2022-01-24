@@ -24,10 +24,9 @@
     <div class="dialog-footer">
       <div
         class="dialog-footer-btn flex-center"
+        :class="[`dialog-footer-btn${btnType}`]"
         @click="$emit('ok')"
-      >
-        {{ btnText }}
-      </div>
+      />
     </div>
   </el-dialog>
 </template>
@@ -38,9 +37,9 @@ export default {
       type: String,
       default: '提示',
     },
-    btnText: {
-      type: String,
-      default: '按钮'
+    btnType: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -140,7 +139,7 @@ export default {
     font-weight: 600;
     color: #EBFFEE;
     line-height: 20px;
-    padding: 10px 10px 5px;
+    padding: 10px 10px 0;
   }
 
   .dialog-footer {
@@ -150,12 +149,15 @@ export default {
     .dialog-footer-btn {
       width: 67px;
       height: 38px;
+      cursor: pointer;
+    }
+    .dialog-footer-btn0 {
       background: url('./ok@2x.png') no-repeat;
       background-size: cover;
-      font-weight: 600;
-      color: #EBFFEE;
-      line-height: 20px;
-      cursor: pointer;
+    }
+    .dialog-footer-btn1 {
+      background: url('./zp@2x.png') no-repeat;
+      background-size: cover;
     }
   }
 }

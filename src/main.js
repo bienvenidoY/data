@@ -4,19 +4,22 @@ import './styles/index.scss'
 import VueCompositionApi from '@vue/composition-api'
 
 import VueTianditu from 'vue-tianditu';
-import { Button, Select, Table, Dialog, Message, Form, FormItem ,Carousel, CarouselItem } from 'element-ui';
+import { Button, Select, Table, Dialog, Message, Form, FormItem ,Carousel, CarouselItem, Option, DatePicker } from 'element-ui';
 
 Vue.config.productionTip = false
 
 // 系统按需组件
 Vue.use(Button)
   .use(Select)
+  .use(Option)
+  .use(DatePicker)
   .use(Table)
   .use(Dialog)
   .use(Carousel)
   .use(Form)
   .use(FormItem)
   .use(CarouselItem)
+Vue.prototype.$ELEMENT = { size: 'small'};
 Vue.prototype.$message = Message;
 
 Vue.use(VueCompositionApi)

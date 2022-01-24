@@ -2,11 +2,11 @@
   <Dialog
     ref="dialog"
     title="转为误报"
-    btn-text="确认"
+    :btn-type="0"
     @close="closeDialog"
     @ok="onOk"
   >
-    <div style="margin-left: 20px">
+    <div style="margin-left: 20px;margin-bottom: 5px;">
       是否将该告警处置为误报
     </div>
   </Dialog>
