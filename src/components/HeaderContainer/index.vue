@@ -1,5 +1,8 @@
 <template>
-  <div class="header-container">
+  <div
+    class="header-container"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  >
     <div class="header-title flex-center">
       <div class="header-title-image" />
       <div class="header-weather">
@@ -17,6 +20,7 @@ import Weather from '@/components/Weather/index.vue'
 
 export default {
   name: 'HeaderContainer',
+  inject: ['injectLayoutType'],
   components: {
     CurrentTime,
     Weather,
@@ -40,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 .header-container {
   height: var(--header-height);
-  background: url(./bg_top@2x.png) no-repeat, var(--container-bg);
+  background: url(./image/small/bg_top@2x.png) no-repeat, var(--container-bg);
   background-size: cover;
 }
 .header-title {
@@ -52,7 +56,7 @@ export default {
 .header-title-image {
   width: 100%;
   height: 22px;
-  background: url(./title@2x.png) no-repeat;
+  background: url(./image/small/title@2x.png) no-repeat;
   background-size: cover;
 }
 .header-weather {
@@ -68,5 +72,19 @@ export default {
 }
 .weather {
   margin-bottom: 9px;
+}
+
+.large {
+  .header-title-image {
+    width: 100%;
+    height: 22px;
+    background: url(./image/large/title@2x.png) no-repeat;
+    background-size: cover;
+  }
+  &.header-container {
+    height: var(--header-height);
+    background: url(./image/large/bg_top@2x.png) no-repeat, var(--container-bg);
+    background-size: cover;
+  }
 }
 </style>

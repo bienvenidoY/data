@@ -1,8 +1,10 @@
 <template>
-  <div class="module6">
+  <div class="module12">
     <ModuleCellCard
       :options="options"
       :data="data"
+      :is-two-row="true"
+      :size="injectLayoutType === 0 ? 'small' : 'large'"
     />
   </div>
 </template>
@@ -14,28 +16,34 @@ export default {
   components: {
     ModuleCellCard,
   },
+  inject: ['injectLayoutType'],
   data() {
     return {
       options: [
         {
           label: '管网告警',
           prop: 'a',
+          suffix: '起'
         },
         {
           label: '排口告警',
           prop: 'b',
+          suffix: '起'
         },
         {
           label: '河道告警',
           prop: 'c',
+          suffix: '起'
         },
         {
           label: '巡检问题',
           prop: 'd',
+          suffix: '起'
         },
         {
           label: '监管问题',
           prop: 'e',
+          suffix: '起'
         },
       ],
       data: {
@@ -55,7 +63,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.module6 {
+.module12 {
+
   flex-wrap: wrap;
 }
 .module6-item {

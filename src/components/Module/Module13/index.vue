@@ -1,10 +1,10 @@
 <template>
-  <div class="module1">
+  <div class="module13">
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="300px"
+      height="283px"
     />
   </div>
 </template>
@@ -32,7 +32,12 @@ export default {
           top: 'bottom',
           data: ['用水量', '排水量'],
           type: 'plain',
-          icon: 'rect'
+          icon: 'rect',
+          itemWidth: 12,
+          itemHeight: 12,
+          textStyle: {
+            color: '#979797',
+          },
         },
         grid: {
           top: '25',
@@ -90,13 +95,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.module-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  &-item {
-    font-size: 14px;
-  }
+.module13 {
+  margin: 0 26px 0 24px;
 }
 </style>
 

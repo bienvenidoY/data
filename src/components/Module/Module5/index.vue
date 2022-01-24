@@ -95,7 +95,7 @@ export default {
   box-sizing: border-box;
 }
 
-.module5-item {
+.module5-column-item {
   background: rgba(71, 123, 41, 0.15);
   text-align: center;
 }

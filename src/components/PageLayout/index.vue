@@ -1,7 +1,7 @@
 <template>
   <div
     class="page-layout"
-    :class="[layoutType === 0 ? 'small' : 'large' ]"
+    :class="[injectLayoutType === 0 ? 'small' : 'large' ]"
   >
     <div class="page-layout-header header-container">
       <slot name="header" />
@@ -13,7 +13,7 @@
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item fl">
         <div class="page-layout-item-bg">
-          <!--          <slot name="left" />-->
+          <slot name="left" />
         </div>
       </div>
       <div class="fl left-action">
@@ -56,14 +56,9 @@ import Select from './Select/index.vue'
 
 export default {
   name: 'PageLayout',
+  inject: ['injectLayoutType'],
   components: {
     Select,
-  },
-  props: {
-    layoutType: {
-      type: Number,
-      default: 0,
-    }
   },
   data() {
     return {
@@ -78,11 +73,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 $pageLayoutItemSmall: 400px;
+$pageLayoutItemLarge: 870px;
 // 天地图zIndex 400
 $pageLayoutIndex: 499;
 $pageLayoutBg: rgba(7, 15, 3, 0.8);
 $pageLayoutTop: 34px;
-$pageMinWidth: 1920px;
 
 .page-layout {
   position: relative;
@@ -91,8 +86,6 @@ $pageMinWidth: 1920px;
   .page-layout-header, .page-layout-footer {
     position: absolute;
     left: 0;
-    width: 100%;
-    min-width: 1980px;
     background: $pageLayoutBg;
     z-index: $pageLayoutIndex;
   }
@@ -114,13 +107,13 @@ $pageMinWidth: 1920px;
   .page-layout-item {
     height: 100%;
     box-sizing: border-box;
-    background: rgba(7, 15, 3, 0.8) ;
-    // /
+    background: $pageLayoutBg ;
   }
 
   .page-layout-item-bg {
     background: var(--container-bg);
     box-sizing: border-box;
+    display: grid;
   }
 
   .page-layout-left {
@@ -131,10 +124,6 @@ $pageMinWidth: 1920px;
   .page-layout-right {
     right: 0;
     top: calc(var(--header-height) - 8px);
-    background: url('./bg_you@2x@2x.png');
-    background-size: 44px auto;
-    background-repeat: no-repeat;
-    background-position: right 7px;
     padding-right: 44px;
     // 左侧857 图片865, 所一需要865
     height: calc(1080px - var(--header-height) - var(--footer-height));
@@ -167,32 +156,83 @@ $pageMinWidth: 1920px;
     margin-right: 20px;
     cursor: pointer;
   }
-  .right-item--btn1 {
-    background: url('./sbgj@2x.png') no-repeat;
-    background-size: cover;
-  }
-  .right-item--btn2 {
-    background: url('./wtsb@2x.png') no-repeat;
-    background-size: cover;
-  }
 }
 
-// 响应式小屏幕下左右宽度
+// 响应式小屏幕
 .small {
+  .page-layout-header, .page-layout-footer {
+    width: var(--page-small-width);
+  }
+  .page-layout-item-bg {
+    width: $pageLayoutItemSmall;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 0;
+    grid-row-gap: 19px;
+  }
   .page-layout-left {
     .page-layout-item-bg {
-      width: $pageLayoutItemSmall;
       padding-right: 19px;
       padding-left: 37px;
     }
   }
   .page-layout-right {
+    background: url('./image/small/bg_you@2x.png');
+    background-size: 44px auto;
+    background-repeat: no-repeat;
+    background-position: right 7px;
     .page-layout-item-bg {
-      width: $pageLayoutItemSmall;
+      padding-left: 12px;
+      padding-right: 44px;
+    }
+  }
+  .right-item--btn1 {
+    background: url('./image/small/sbgj@2x.png') no-repeat;
+    background-size: cover;
+  }
+  .right-item--btn2 {
+    background: url('./image/small/wtsb@2x.png') no-repeat;
+    background-size: cover;
+  }
+
+}
+
+// 响应式大屏幕
+.large {
+  .page-layout-header, .page-layout-footer {
+    width: var(--page-large-width);
+  }
+  .page-layout-item-bg {
+    width: $pageLayoutItemLarge;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 22px;
+  }
+  .page-layout-left {
+    .page-layout-item-bg {
+
+      padding-right: 33px;
+      padding-left: 37px;
+    }
+  }
+  .page-layout-right {
+    background: url('./image/large/bg_you@2x.png');
+    background-size: 44px auto;
+    background-repeat: no-repeat;
+    background-position: right 7px;
+    .page-layout-item-bg {
       padding-left: 12px;
       padding-right: 44px;
     }
   }
 
+  .right-item--btn1 {
+    background: url('./image/large/sbgj@2x.png') no-repeat;
+    background-size: cover;
+  }
+  .right-item--btn2 {
+    background: url('./image/large/wtsb@2x.png') no-repeat;
+    background-size: cover;
+  }
 }
 </style>

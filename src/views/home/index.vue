@@ -1,5 +1,5 @@
 <template>
-  <div class="root-container">
+  <div :class="[layoutType === 0 ? 'small-root-container' : 'large-root-container']">
     <!-- 布局  -->
     <PageLayout
       :layout-type="0"
@@ -20,6 +20,7 @@
           :key="index"
           class="module-card-wrapper"
           :title="item.title"
+          :style="{ height: item.height}"
         >
           <components :is="item.key" />
         </ModuleCard>
@@ -29,8 +30,9 @@
           v-for="(item, index) in layoutList.right"
           :key="index"
           class="module-card-wrapper"
-          :class="{'small-right-first' : index === 0}"
+          :class="{'small-right-first' : layoutType === 0 && index === 0}"
           :title="item.title"
+          :style="{ height: item.height}"
         >
           <components :is="item.key" />
         </ModuleCard>
@@ -86,12 +88,16 @@ export default {
   },
   data() {
     return {
+      layoutType: 1,
+    }
+  },
+  provide(){
+    return {
+      injectLayoutType: this.layoutType,
     }
   },
   computed: {
     layoutList() {
-      // 0 1980尺寸，1 大屏尺寸
-      const layoutType = 0
       const obj = {
         0: {
           list: options,
@@ -102,13 +108,13 @@ export default {
           limit: 6,
         }
       }
-      const { list, limit } = obj[layoutType]
+      const { list, limit } = obj[this.layoutType]
 
       return {
         left: list.slice(0, limit),
         right: list.slice(limit, list.length)
       }
-    }
+    },
   },
   methods: {
     onWarning() {
@@ -128,14 +134,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.root-container {
-  height: 100%;
-  min-width: 1980px;
+.small-root-container{
+  height: var(--page-height);
+  width: var(--page-small-width);
+}
+.large-root-container {
+  width: var(--page-large-width);
+  height: var(--page-height);
+  .module-card-wrapper {
+    width: 380px;
+  }
 }
 
-.module-card-wrapper + .module-card-wrapper{
-  margin-top: 19px;
-}
 
 .small-right-first {
   margin-top: -8px;

@@ -1,15 +1,36 @@
 <template>
-  <div class="module-cell-card">
-    <div
-      v-for="item in options"
-      :key="item.prop"
-      class="module-cell-card-item"
-    >
-      <div class="module-cell-card-item-label">
-        {{ item.label }}
+  <div
+    class="module-cell-card"
+    :class="[size]"
+  >
+    <div class="module-cell-card-wrapper">
+      <div
+        v-for="item in list.top"
+        :key="item.prop"
+        class="module-cell-card-item"
+      >
+        <div class="module-cell-card-item-label">
+          {{ item.label }}
+        </div>
+        <div class="module-cell-card-item-value">
+          {{ data[item.prop] }} <span>{{ item.suffix }}</span>
+        </div>
       </div>
-      <div class="module-cell-card-item-value">
-        {{ data[item.prop] }} <span>{{ item.suffix }}</span>
+    </div>
+    <div
+      class="module-cell-card-wrapper"
+    >
+      <div
+        v-for="item in list.bottom"
+        :key="item.prop"
+        class="module-cell-card-item"
+      >
+        <div class="module-cell-card-item-label">
+          {{ item.label }}
+        </div>
+        <div class="module-cell-card-item-value">
+          {{ data[item.prop] }} <span>{{ item.suffix }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -25,23 +46,49 @@ export default {
     data: {
       type: Object,
       default: () => {},
+    },
+    size: {
+      type: String,
+      default: 'small',
+    },
+    // 头部两列
+    isTwoRow: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {
     return {}
+  },
+  computed: {
+    list(){
+      const limit = this.isTwoRow ? 2 : 3
+      console.log('isTwoRow', this.isTwoRow, this.options.slice(0 , limit))
+      return {
+        top: this.options.slice(0 , limit),
+        bottom: this.options.slice(limit, this.options.length),
+      }
+    }
   },
   methods: {},
 }
 </script>
 <style lang="scss" scoped>
 .module-cell-card {
+  padding-top: 24px;
+}
+
+.module-cell-card-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 10px;
   justify-content: center;
-  padding-bottom: 33px;
-  padding-top: 24px;
 }
+
+.module-cell-card-wrapper + .module-cell-card-wrapper{
+  margin-top: 10px;
+}
+
 .module-cell-card-item {
   width: 94px;
   height: 48px;
@@ -74,7 +121,26 @@ export default {
   }
 }
 
-.module-cell-card-item + .module-cell-card-item {
-  margin-left: 10px;
+.large {
+  .module-cell-card-item {
+    width: 104px;
+    height: 52px;
+    background: url('./big-bg.png') no-repeat center;
+    background-size: cover;
+  }
+
+  .module-cell-card {
+    padding-top: 38px;
+  }
+  .module-cell-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 27px 11px;
+    justify-content: center;
+  }
+
+  .module-cell-card-wrapper + .module-cell-card-wrapper{
+    margin-top: 27px;
+  }
 }
 </style>
