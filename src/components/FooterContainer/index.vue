@@ -1,8 +1,12 @@
 <template>
-  <div class="footer-container" />
+  <div
+    class="footer-container"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  />
 </template>
 <script>
 export default {
+  inject: ['injectLayoutType'],
   data() {
     return {}
   }
@@ -11,7 +15,12 @@ export default {
 <style lang="scss" scoped>
 .footer-container {
   height: var(--footer-height);
-  background: url(./bg_xia.2e87cb9@2x.png)  no-repeat, var(--container-bg);
+  background: url(./small-bg.png)  no-repeat, var(--container-bg);
+  background-size: cover;
+}
+.large.footer-container {
+  height: var(--footer-height);
+  background: url(./big-bg.png)  no-repeat, var(--container-bg);
   background-size: cover;
 }
 </style>

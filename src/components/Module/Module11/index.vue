@@ -3,7 +3,7 @@
     <ModuleCellCard
       :options="options"
       :data="data"
-      :size="injectLayoutType === 0 ? 'small' : 'large'"
+      size="large"
     />
   </div>
 </template>
@@ -15,7 +15,6 @@ export default {
   components: {
     ModuleCellCard,
   },
-  inject: ['injectLayoutType'],
   data() {
     return {
       options: [
@@ -69,6 +68,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module11 {
+  padding-top: 38px;
   flex-wrap: wrap;
   padding-left: 31px;
   padding-right: 15px;

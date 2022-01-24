@@ -3,12 +3,15 @@
     <ModuleCellCard
       :options="options"
       :data="data"
+      size="large"
+      val-sty-type="normal"
+      class="margin-top"
     />
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="400px"
+      height="160px"
     />
   </div>
 </template>
@@ -27,42 +30,67 @@ export default {
       options: [
         {
           label: '雨水管网',
-          value: 0,
+          prop: 'a',
+          suffix: '个'
         },
         {
           label: '污水管网',
-          value: 0,
+          prop: 'b',
+          suffix: '个'
         },
         {
           label: '感知点控',
-          value: 0,
+          prop: 'c',
+          suffix: '个'
         },
       ],
-      data: {},
+      data: {
+
+      },
       chartOpt: {
         tooltip: {},
         legend: {
           top: 'bottom',
+          type: 'plain',
+          icon: 'rect',
+          itemWidth: 9,
+          itemHeight: 9,
+          fontSize: 9,
+          textStyle: {
+            color: '#979797',
+          },
         },
         grid: {
+          top: 0,
           left: '3%',
           right: '4%',
-          bottom: '3%',
-          containLabel: true
+          bottom: 25,
+          containLabel: true,
         },
         xAxis: {
           type: 'value',
-          boundaryGap: [0, 0.01]
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff'
+            }
+          },
         },
         yAxis: {
           type: 'category',
-          data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+          data: ['Brazil', 'Indonesia'],
+          axisLabel: {show: false},
+          axisTick: {show: false},
         },
         series: [
           {
-            name: '2011',
+            name: '点位数量',
             type: 'bar',
-            data: [18203, 23489, 29034, 104970, 131744, 630230]
+            data: [5, 4]
           }
         ]
       }
@@ -78,6 +106,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.module10 {
 
+  .margin-top {
+    margin-top: 7px;
+    margin-left: -6px;
+  }
+
+  .chart-content {
+    padding-top: 15px;
+    padding-left: 32px;
+    padding-right: 16px;
+  }
+}
 </style>
 

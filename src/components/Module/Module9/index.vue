@@ -3,12 +3,15 @@
     <ModuleCellCard
       :options="options"
       :data="data"
+      size="large"
+      val-sty-type="normal"
+      class="margin-top"
     />
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="400px"
+      height="162px"
     />
   </div>
 </template>
@@ -28,14 +31,17 @@ export default {
         {
           label: '雨水管网',
           prop: '1',
+          suffix: '个'
         },
         {
           label: '污水管网',
           prop: '2',
+          suffix: '个'
         },
         {
           label: '感知点控',
           prop: '3',
+          suffix: '个'
         },
       ],
       data: {},
@@ -43,26 +49,48 @@ export default {
         tooltip: {},
         legend: {
           top: 'bottom',
+          type: 'plain',
+          icon: 'rect',
+          itemWidth: 9,
+          itemHeight: 9,
+          fontSize: 9,
+          textStyle: {
+            color: '#979797',
+          },
         },
         grid: {
+          top: 10,
           left: '3%',
           right: '4%',
-          bottom: '3%',
+          bottom: 25,
           containLabel: true
         },
         xAxis: {
           type: 'category',
-          data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+          data: ['液位+电导率', '液位+ph', '液位', '流量'],
+          axisLabel: {
+            color: '#ffffff',
+            fontSize: 9,
+          },
         },
         yAxis: {
           type: 'value',
-          boundaryGap: [0, 0.01]
+          splitLine: {
+            lineStyle: {
+              color: ['#404040'],
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ffffff'
+            }
+          },
         },
         series: [
           {
-            name: '2011',
+            name: '点位数量',
             type: 'bar',
-            data: [18203, 23489, 29034, 104970, 131744, 630230]
+            data: [1, 2, 3, 20]
           }
         ]
       }
@@ -78,6 +106,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.module9 {
 
+  .margin-top {
+    margin-top: 7px;
+    margin-left: -6px;
+  }
+
+  .chart-content {
+    padding-top: 9px;
+    padding-left: 32px;
+    padding-right: 16px;
+  }
+}
 </style>
 

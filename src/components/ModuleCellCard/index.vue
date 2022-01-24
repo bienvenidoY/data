@@ -12,12 +12,16 @@
         <div class="module-cell-card-item-label">
           {{ item.label }}
         </div>
-        <div class="module-cell-card-item-value">
-          {{ data[item.prop] }} <span>{{ item.suffix }}</span>
+        <div
+          class="module-cell-card-item-value"
+          :class="valStyType === 'normal' ? 'value-normal' : ''"
+        >
+          {{ data[item.prop] || 0 }} <span>{{ item.suffix }}</span>
         </div>
       </div>
     </div>
     <div
+      v-if="!!list.bottom.length"
       class="module-cell-card-wrapper"
     >
       <div
@@ -28,8 +32,11 @@
         <div class="module-cell-card-item-label">
           {{ item.label }}
         </div>
-        <div class="module-cell-card-item-value">
-          {{ data[item.prop] }} <span>{{ item.suffix }}</span>
+        <div
+          class="module-cell-card-item-value"
+          :class="valStyType === 'normal' ? 'value-normal' : ''"
+        >
+          {{ data[item.prop] || 0 }} <span>{{ item.suffix }}</span>
         </div>
       </div>
     </div>
@@ -50,6 +57,10 @@ export default {
     size: {
       type: String,
       default: 'small',
+    },
+    valStyType: {
+      type: String, // normal
+      default: 'primary',
     },
     // 头部两列
     isTwoRow: {
@@ -75,7 +86,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module-cell-card {
-  padding-top: 24px;
+
 }
 
 .module-cell-card-wrapper {
@@ -112,6 +123,12 @@ export default {
     color: #FFB23F;
     line-height: 20px;
     padding-right: 4px;
+    &.value-normal {
+      font-size: 12px;
+      font-weight: 400;
+      color: #EBFFEE;
+      line-height: 17px;
+    }
     span {
       font-size: 12px;
       font-weight: 400;
@@ -130,7 +147,7 @@ export default {
   }
 
   .module-cell-card {
-    padding-top: 38px;
+
   }
   .module-cell-card-wrapper {
     display: flex;

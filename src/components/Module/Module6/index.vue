@@ -61,6 +61,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .module6 {
+  padding-top: 24px;
   flex-wrap: wrap;
 }
 .module6-item {

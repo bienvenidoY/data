@@ -43,7 +43,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .header-container {
-  height: var(--header-height);
+  height: var(--header-small-height);
   background: url(./image/small/bg_top@2x.png) no-repeat, var(--container-bg);
   background-size: cover;
 }
@@ -82,7 +82,7 @@ export default {
     background-size: cover;
   }
   &.header-container {
-    height: var(--header-height);
+    height: var(--header-large-height);
     background: url(./image/large/bg_top@2x.png) no-repeat, var(--container-bg);
     background-size: cover;
   }
