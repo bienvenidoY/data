@@ -49,6 +49,7 @@ export default {
   line-height: 20px;
   .warning-item {
     padding: 11px 39px 11px 30px;
+    cursor: pointer;
     &--title {
       color: #FFB23F;
     }
@@ -56,7 +57,7 @@ export default {
       padding: 2px 0;
     }
     &--time {}
-    &.is-active {
+    &.is-active, &:hover {
       background: linear-gradient(90deg, rgba(240, 176, 6, 0.3) 0%, rgba(230, 171, 2, 0) 100%);
     }
   }
