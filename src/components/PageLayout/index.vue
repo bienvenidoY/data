@@ -4,10 +4,10 @@
     :class="[layoutType === 0 ? 'small' : 'large' ]"
   >
     <div class="page-layout-header header-container">
-      <!--      <slot name="header" />-->
+      <slot name="header" />
     </div>
     <div class="page-layout-footer footer-container">
-      <!--      <slot name="footer" />-->
+      <slot name="footer" />
     </div>
 
     <div class="page-layout-left page-layout-container">
@@ -19,16 +19,8 @@
       <div class="fl left-action">
         <div
           class="left-item--select"
-          @click="$emit('changeType', type)"
         >
-          <el-select v-model="type">
-            <el-option
-              v-for="item in typeOptions"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
+          <Select @change="changeType" />
         </div>
         <div
           class="left-item--btn"
@@ -43,7 +35,7 @@
         class="page-layout-item fr"
       >
         <div class="page-layout-item-bg">
-          <!--          <slot name="right" />-->
+          <slot name="right" />
         </div>
       </div>
       <div class="fr right-action">
@@ -60,8 +52,13 @@
   </div>
 </template>
 <script>
+import Select from './Select/index.vue'
+
 export default {
   name: 'PageLayout',
+  components: {
+    Select,
+  },
   props: {
     layoutType: {
       type: Number,
@@ -70,11 +67,13 @@ export default {
   },
   data() {
     return {
-      type: '',
-      typeOptions: [],
     }
   },
-  methods: {},
+  methods: {
+    changeType(type) {
+      this.$emit('changeType', type)
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
