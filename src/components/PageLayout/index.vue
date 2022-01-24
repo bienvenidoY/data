@@ -149,7 +149,6 @@ $pageLayoutTop: 34px;
   .page-layout-item-bg {
     width: $pageLayoutItemSmall;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
     grid-column-gap: 0;
     grid-row-gap: 19px;
   }
@@ -165,8 +164,9 @@ $pageLayoutTop: 34px;
     background-repeat: no-repeat;
     background-position: right 7px;
     .page-layout-item-bg {
+      width: calc($pageLayoutItemSmall - 44px);
       padding-left: 12px;
-      padding-right: 44px;
+      // padding-right: 44px;
     }
   }
   .right-item--btn1 {

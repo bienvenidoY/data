@@ -12,17 +12,17 @@ export const options =  [
   {
     title: '设备概况',
     key: 'Module3',
-    height: '209px',
+    height: '243px',
   },
   {
     title: '巡检维护',
     key: 'Module4',
-    height: '215px',
+    height: '209px',
   },
   {
     title: '河道水质',
     key: 'Module5',
-    height: '191px',
+    height: '215px',
   },
   {
     title: '异常情况',
@@ -37,7 +37,7 @@ export const options =  [
   {
     title: '事件存档',
     key: 'Module8',
-    height: '192px',
+    height: '251px',
   },
 ]
 
