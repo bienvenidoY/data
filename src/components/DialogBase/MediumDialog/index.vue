@@ -5,15 +5,15 @@
     :show-close="false"
     :close-on-click-modal="false"
     append-to-body
-    custom-class="big-custom-dialog"
+    custom-class="mediumcustom-dialog"
     @close="closeDialog"
     v-on="$listeners"
   >
-    <div class="big-dialog-header">
-      <div class="big-dialog-title">
+    <div class="medium-dialog-header">
+      <div class="medium-dialog-title">
         {{ title }}
       </div>
-      <div class="big-dialog-action">
+      <div class="medium-dialog-action">
         <slot name="headerAction" />
       </div>
       <div
@@ -21,7 +21,7 @@
         @click="closeDialog"
       />
     </div>
-    <div class="big-dialog-content">
+    <div class="medium-dialog-content">
       <slot />
     </div>
   </el-dialog>
@@ -86,9 +86,9 @@ export default {
 }
 </script>
 <style lang="scss">
-.big-custom-dialog {
-  width: 876px;
-  height: 463px;
+.mediumcustom-dialog {
+  width: 471px;
+  height: 473px;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -112,15 +112,15 @@ export default {
   }
 
 
-  .big-dialog-title {
-    padding-left: 25px;
+  .medium-dialog-title {
+    padding-left: 105px;
     font-size: 16px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #34B84A;
     line-height: 22px;
   }
-  .big-dialog-content {
+  .medium-dialog-content {
     font-size: 14px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
@@ -128,17 +128,17 @@ export default {
     line-height: 20px;
   }
 
-  .big-dialog-header {
+  .medium-dialog-header {
     display: flex;
     position: relative;
-    padding: 24px 24px 0;
+    padding: 5px 0 0;
     .dialog-close-icon {
       position: absolute;
-      right: 22px;
-      top: 22px;
+      right: 10px;
+      top: 7px;
     }
 
-    .big-dialog-action {
+    .medium-dialog-action {
       flex: 1;
     }
 

@@ -74,7 +74,6 @@ export default {
   computed: {
     list(){
       const limit = this.isTwoRow ? 2 : 3
-      console.log('isTwoRow', this.isTwoRow, this.options.slice(0 , limit))
       return {
         top: this.options.slice(0 , limit),
         bottom: this.options.slice(limit, this.options.length),

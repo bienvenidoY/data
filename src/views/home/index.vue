@@ -40,7 +40,7 @@
     </PageLayout>
 
     <!--  天地图  -->
-    <!--    <MapContainer />-->
+    <MapContainer @action="onAction" />
 
     <WarningDialog
       ref="WarningDialog"
@@ -56,6 +56,10 @@
     <!--  弹窗内事件  -->
     <ErrorReportDialog ref="ErrorReportDialog" />
     <AssignStaffDialog ref="AssignStaffDialog" />
+
+    <!--  地图点 工具弹窗  -->
+    <OversizeDialog ref="OversizeDialog" />
+    <TextDialog ref="TextDialog" />
   </div>
 </template>
 <script>
@@ -71,6 +75,8 @@ import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
 import InfoDialog from '@/components/DialogGroup/InfoDialog/index.vue'
 import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
 import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
+import OversizeDialog from '@/components/DialogBase/OversizeDialog/index.vue'
+import TextDialog from '@/components/DialogBase/TextDialog/index.vue'
 
 export default {
   components: {
@@ -84,6 +90,8 @@ export default {
     InfoDialog,
     ErrorReportDialog,
     AssignStaffDialog,
+    OversizeDialog,
+    TextDialog,
     ...ModuleComponents,
   },
   data() {
@@ -125,6 +133,17 @@ export default {
     },
     onInfo() {
       this.$refs.InfoDialog.show()
+    },
+    onAction(type, info) {
+      console.log(type)
+      if(type === 'table') {
+        this.$refs.OversizeDialog.show(info)
+        return
+      }
+      if(type === 'text') {
+        this.$refs.TextDialog.show(info)
+        return
+      }
     },
     onChangeType() {
       //

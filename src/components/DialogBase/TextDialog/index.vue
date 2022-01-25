@@ -5,53 +5,53 @@
     :show-close="false"
     :close-on-click-modal="false"
     append-to-body
-    custom-class="big-custom-dialog"
+    custom-class="text-custom-dialog"
     @close="closeDialog"
     v-on="$listeners"
   >
-    <div class="big-dialog-header">
-      <div class="big-dialog-title">
+    <div class="text-dialog-header">
+      <div class="text-dialog-title text-dialog-content-right-title">
         {{ title }}
-      </div>
-      <div class="big-dialog-action">
-        <slot name="headerAction" />
       </div>
       <div
         class="dialog-close-icon"
         @click="closeDialog"
       />
     </div>
-    <div class="big-dialog-content">
-      <slot />
+    <div class="text-dialog-content">
+      <ScrollBar :view-style="[{ height: '230px'}]">
+        <div
+          v-for="(item, index) in content"
+          :key="index"
+          class="text-dialog-content--item"
+        >
+          {{ item.label }}:{{ item.value }}
+        </div>
+      </ScrollBar>
     </div>
   </el-dialog>
 </template>
 <script>
+import ScrollBar from '@/components/ScrollBar/index.vue'
+
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '提示',
-    },
+  components: {
+    ScrollBar
   },
   data() {
     return {
-      formLayout: {
-        span: 24,
-      },
+      content: [],
+      title: '提示',
       isShowDialog: false,
       isLoading: false,
-      form: {
-        staff: '',
-      },
-      formRules: {},
-      row: {},
-      options: [],
     }
   },
   methods: {
     // 弹窗打开事件
-    show() {
+    show(info) {
+      const { title, content } = info
+      this.content = content
+      this.title = title
       this.isShowDialog = true
     },
     // 弹窗确认事件
@@ -86,9 +86,9 @@ export default {
 }
 </script>
 <style lang="scss">
-.big-custom-dialog {
-  width: 876px;
-  height: 463px;
+.text-custom-dialog {
+  width: 471px;
+  height: 333px;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -112,33 +112,51 @@ export default {
   }
 
 
-  .big-dialog-title {
-    padding-left: 25px;
-    font-size: 16px;
-    font-family: PingFangSC-Semibold, PingFang SC;
-    font-weight: 600;
-    color: #34B84A;
-    line-height: 22px;
+  .text-dialog-title {
+    height: 20px;
+    font-size: 14px;
+    font-family: PingFangSC-Medium, PingFang SC;
+    font-weight: 500;
+    color: #477B29;
+    line-height: 20px;
+    padding-left: 15px;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: ' ';
+      width: 1px;
+      height: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #34B84A;
+      left: 0;
+    }
   }
-  .big-dialog-content {
+
+  .text-dialog-content {
     font-size: 14px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
     color: #EBFFEE;
     line-height: 20px;
+    padding: 14px 6px 22px 32px;
+    height: 230px;
+    .text-dialog-content--item + .text-dialog-content--item {
+      margin-top: 10px;
+    }
   }
 
-  .big-dialog-header {
+  .text-dialog-header {
     display: flex;
     position: relative;
-    padding: 24px 24px 0;
+    padding: 47px 0 0 31px;
     .dialog-close-icon {
       position: absolute;
-      right: 22px;
-      top: 22px;
+      right: 10px;
+      top: 7px;
     }
 
-    .big-dialog-action {
+    .text-dialog-action {
       flex: 1;
     }
 

@@ -5,15 +5,15 @@
     :show-close="false"
     :close-on-click-modal="false"
     append-to-body
-    custom-class="big-custom-dialog"
+    custom-class="oversize-custom-dialog"
     @close="closeDialog"
     v-on="$listeners"
   >
-    <div class="big-dialog-header">
-      <div class="big-dialog-title">
+    <div class="oversize-dialog-header">
+      <div class="oversize-dialog-title">
         {{ title }}
       </div>
-      <div class="big-dialog-action">
+      <div class="oversize-dialog-action">
         <slot name="headerAction" />
       </div>
       <div
@@ -21,7 +21,7 @@
         @click="closeDialog"
       />
     </div>
-    <div class="big-dialog-content">
+    <div class="oversize-dialog-content">
       <slot />
     </div>
   </el-dialog>
@@ -86,9 +86,9 @@ export default {
 }
 </script>
 <style lang="scss">
-.big-custom-dialog {
-  width: 876px;
-  height: 463px;
+.oversize-custom-dialog {
+  width: 886px;
+  height: 679px;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -112,7 +112,7 @@ export default {
   }
 
 
-  .big-dialog-title {
+  .oversize-dialog-title {
     padding-left: 25px;
     font-size: 16px;
     font-family: PingFangSC-Semibold, PingFang SC;
@@ -120,7 +120,7 @@ export default {
     color: #34B84A;
     line-height: 22px;
   }
-  .big-dialog-content {
+  .oversize-dialog-content {
     font-size: 14px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
@@ -128,7 +128,7 @@ export default {
     line-height: 20px;
   }
 
-  .big-dialog-header {
+  .oversize-dialog-header {
     display: flex;
     position: relative;
     padding: 24px 24px 0;
@@ -138,7 +138,7 @@ export default {
       top: 22px;
     }
 
-    .big-dialog-action {
+    .oversize-dialog-action {
       flex: 1;
     }
 

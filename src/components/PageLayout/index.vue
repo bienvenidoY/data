@@ -11,22 +11,16 @@
     </div>
 
     <div class="page-layout-left page-layout-container">
-      <div class="page-layout-item fl">
+      <div class="page-layout-item ">
         <div class="page-layout-item-bg">
           <slot name="left" />
         </div>
       </div>
-      <div class="fl left-action">
+      <div class="left-action">
         <div
           class="left-item--select"
         >
           <Select @change="changeType" />
-        </div>
-        <div
-          class="left-item--btn"
-          @click="$emit('info')"
-        >
-          <el-button>icon</el-button>
         </div>
       </div>
     </div>
@@ -113,10 +107,8 @@ $pageLayoutTop: 34px;
 
   /* 左侧操作区域 start */
   .left-action {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
+    position: absolute;
+    top: 0;
   }
 
   /* 左侧操作区域 end */
@@ -183,7 +175,7 @@ $pageLayoutTop: 34px;
   }
 
   .left-action {
-    margin-left: 15px;
+    margin-left: calc($pageLayoutItemSmall + 15px);
   }
 
   .right-item--btn {
@@ -256,7 +248,7 @@ $pageLayoutTop: 34px;
     margin-top: 49px;
   }
   .left-action {
-    margin-left: 53px;
+    margin-left: calc($pageLayoutItemLarge + 53px);
   }
 
   .right-item--btn {

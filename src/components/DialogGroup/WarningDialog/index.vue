@@ -132,7 +132,7 @@ export default {
   position: relative;
 }
 .content-left {
-  width: 263px;
+  width: 264px;
   margin-right: 15px;
   &:before {
     position: absolute;
@@ -141,7 +141,7 @@ export default {
     width: 1px;
     height: 371px;
     top: 2px;
-    background: #34B84A;
+    background: linear-gradient(to top, #fff 4%, #1A5D27 4%, #1A5D27 96%, #fff 96%);
   }
 }
 

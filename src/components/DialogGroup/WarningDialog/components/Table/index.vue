@@ -12,28 +12,37 @@
         </div>
       </div>
     </div>
-    <div class="flex table-scroll">
-      <div
-        v-for="item in column"
-        :key="item.prop"
-        class="warning-table-item"
-        :style="{ width: `144px` }"
-      >
+    <ScrollBar
+      :style="[{height: '315px' }]"
+      :view-style="[{height: '315px' }]"
+    >
+      <div class="flex">
         <div
-          v-for="(chunk,chunkIndex) in data"
-          :key="chunkIndex"
-          class="warning-table-cell warning-table-item-chunk"
+          v-for="item in column"
+          :key="item.prop"
+          class="warning-table-item"
+          :style="{ width: `144px` }"
         >
-          {{ chunk[item.prop] }}
+          <div
+            v-for="(chunk,chunkIndex) in data"
+            :key="chunkIndex"
+            class="warning-table-cell warning-table-item-chunk"
+          >
+            {{ chunk[item.prop] }}
+          </div>
         </div>
       </div>
-    </div>
+    </ScrollBar>
   </div>
 </template>
 <script>
+import ScrollBar from '@/components/ScrollBar/index.vue'
 
 export default {
   name: 'Table',
+  components: {
+    ScrollBar,
+  },
   props: {
     data: {
       type: Array,
@@ -70,10 +79,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.table-scroll {
-  overflow-y: scroll;
-  height: 315px;
-}
 .warning-table {
   font-size: 12px;
   font-family: PingFangSC-Medium, PingFang SC;
