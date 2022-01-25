@@ -2,10 +2,9 @@
   <div :class="[layoutType === 0 ? 'small-root-container' : 'large-root-container']">
     <!-- 布局  -->
     <PageLayout
-      :layout-type="0"
+      :layout-type="layoutType"
       @warning="onWarning"
       @error="onError"
-      @info="onInfo"
       @changeType="onChangeType"
     >
       <template #header>
@@ -52,13 +51,12 @@
       @report="$refs.ErrorReportDialog.show()"
       @assign="$refs.AssignStaffDialog.show()"
     />
-    <InfoDialog ref="InfoDialog" />
     <!--  弹窗内事件  -->
     <ErrorReportDialog ref="ErrorReportDialog" />
     <AssignStaffDialog ref="AssignStaffDialog" />
 
     <!--  地图点 工具弹窗  -->
-    <OversizeDialog ref="OversizeDialog" />
+    <DotDialog ref="DotDialog" />
     <TextDialog ref="TextDialog" />
   </div>
 </template>
@@ -72,10 +70,9 @@ import PageLayout from '@/components/PageLayout/index.vue'
 import ModuleCard from '@/components/ModuleCard/index.vue'
 import WarningDialog from '@/components/DialogGroup/WarningDialog/index.vue'
 import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
-import InfoDialog from '@/components/DialogGroup/InfoDialog/index.vue'
 import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
 import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
-import OversizeDialog from '@/components/DialogBase/OversizeDialog/index.vue'
+import DotDialog from '@/components/DialogGroup/DotDialog/index.vue'
 import TextDialog from '@/components/DialogBase/TextDialog/index.vue'
 
 export default {
@@ -87,10 +84,9 @@ export default {
     PageLayout,
     WarningDialog,
     ErrorDialog,
-    InfoDialog,
     ErrorReportDialog,
     AssignStaffDialog,
-    OversizeDialog,
+    DotDialog,
     TextDialog,
     ...ModuleComponents,
   },
@@ -131,13 +127,10 @@ export default {
     onError() {
       this.$refs.ErrorDialog.show()
     },
-    onInfo() {
-      this.$refs.InfoDialog.show()
-    },
     onAction(type, info) {
       console.log(type)
-      if(type === 'table') {
-        this.$refs.OversizeDialog.show(info)
+      if(type.includes('Dialog')) {
+        this.$refs.DotDialog.show(type, info)
         return
       }
       if(type === 'text') {

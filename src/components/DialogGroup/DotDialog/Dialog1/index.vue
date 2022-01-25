@@ -1,43 +1,29 @@
 <template>
-  <el-dialog
-    :title="title"
-    :visible.sync="isShowDialog"
-    :close-on-click-modal="false"
-    append-to-body
-    class="avue-dialog"
-    width="60%"
-    @close="closeDialog"
-  >
-    1111
-  </el-dialog>
+  <div>
+    shenasdfj
+  </div>
 </template>
 <script>
+
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '提示',
-    },
+  components: {
   },
   data() {
     return {
-      formLayout: {
-        span: 24,
-      },
-      isShowDialog: false,
-      isLoading: false,
-      form: {
-        staff: '',
-      },
-      formRules: {},
-      row: {},
-      options: [],
+      list: [],
     }
+  },
+  mounted() {
+    const list = new Array(20).fill({
+      title: '设备名称',
+      content: '1号楼二层楼梯转角处设1号楼二层楼梯转角处设'
+    })
+    this.list = list
   },
   methods: {
     // 弹窗打开事件
     show() {
-      this.isShowDialog = true
+      this.$refs.dialog.show()
     },
     // 弹窗确认事件
     confirm() {
@@ -54,21 +40,32 @@ export default {
     // 完成事件 传递给外部使用
     done() {
       this.loading()
-      this.$refs.form.resetFields()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
     // 取消事件 关闭弹窗
     hide() {
       this.loading()
       // 关闭且清空表单
-      this.$refs.form.resetFields()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
     // 弹窗关闭按钮 关闭弹窗
     closeDialog() {
       this.loading()
-      this.isShowDialog = false
+      this.$refs.dialog.hide()
     },
   },
 }
 </script>
+<style lang="scss" scoped>
+.error-dialog-content {
+  padding-top: 14px;
+  padding-left: 31px;
+  padding-bottom: 15px;
+
+  .error-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>

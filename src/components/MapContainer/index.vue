@@ -8,7 +8,7 @@
     <div style="padding-left: 900px;padding-top: 600px">
       <DotIcon
         type="1"
-        @click.native="onAction('table')"
+        @click.native="onAction('Dialog1')"
       />
       <DotIcon
         type="2"

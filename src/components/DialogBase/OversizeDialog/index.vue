@@ -13,9 +13,6 @@
       <div class="oversize-dialog-title">
         {{ title }}
       </div>
-      <div class="oversize-dialog-action">
-        <slot name="headerAction" />
-      </div>
       <div
         class="dialog-close-icon"
         @click="closeDialog"
@@ -28,58 +25,26 @@
 </template>
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '提示',
-    },
-  },
   data() {
     return {
-      formLayout: {
-        span: 24,
-      },
+      title: '点位名称',
       isShowDialog: false,
-      isLoading: false,
-      form: {
-        staff: '',
-      },
-      formRules: {},
-      row: {},
-      options: [],
+      info: {},
     }
   },
   methods: {
     // 弹窗打开事件
-    show() {
+    show(info) {
+      this.info = info
       this.isShowDialog = true
     },
-    // 弹窗确认事件
-    confirm() {
-      this.$refs.form.validate(valid => {
-        if (!valid) return
-        const form = {}
-        this.$emit('confirm', form, this.loading, this.done)
-      })
-    },
-    // 取消loading事件
-    loading() {
-      this.isLoading = false
-    },
-    // 完成事件 传递给外部使用
-    done() {
-      this.loading()
-      this.isShowDialog = false
-    },
+
     // 取消事件 关闭弹窗
     hide() {
-      this.loading()
-      // 关闭且清空表单
       this.isShowDialog = false
     },
     // 弹窗关闭按钮 关闭弹窗
     closeDialog() {
-      this.loading()
       this.isShowDialog = false
     },
   },
@@ -113,7 +78,7 @@ export default {
 
 
   .oversize-dialog-title {
-    padding-left: 25px;
+    padding-left: 108px;
     font-size: 16px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
@@ -131,17 +96,12 @@ export default {
   .oversize-dialog-header {
     display: flex;
     position: relative;
-    padding: 24px 24px 0;
+    padding: 5px 0 20px;
     .dialog-close-icon {
       position: absolute;
-      right: 22px;
-      top: 22px;
+      right: 10px;
+      top: 5px;
     }
-
-    .oversize-dialog-action {
-      flex: 1;
-    }
-
   }
 }
 
