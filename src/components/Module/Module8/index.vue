@@ -1,10 +1,13 @@
 <template>
-  <div class="module8">
+  <div
+    class="module8"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  >
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="200px"
+      :height="`${chartSty.height}px`"
     />
   </div>
 </template>
@@ -13,6 +16,7 @@ import ChartView from '@/components/ChartView/index.vue'
 
 export default {
   name: 'Module8',
+  inject: ['injectLayoutType'],
   components: {
     ChartView,
   },
@@ -28,7 +32,7 @@ export default {
             color: '#979797',
           },
         },
-        grid: [{top: '0', right: 160, bottom: 50}, {top: '0', left: 170, bottom: 50}],
+        grid: [{top: '0', right: '57%', bottom: 50}, {top: '0', left: '57%', bottom: 50}],
         dataset: {
           source: {
             product: [
@@ -45,8 +49,8 @@ export default {
               '11月',
               '12月'
             ],
-            '归档事件数': [23, 5, 12, 8, 9.2, 6.9, 235, 12, 8, 1.4, 8, 1.4],
-            '事件平均处理时效': [5.8, 1.4, 91.2, 6.9, 25, 12, 8, 76.9, 5, 1.4, 8, 1.4]
+            '归档事件数': [3, 5, 12, 8, 9.2, 6.9, 25, 12, 8, 1.4, 8, 1.4],
+            '事件平均处理时效': [5.8, 1.4, 2, 6.9, 25, 12, 8, 6.9, 5, 1.4, 8, 1.4]
           }
         },
         xAxis: [{
@@ -97,6 +101,18 @@ export default {
       }
     }
   },
+  computed: {
+    chartSty() {
+      if(this.injectLayoutType === 0) {
+        return {
+          height: 200,
+        }
+      }
+      return {
+        height: 221,
+      }
+    }
+  },
   mounted() {
 
   },
@@ -107,6 +123,13 @@ export default {
 <style lang="scss" scoped>
 .module8 {
   padding: 9px 28px 16px 26px;
+}
+
+.large {
+  &.module8 {
+    padding: 11px 31px 0 29px;
+  }
+
 }
 </style>
 

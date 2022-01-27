@@ -44,7 +44,7 @@ export default {
 <style lang="scss" scoped>
 .header-container {
   height: var(--header-small-height);
-  background: url(./image/small/bg_top@2x.png) no-repeat, var(--container-bg);
+  background: url(./image/small/bg_top@2x.png) no-repeat;
   background-size: cover;
 }
 .header-title {
@@ -83,7 +83,7 @@ export default {
   }
   &.header-container {
     height: var(--header-large-height);
-    background: url(./image/large/bg_top@2x.png) no-repeat, var(--container-bg);
+    background: url(./image/large/bg_top@2x.png) no-repeat;
     background-size: cover;
   }
 }

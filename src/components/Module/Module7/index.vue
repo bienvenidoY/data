@@ -1,10 +1,13 @@
 <template>
-  <div class="module7">
+  <div
+    class="module7"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  >
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="140px"
+      :height="`${chartSty.height}px`"
     />
   </div>
 </template>
@@ -13,6 +16,7 @@ import ChartView from '@/components/ChartView/index.vue'
 
 export default {
   name: 'Module7',
+  inject: ['injectLayoutType'],
   components: {
     ChartView,
   },
@@ -34,8 +38,8 @@ export default {
           },
         },
         grid: {
-          left: '0',
-          right: '0',
+          left: '3%',
+          right: '3%',
           bottom: 30,
           top: 10,
           containLabel: true
@@ -79,6 +83,18 @@ export default {
       }
     }
   },
+  computed: {
+    chartSty() {
+      if(this.injectLayoutType === 0) {
+        return {
+          height: 140,
+        }
+      }
+      return {
+        height: 155,
+      }
+    }
+  },
   mounted() {
 
   },
@@ -91,6 +107,13 @@ export default {
 <style lang="scss" scoped>
 .module7 {
   padding: 2px 22px 22px;
+}
+
+.large {
+  &.module7 {
+    padding: 31px 24px 0 25px;
+  }
+
 }
 </style>
 

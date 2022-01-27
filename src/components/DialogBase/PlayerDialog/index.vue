@@ -5,53 +5,46 @@
     :show-close="false"
     :close-on-click-modal="false"
     append-to-body
-    custom-class="text-custom-dialog"
+    custom-class="player-custom-dialog"
     @close="closeDialog"
     v-on="$listeners"
   >
-    <div class="text-dialog-header">
-      <div class="text-dialog-title text-dialog-content-right-title">
-        {{ title }}
+    <div class="player-dialog-header">
+      <div class="player-dialog-title player-dialog-content-right-title">
+        视频直播
       </div>
       <div
         class="dialog-close-icon"
         @click="closeDialog"
       />
     </div>
-    <div class="text-dialog-content">
-      <ScrollBar :view-style="[{ height: '230px'}]">
-        <div
-          v-for="(item, index) in content"
-          :key="index"
-          class="text-dialog-content--item"
-        >
-          {{ item.label }}:{{ item.value }}
-        </div>
-      </ScrollBar>
+    <div class="player-dialog-content">
+      <video
+        controls
+        controlslist="nodownload nofullscreen noremoteplayback noplaybackrate"
+        :disablePictureInPicture="true"
+        οncοntextmenu="return false"
+        :src="src"
+      />
     </div>
   </el-dialog>
 </template>
 <script>
-import ScrollBar from '@/components/ScrollBar/index.vue'
 
 export default {
   components: {
-    ScrollBar
   },
   data() {
     return {
-      content: [],
-      title: '提示',
+      src: {},
       isShowDialog: false,
       isLoading: false,
     }
   },
   methods: {
     // 弹窗打开事件
-    show(info) {
-      const { title, content } = info
-      this.content = content
-      this.title = title
+    show({src}) {
+      this.src = src
       this.isShowDialog = true
     },
     // 弹窗确认事件
@@ -86,9 +79,13 @@ export default {
 }
 </script>
 <style lang="scss">
-.text-custom-dialog {
-  width: 471px;
-  height: 333px;
+// 隐藏全屏按钮
+video::-webkit-media-controls-fullscreen-button {
+  display: none;
+}
+.player-custom-dialog {
+  width: 701px;
+  height: 462px;
   background: transparent;
   box-shadow: none;
   border-radius: 0;
@@ -112,54 +109,32 @@ export default {
   }
 
 
-  .text-dialog-title {
-    height: 20px;
-    font-size: 14px;
-    font-family: PingFangSC-Medium, PingFang SC;
-    font-weight: 500;
-    color: #477B29;
-    line-height: 20px;
-    padding-left: 15px;
-    position: relative;
-    &:before {
-      position: absolute;
-      content: ' ';
-      width: 1px;
-      height: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #34B84A;
-      left: 0;
-    }
-  }
-
-  .text-dialog-content {
-    font-size: 14px;
+  .player-dialog-title {
+    font-size: 16px;
     font-family: PingFangSC-Semibold, PingFang SC;
     font-weight: 600;
-    color: #EBFFEE;
-    line-height: 20px;
-    padding: 14px 6px 22px 32px;
-    height: 230px;
-    .text-dialog-content--item + .text-dialog-content--item {
-      margin-top: 10px;
+    color: #34B84A;
+    line-height: 22px;
+    padding-left: 50px;
+    padding-top: 24px;
+  }
+
+  .player-dialog-content {
+    padding: 13px 25px 29px;
+    height: 374px;
+    video {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
     }
   }
 
-  .text-dialog-header {
-    display: flex;
-    position: relative;
-    padding: 47px 0 0 31px;
+  .player-dialog-header {
     .dialog-close-icon {
       position: absolute;
-      right: 10px;
-      top: 7px;
+      right: 21px;
+      top: 21px;
     }
-
-    .text-dialog-action {
-      flex: 1;
-    }
-
   }
 }
 

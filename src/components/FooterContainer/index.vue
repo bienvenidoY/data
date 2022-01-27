@@ -15,12 +15,12 @@ export default {
 <style lang="scss" scoped>
 .footer-container {
   height: var(--footer-height);
-  background: url(./small-bg.png)  no-repeat, var(--container-bg);
+  background: url(./small-bg.png)  no-repeat;
   background-size: cover;
 }
 .large.footer-container {
   height: var(--footer-height);
-  background: url(./big-bg.png)  no-repeat, var(--container-bg);
+  background: url(./big-bg.png)  no-repeat;
   background-size: cover;
 }
 </style>

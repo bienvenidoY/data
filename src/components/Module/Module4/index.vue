@@ -2,17 +2,17 @@
   <div class="module4">
     <div class="module-top">
       <div class="module-top-item">
-        废水排放<span>55家</span>
+        废水排放<span>55次</span>
       </div>
       <div class="module-top-item">
-        废水排放<span>55家</span>
+        废水排放<span>55次</span>
       </div>
     </div>
     <ChartView
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="126px"
+      :height="`${chartSty.height}px`"
     />
   </div>
 </template>
@@ -21,6 +21,7 @@ import ChartView from '@/components/ChartView/index.vue'
 
 export default {
   name: 'Module4',
+  inject: ['injectLayoutType'],
   components: {
     ChartView,
   },
@@ -38,8 +39,8 @@ export default {
           },
         },
         grid: {
-          left: '0',
-          right: '0',
+          left: '3%',
+          right: '3%',
           bottom: 20,
           top: 20,
           containLabel: true
@@ -104,6 +105,18 @@ export default {
             }
           }
         ]
+      }
+    }
+  },
+  computed: {
+    chartSty() {
+      if(this.injectLayoutType === 0) {
+        return {
+          height: 126,
+        }
+      }
+      return {
+        height: 158,
       }
     }
   },

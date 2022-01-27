@@ -3,16 +3,20 @@
     class="page-layout"
     :class="[injectLayoutType === 0 ? 'small' : 'large' ]"
   >
-    <div class="page-layout-header header-container">
-      <slot name="header" />
+    <div class="page-layout-header container-bg">
+      <div class="page-layout-bg">
+        <slot name="header" />
+      </div>
     </div>
-    <div class="page-layout-footer footer-container">
-      <slot name="footer" />
+    <div class="page-layout-footer footer-container container-bg">
+      <div class="page-layout-bg">
+        <slot name="footer" />
+      </div>
     </div>
 
     <div class="page-layout-left page-layout-container">
-      <div class="page-layout-item ">
-        <div class="page-layout-item-bg">
+      <div class="page-layout-item container-bg ">
+        <div class="page-layout-item-bg page-layout-bg">
           <slot name="left" />
         </div>
       </div>
@@ -26,13 +30,13 @@
     </div>
     <div class="page-layout-right page-layout-container">
       <div
-        class="page-layout-item fr"
+        class="page-layout-item container-bg"
       >
-        <div class="page-layout-item-bg">
+        <div class="page-layout-item-bg page-layout-bg">
           <slot name="right" />
         </div>
       </div>
-      <div class="fr right-action">
+      <div class="right-action">
         <div
           class="right-item--btn right-item--btn1"
           @click="$emit('warning')"
@@ -73,6 +77,14 @@ $pageLayoutIndex: 499;
 $pageLayoutBg: rgba(7, 15, 3, 0.8);
 $pageLayoutTop: 34px;
 
+.container-bg {
+  background: var(--container-bg)
+}
+
+.page-layout-bg {
+  background: $pageLayoutBg;
+}
+
 .page-layout {
   position: relative;
   width: 100%;
@@ -80,7 +92,6 @@ $pageLayoutTop: 34px;
   .page-layout-header, .page-layout-footer {
     position: absolute;
     left: 0;
-    background: $pageLayoutBg;
     z-index: $pageLayoutIndex;
   }
   .footer-container {
@@ -96,17 +107,19 @@ $pageLayoutTop: 34px;
   .page-layout-item {
     height: 100%;
     box-sizing: border-box;
-    background: $pageLayoutBg ;
   }
 
   .page-layout-item-bg {
-    background: var(--container-bg);
     box-sizing: border-box;
     display: grid;
   }
 
   /* 左侧操作区域 start */
   .left-action {
+    position: absolute;
+    top: 0;
+  }
+  .right-action {
     position: absolute;
     top: 0;
   }
@@ -182,11 +195,11 @@ $pageLayoutTop: 34px;
     width: 130px;
     height: 43px;
     margin-bottom: 10px;
-    margin-right: 20px;
     cursor: pointer;
   }
   .right-action {
     margin-top: 11px;
+    right: calc($pageLayoutItemSmall + 20px + 44px);
   }
 }
 
@@ -216,10 +229,11 @@ $pageLayoutTop: 34px;
   }
   .page-layout-left {
     .page-layout-item-bg {
+      padding-top: 6px;
       padding-right: 33px;
       padding-left: 37px;
       grid-column-gap: 40px;
-      grid-row-gap: 22px;
+      grid-row-gap: 20px;
     }
   }
   .page-layout-right {
@@ -228,8 +242,9 @@ $pageLayoutTop: 34px;
     background-repeat: no-repeat;
     background-position: right 0;
     .page-layout-item-bg {
-      width: 843px;
+      width: 826px;
       padding-left: 27px;
+      padding-top: 5px;
       grid-column-gap: 39px;
       grid-row-gap: 20px;
     }
@@ -255,11 +270,11 @@ $pageLayoutTop: 34px;
     width: 204px;
     height: 68px;
     margin-bottom: 22px;
-    margin-right: 19px;
     cursor: pointer;
   }
   .right-action {
     margin-top: 65px;
+    right: calc(826px + 19px + 44px);
   }
 }
 </style>

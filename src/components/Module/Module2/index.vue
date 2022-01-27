@@ -1,9 +1,12 @@
 <template>
-  <div class="module2">
+  <div
+    class="module2"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  >
     <el-carousel
       class="swiper-container"
       :interval="10000"
-      height="140px"
+      :height="`${chartSty.height + 16}px`"
       arrow="never"
     >
       <el-carousel-item
@@ -24,8 +27,8 @@
             class="chart-content"
             :chart-option="chartOpt"
             :auto-resize="true"
-            height="114px"
-            width="211px"
+            :height="`${chartSty.height}px`"
+            :width="`${chartSty.width}px`"
           />
         </div>
       </el-carousel-item>
@@ -36,7 +39,8 @@
 import ChartView from '@/components/ChartView/index.vue'
 
 export default {
-  name: 'Module1',
+  name: 'Module2',
+  inject: ['injectLayoutType'],
   components: {
     ChartView,
   },
@@ -114,6 +118,18 @@ export default {
         v.chartOpt = this.chartOpt
         return v
       })
+    },
+    chartSty() {
+      if(this.injectLayoutType === 0) {
+        return {
+          height: 114,
+          width: 211,
+        }
+      }
+      return {
+        height: 200,
+        width: 243,
+      }
     }
   },
   mounted() {
@@ -127,8 +143,6 @@ export default {
 .module2 {
   padding-left: 39px;
   padding-right: 26px;
-
-
 }
 
 .swiper-container {
@@ -162,6 +176,21 @@ export default {
   color: #C8F9CE;
   line-height: 20px;
   margin-top: 10px;
+}
+
+.large {
+  &.module2 {
+    padding-left: 43px;
+  }
+  .module2-icon {
+    width: 67px;
+    height: 67px;
+    margin-right: 1px;
+  }
+
+  .swiper-container {
+    padding-top: 13px;
+  }
 }
 </style>
 

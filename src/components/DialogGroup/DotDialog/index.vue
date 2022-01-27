@@ -19,19 +19,27 @@
       <div class="dialog-action--status">
         在线
       </div>
-      <div class="dialog-action--icon" />
+      <div
+        class="dialog-action--icon"
+        @click="$refs.PlayerDialog.show({src: 'https://v.hunshehui.cn/mts/v/video2021121639038147558368071.mp4'})"
+      />
     </div>
     <components :is="type" />
+
+    <!-- 播放器 -->
+    <PlayerDialog ref="PlayerDialog" />
   </Dialog>
 </template>
 <script>
 import Dialog from '@/components/DialogBase/OversizeDialog/index.vue'
+import PlayerDialog from '@/components/DialogBase/PlayerDialog/index.vue'
 import Dialog1 from './Dialog1/index.vue'
 
 export default {
   components: {
     Dialog,
     Dialog1,
+    PlayerDialog,
   },
   data() {
     return {
@@ -96,6 +104,7 @@ export default {
     width: 32px;
     height: 32px;
     background: red;
+    cursor: pointer;
   }
 }
 </style>

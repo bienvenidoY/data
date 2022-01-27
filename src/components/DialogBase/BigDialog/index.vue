@@ -99,14 +99,14 @@ export default {
   .el-dialog__body {
     height: 100%;
     padding: 0;
-    background: url("./bg-small.png") no-repeat;
+    background: url("./bg.png") no-repeat;
     background-size: cover;
   }
 
   .dialog-close-icon {
     height: 17px;
     width: 17px;
-    background: url('./icon-close.png') no-repeat;
+    background: url('../image/icon-close.png') no-repeat;
     background-size: cover;
     cursor: pointer;
   }

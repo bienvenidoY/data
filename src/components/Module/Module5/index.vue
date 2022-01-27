@@ -1,10 +1,11 @@
 <template>
   <div
     class="module5"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
   >
     <div class="module5-item flex">
       <div
-        v-for="item in options.column"
+        v-for="item in options"
         :key="item.prop"
         class="module5-column-item"
         :style="{ width: `${item.width}px` }"
@@ -27,29 +28,11 @@
 
 export default {
   name: 'Module5',
+  inject: ['injectLayoutType'],
   components: {
   },
   data() {
     return {
-      options: {
-        column: [
-          {
-            label: '站点名称',
-            prop: 'a',
-            width: 120,
-          },
-          {
-            label: '所属河道',
-            prop: 'b',
-            width: 92,
-          },
-          {
-            label: '水质类别',
-            prop: 'c',
-            width: 80,
-          },
-        ]
-      },
       data: [
         {
           'a': '说明a',
@@ -73,6 +56,47 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    options() {
+      if(this.injectLayoutType === 1) {
+        return [
+          {
+            label: '站点名称',
+            prop: 'a',
+            width: 133,
+          },
+          {
+            label: '所属河道',
+            prop: 'b',
+            width: 102,
+          },
+          {
+            label: '水质类别',
+            prop: 'c',
+            width: 88,
+          },
+        ]
+      }
+
+      return  [
+        {
+          label: '站点名称',
+          prop: 'a',
+          width: 120,
+        },
+        {
+          label: '所属河道',
+          prop: 'b',
+          width: 92,
+        },
+        {
+          label: '水质类别',
+          prop: 'c',
+          width: 80,
+        },
+      ]
+    },
   },
   mounted() {
 
@@ -107,6 +131,16 @@ export default {
   height: 25px;
   align-items: center;
   justify-content: center;
+}
+
+.large {
+  .module5 {
+    padding-top: 16px;
+    padding-left: 30px;
+  }
+  .module5-cell {
+    height: 33px;
+  }
 }
 </style>
 

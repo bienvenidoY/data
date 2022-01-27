@@ -45,12 +45,12 @@ export const largeOptions =  [
   {
     title: '企业概况',
     key: 'Module1',
-    height: '292px',
+    height: '268px',
   },
   {
     title: '河道水质',
     key: 'Module5',
-    height: '292px',
+    height: '268px',
   },
   {
     title: '官网概况',
@@ -65,12 +65,12 @@ export const largeOptions =  [
   {
     title: '排口概况',
     key: 'Module10',
-    height: '290px',
+    height: '292px',
   },
   {
     title: '巡检维护',
     key: 'Module4',
-    height: '290px',
+    height: '292px',
   },
   {
     title: '设备告警',

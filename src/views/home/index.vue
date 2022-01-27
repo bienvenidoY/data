@@ -92,7 +92,7 @@ export default {
   },
   data() {
     return {
-      layoutType: 1,
+      layoutType: 0,
     }
   },
   provide(){

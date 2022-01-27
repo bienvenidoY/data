@@ -1,5 +1,8 @@
 <template>
-  <div class="module1">
+  <div
+    class="module1"
+    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+  >
     <div class="module-top">
       <div class="module-top-item">
         废水排放<span>55家</span>
@@ -12,7 +15,7 @@
       class="chart-content"
       :chart-option="chartOpt"
       :auto-resize="true"
-      height="163px"
+      :height="`${chartSty.height}px`"
     />
   </div>
 </template>
@@ -21,6 +24,7 @@ import ChartView from '@/components/ChartView/index.vue'
 
 export default {
   name: 'Module1',
+  inject: ['injectLayoutType'],
   components: {
     ChartView,
   },
@@ -120,6 +124,18 @@ export default {
       }
     }
   },
+  computed: {
+    chartSty() {
+      if(this.injectLayoutType === 0) {
+        return {
+          height: 143,
+        }
+      }
+      return {
+        height: 157,
+      }
+    }
+  },
   mounted() {
 
   },
@@ -137,8 +153,6 @@ export default {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  letter-spacing: 1px;
-  margin-top: 13px;
   padding-right: 31px;
   &-item {
     font-size: 14px;
@@ -160,11 +174,26 @@ export default {
   }
 }
 .module1 {
-  margin-left: 29px;
-  padding-bottom: 16px;
+  padding-left: 29px;
+  padding-top: 13px;
   .chart-content {
+    padding-top: 23px;
     margin-right: 14px;
   }
 }
+
+.large{
+  &.module1 {
+    padding-left: 32px;
+    padding-top: 16px;
+    padding-right: 15px;
+  }
+  .chart-content {
+    padding-top: 26px;
+    padding-bottom: 18px;
+    margin-right: 0;
+  }
+}
+
 </style>
 
