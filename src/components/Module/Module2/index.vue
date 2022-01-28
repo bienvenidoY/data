@@ -1,7 +1,7 @@
 <template>
   <div
     class="module2"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   >
     <el-carousel
       class="swiper-container"
@@ -120,7 +120,7 @@ export default {
       })
     },
     chartSty() {
-      if(this.injectLayoutType === 0) {
+      if(this.injectLayoutType() === 0) {
         return {
           height: 114,
           width: 211,

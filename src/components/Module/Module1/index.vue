@@ -1,7 +1,7 @@
 <template>
   <div
     class="module1"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   >
     <div class="module-top">
       <div class="module-top-item">
@@ -53,8 +53,8 @@ export default {
         },
         grid: {
           top: '23',
-          left: '0',
-          right: '0',
+          left: '3%',
+          right: '3%',
           bottom: '30',
           containLabel: true
         },
@@ -65,7 +65,7 @@ export default {
             axisLabel: {
               color: '#ffffff'
             },
-            data: ['12.16', '12.17', '12.18', '12.19', '12.20', '12.21', '12.22']
+            data: ['12.16', '12.17', '12.18', '12.19']
           }
         ],
         yAxis: [
@@ -94,7 +94,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: [120, 132, 101, 134, 90]
           },
           {
             name: '黄码',
@@ -106,7 +106,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [220, 182, 191, 234, 290, 330, 310]
+            data: [220, 182, 191, 234, 290]
           },
           {
             name: '绿码',
@@ -118,7 +118,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [150, 232, 201, 154, 190, 330, 410]
+            data: [150, 232, 201, 154, 190]
           },
         ]
       }
@@ -126,7 +126,8 @@ export default {
   },
   computed: {
     chartSty() {
-      if(this.injectLayoutType === 0) {
+      console.log(this.injectLayoutType() === 0)
+      if(this.injectLayoutType() === 0) {
         return {
           height: 143,
         }
@@ -153,7 +154,7 @@ export default {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  padding-right: 31px;
+  padding-right: 17px;
   &-item {
     font-size: 14px;
     position: relative;
@@ -176,9 +177,9 @@ export default {
 .module1 {
   padding-left: 29px;
   padding-top: 13px;
+  padding-right: 14px;
   .chart-content {
     padding-top: 23px;
-    margin-right: 14px;
   }
 }
 
@@ -190,8 +191,6 @@ export default {
   }
   .chart-content {
     padding-top: 26px;
-    padding-bottom: 18px;
-    margin-right: 0;
   }
 }
 

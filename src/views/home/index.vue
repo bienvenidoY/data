@@ -2,7 +2,7 @@
   <div :class="[layoutType === 0 ? 'small-root-container' : 'large-root-container']">
     <!-- 布局  -->
     <PageLayout
-      :layout-type="layoutType"
+      v-if="layoutType === 0 || layoutType === 1"
       @warning="onWarning"
       @error="onError"
       @changeType="onChangeType"
@@ -57,7 +57,6 @@
 
     <!--  地图点 工具弹窗  -->
     <DotDialog ref="DotDialog" />
-    <TextDialog ref="TextDialog" />
   </div>
 </template>
 <script>
@@ -73,7 +72,6 @@ import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
 import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
 import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
 import DotDialog from '@/components/DialogGroup/DotDialog/index.vue'
-import TextDialog from '@/components/DialogBase/TextDialog/index.vue'
 
 export default {
   components: {
@@ -87,17 +85,16 @@ export default {
     ErrorReportDialog,
     AssignStaffDialog,
     DotDialog,
-    TextDialog,
     ...ModuleComponents,
   },
   data() {
     return {
-      layoutType: 0,
+      layoutType: -1,
     }
   },
   provide(){
     return {
-      injectLayoutType: this.layoutType,
+      injectLayoutType: () => this.layoutType,
     }
   },
   computed: {
@@ -120,7 +117,19 @@ export default {
       }
     },
   },
+  created() {
+    window.addEventListener('resize', this.myEventHandler);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.myEventHandler);
+  },
+  mounted() {
+    this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
+  },
   methods: {
+    myEventHandler() {
+      this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
+    },
     onWarning() {
       this.$refs.WarningDialog.show()
     },
@@ -128,13 +137,8 @@ export default {
       this.$refs.ErrorDialog.show()
     },
     onAction(type, info) {
-      console.log(type)
       if(type.includes('Dialog')) {
         this.$refs.DotDialog.show(type, info)
-        return
-      }
-      if(type === 'text') {
-        this.$refs.TextDialog.show(info)
         return
       }
     },
@@ -149,6 +153,9 @@ export default {
 .small-root-container{
   height: var(--page-height);
   width: var(--page-small-width);
+  .module-card-wrapper{
+    width: 344px;
+  }
 }
 .large-root-container {
   width: var(--page-large-width);

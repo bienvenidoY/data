@@ -1,7 +1,7 @@
 <template>
   <div
     class="module5"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   >
     <div class="module5-item flex">
       <div
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     options() {
-      if(this.injectLayoutType === 1) {
+      if(this.injectLayoutType() === 1) {
         return [
           {
             label: '站点名称',

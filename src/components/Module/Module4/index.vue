@@ -110,7 +110,7 @@ export default {
   },
   computed: {
     chartSty() {
-      if(this.injectLayoutType === 0) {
+      if(this.injectLayoutType() === 0) {
         return {
           height: 126,
         }

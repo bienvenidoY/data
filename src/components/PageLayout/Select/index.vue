@@ -2,7 +2,7 @@
   <el-select
     v-model="type"
     class="page-layout-select"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
     v-on="$listeners"
   >
     <el-option

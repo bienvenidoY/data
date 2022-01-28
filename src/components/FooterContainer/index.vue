@@ -1,7 +1,7 @@
 <template>
   <div
     class="footer-container"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   />
 </template>
 <script>

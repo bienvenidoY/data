@@ -1,7 +1,7 @@
 <template>
   <div
     class="header-container"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   >
     <div class="header-title flex-center">
       <div class="header-title-image" />

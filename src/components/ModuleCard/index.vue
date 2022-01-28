@@ -1,7 +1,7 @@
 <template>
   <div
     class="module-card"
-    :class="[injectLayoutType === 0 ? 'small': 'large']"
+    :class="[injectLayoutType() === 0 ? 'small': 'large']"
   >
     <div class="module-card-title">
       {{ title }}

@@ -1,7 +1,7 @@
 <template>
   <div
     class="module7"
-    :class="[injectLayoutType === 0 ? 'small' : 'large']"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large']"
   >
     <ChartView
       class="chart-content"
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     chartSty() {
-      if(this.injectLayoutType === 0) {
+      if(this.injectLayoutType() === 0) {
         return {
           height: 140,
         }

@@ -1,14 +1,30 @@
 <template>
   <div
     class="page-layout"
-    :class="[injectLayoutType === 0 ? 'small' : 'large' ]"
+    :class="[injectLayoutType() === 0 ? 'small' : 'large' ]"
   >
+    <!-- 布局层  start  由于渐变底色不正确，所以采用布局分层 -->
+    <div class="page-layout-bg-container">
+      <!--  渐变层    -->
+      <div class="gradient-header page-layout-header gradient-bg" />
+      <div class="gradient-footer page-layout-footer gradient-bg" />
+      <div class="gradient-left  gradient-bg" />
+      <div class="gradient-right page-layout-bg-container gradient-bg" />
+
+      <!--  纯色层    -->
+      <div class="pure-header page-layout-header pure-bg" />
+      <div class="pure-footer page-layout-footer pure-bg" />
+      <div class="pure-left  pure-bg" />
+      <div class="pure-right pure-bg" />
+    </div>
+    <!-- 布局层  end -->
+
     <div class="page-layout-header container-bg">
       <div class="page-layout-bg">
         <slot name="header" />
       </div>
     </div>
-    <div class="page-layout-footer footer-container container-bg">
+    <div class="page-layout-footer container-bg">
       <div class="page-layout-bg">
         <slot name="footer" />
       </div>
@@ -16,7 +32,7 @@
 
     <div class="page-layout-left page-layout-container">
       <div class="page-layout-item container-bg ">
-        <div class="page-layout-item-bg page-layout-bg">
+        <div class="page-layout-item-bg page-layout-bg page-layout-left-container">
           <slot name="left" />
         </div>
       </div>
@@ -32,7 +48,7 @@
       <div
         class="page-layout-item container-bg"
       >
-        <div class="page-layout-item-bg page-layout-bg">
+        <div class="page-layout-item-bg page-layout-right-container page-layout-bg">
           <slot name="right" />
         </div>
       </div>
@@ -77,13 +93,14 @@ $pageLayoutIndex: 499;
 $pageLayoutBg: rgba(7, 15, 3, 0.8);
 $pageLayoutTop: 34px;
 
-.container-bg {
-  background: var(--container-bg)
-}
+//.container-bg {
+//  background: var(--container-bg)
+//}
+//
+//.page-layout-bg {
+//  background: $pageLayoutBg;
+//}
 
-.page-layout-bg {
-  background: $pageLayoutBg;
-}
 
 .page-layout {
   position: relative;
@@ -92,16 +109,17 @@ $pageLayoutTop: 34px;
   .page-layout-header, .page-layout-footer {
     position: absolute;
     left: 0;
-    z-index: $pageLayoutIndex;
+    z-index: $pageLayoutIndex + 10;
   }
-  .footer-container {
+  .page-layout-footer {
+    height: var(--footer-height);
     top: calc(1080px - var(--footer-height));
   }
   /* 上下布局 end */
 
   .page-layout-container {
     position: absolute;
-    z-index: $pageLayoutIndex;
+    z-index: $pageLayoutIndex + 10;
   }
 
   .page-layout-item {
@@ -136,6 +154,9 @@ $pageLayoutTop: 34px;
   .page-layout-header, .page-layout-footer {
     width: var(--page-small-width);
   }
+  .page-layout-header {
+    height: var(--header-small-height);
+  }
 
   .page-layout-left {
     left: 0;
@@ -151,16 +172,27 @@ $pageLayoutTop: 34px;
     padding-top: 8px;
   }
 
-  .page-layout-item-bg {
+  .page-layout-left-container {
     width: $pageLayoutItemSmall;
+    padding-right: 19px;
+    padding-left: 37px;
+    box-sizing: border-box
+  }
+
+  .page-layout-right-container {
+    width: calc($pageLayoutItemSmall - 44px);
+    padding-left: 12px;
+    box-sizing: border-box
+  }
+
+  .page-layout-item-bg {
     grid-template-columns: 1fr;
     grid-column-gap: 0;
     grid-row-gap: 19px;
   }
   .page-layout-left {
     .page-layout-item-bg {
-      padding-right: 19px;
-      padding-left: 37px;
+
     }
   }
   .page-layout-right {
@@ -169,8 +201,6 @@ $pageLayoutTop: 34px;
     background-repeat: no-repeat;
     background-position: right 7px;
     .page-layout-item-bg {
-      width: calc($pageLayoutItemSmall - 44px);
-      padding-left: 12px;
       // padding-right: 44px;
     }
   }
@@ -198,8 +228,8 @@ $pageLayoutTop: 34px;
     cursor: pointer;
   }
   .right-action {
-    margin-top: 11px;
-    right: calc($pageLayoutItemSmall + 20px + 44px);
+    margin-top: 25px;
+    right: calc($pageLayoutItemSmall + 20px);
   }
 }
 
@@ -209,6 +239,9 @@ $pageLayoutTop: 34px;
     width: var(--page-large-width);
   }
 
+  .page-layout-header {
+    height: var(--header-large-height);
+  }
   .page-layout-left {
     left: 0;
     top: calc(var(--header-large-height));
@@ -222,16 +255,28 @@ $pageLayoutTop: 34px;
   }
 
   .page-layout-item-bg {
-    width: $pageLayoutItemLarge;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 40px;
     grid-row-gap: 22px;
   }
+
+  .page-layout-left-container {
+    width: $pageLayoutItemLarge;
+    padding-top: 6px;
+    padding-right: 33px;
+    padding-left: 37px;
+    box-sizing: border-box
+  }
+
+  .page-layout-right-container {
+    width: 826px;
+    padding-left: 27px;
+    padding-top: 5px;
+    box-sizing: border-box;
+  }
+
   .page-layout-left {
     .page-layout-item-bg {
-      padding-top: 6px;
-      padding-right: 33px;
-      padding-left: 37px;
       grid-column-gap: 40px;
       grid-row-gap: 20px;
     }
@@ -242,9 +287,6 @@ $pageLayoutTop: 34px;
     background-repeat: no-repeat;
     background-position: right 0;
     .page-layout-item-bg {
-      width: 826px;
-      padding-left: 27px;
-      padding-top: 5px;
       grid-column-gap: 39px;
       grid-row-gap: 20px;
     }
@@ -263,7 +305,7 @@ $pageLayoutTop: 34px;
     margin-top: 49px;
   }
   .left-action {
-    margin-left: calc($pageLayoutItemLarge + 53px);
+    margin-left: calc($pageLayoutItemLarge + 20px);
   }
 
   .right-item--btn {
@@ -274,7 +316,49 @@ $pageLayoutTop: 34px;
   }
   .right-action {
     margin-top: 65px;
-    right: calc(826px + 19px + 44px);
+    right: calc($pageLayoutItemLarge + 19px);
   }
 }
+
+.gradient-bg {
+  background: var(--container-bg);
+  z-index: $pageLayoutIndex + 4!important;
+  position: absolute;
+}
+.pure-bg {
+  background: $pageLayoutBg;
+  z-index: $pageLayoutIndex + 8!important;
+  position: absolute;
+}
+
+.small {
+  .gradient-left, .pure-left {
+    width: $pageLayoutItemSmall;
+    left: 0;
+    top: var(--header-small-height);
+    height: calc(var(--page-height) - var(--header-small-height) - var(--footer-height))
+  }
+  .gradient-right, .pure-right {
+    top: var(--header-small-height);
+    height: calc(var(--page-height) - var(--header-small-height) - var(--footer-height));
+    width: $pageLayoutItemSmall;
+    right: 0;
+  }
+}
+
+.large {
+  .gradient-left, .pure-left {
+    width: $pageLayoutItemLarge;
+    left: 0;
+    top: var(--header-large-height);
+    height: calc(var(--page-height) - var(--header-large-height) - var(--footer-height))
+  }
+  .gradient-right, .pure-right {
+    top: var(--header-large-height);
+    height: calc(var(--page-height) - var(--header-large-height) - var(--footer-height));
+    width: $pageLayoutItemLarge;
+    right: 0;
+  }
+}
+
 </style>
