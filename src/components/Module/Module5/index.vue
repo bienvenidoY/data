@@ -26,6 +26,8 @@
 </template>
 <script>
 
+import {getWaterLevel} from '@/api/cockpit';
+
 export default {
   name: 'Module5',
   inject: ['injectLayoutType'],
@@ -33,28 +35,7 @@ export default {
   },
   data() {
     return {
-      data: [
-        {
-          'a': '说明a',
-          'b': '说明b',
-          'c': '说明c',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-          'c': '说明c',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-          'c': '说明c',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-          'c': '说明c',
-        },
-      ],
+      data: [],
     }
   },
   computed: {
@@ -63,17 +44,17 @@ export default {
         return [
           {
             label: '站点名称',
-            prop: 'a',
+            prop: 'siteName',
             width: 133,
           },
           {
             label: '所属河道',
-            prop: 'b',
+            prop: 'riverName',
             width: 102,
           },
           {
             label: '水质类别',
-            prop: 'c',
+            prop: 'level',
             width: 88,
           },
         ]
@@ -82,26 +63,38 @@ export default {
       return  [
         {
           label: '站点名称',
-          prop: 'a',
+          prop: 'siteName',
           width: 120,
         },
         {
           label: '所属河道',
-          prop: 'b',
+          prop: 'riverName',
           width: 92,
         },
         {
           label: '水质类别',
-          prop: 'c',
+          prop: 'level',
           width: 80,
         },
       ]
     },
   },
   mounted() {
-
+    const data = new Array(4).fill({
+      'siteName': '说明a',
+      'riverName': '说明b',
+      'level': '说明c',
+    })
+    this.data = data
+    // this.getWaterLevel()
   },
-  methods: {},
+  methods: {
+    getWaterLevel() {
+      getWaterLevel().then(res => {
+        this.data = res.data
+      })
+    }
+  },
 
 }
 </script>

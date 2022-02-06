@@ -31,6 +31,8 @@
 </template>
 <script>
 
+import {getDeviceNum} from '@/api/cockpit';
+
 export default {
   name: 'Module3',
   components: {
@@ -44,17 +46,17 @@ export default {
             {
               label: '雨水管网',
               icon: require('./image1.png'),
-              prop: '',
+              prop: 'rainPipe',
               suffix: '公里',
             },{
               label: '污水管网',
               icon: require('./image2.png'),
-              prop: '',
+              prop: 'wastePipe',
               suffix: '公里',
             },{
               label: '感知点位',
               icon: require('./image3.png'),
-              prop: '',
+              prop: 'pipeAwarePoint',
               suffix: '个',
             },
           ]
@@ -65,31 +67,50 @@ export default {
             {
               label: '雨水排口',
               icon: require('./image4.png'),
-              prop: '',
+              prop: 'rainOutlet',
               suffix: '个',
             },{
               label: '污水排口',
               icon: require('./image4.png'),
-              prop: '',
+              prop: 'wasteOutlet',
               suffix: '个',
             },{
               label: '感知点位',
               icon: require('./image3.png'),
-              prop: '',
+              prop: 'outletAwarePoint',
               suffix: '个',
             },
           ]
         },
       ],
       data: {
-
+        outletAwarePoint: 0,
+        pipeAwarePoint: 0,
+        rainOutlet: 0,
+        rainPipe: 0,
+        wasteOutlet: 0,
+        wastePipe: 0
       }
     }
   },
   mounted() {
-
+    this.data = {
+      outletAwarePoint: 1,
+      pipeAwarePoint: 2,
+      rainOutlet: 3,
+      rainPipe: 4,
+      wasteOutlet: 5,
+      wastePipe: 6
+    }
+    // this.getDeviceNum()
   },
-  methods: {},
+  methods: {
+    getDeviceNum() {
+      getDeviceNum().then(res => {
+        this.data = res.data
+      })
+    }
+  },
 
 }
 </script>

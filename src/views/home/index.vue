@@ -1,5 +1,8 @@
 <template>
-  <div :class="[layoutType === 0 ? 'small-root-container' : 'large-root-container']">
+  <div
+    v-if="isLogin"
+    :class="[layoutType === 0 ? 'small-root-container' : 'large-root-container']"
+  >
     <!-- 布局  -->
     <PageLayout
       v-if="layoutType === 0 || layoutType === 1"
@@ -90,6 +93,7 @@ export default {
   data() {
     return {
       layoutType: -1,
+      isLogin: false,
     }
   },
   provide(){
@@ -118,6 +122,7 @@ export default {
     },
   },
   created() {
+    this.getToken()
     window.addEventListener('resize', this.myEventHandler);
   },
   destroyed() {
@@ -145,6 +150,10 @@ export default {
     onChangeType() {
       //
       console.log('触发类别修改')
+    },
+    getToken() {
+      // 获取linshiToken -> token -> 本地存储 -> 重载
+      // this.isLogin = true
     },
   }
 }

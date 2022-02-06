@@ -5,10 +5,10 @@
   >
     <div class="module-top">
       <div class="module-top-item">
-        废水排放<span>55家</span>
+        废水排放<span>{{ info.wasteGasNum }}家</span>
       </div>
       <div class="module-top-item">
-        废水排放<span>55家</span>
+        废水排放<span>{{ info.wasteWaterNum }}家</span>
       </div>
     </div>
     <ChartView
@@ -21,6 +21,8 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import { getEntNum, getEntCodeNum } from '@/api/cockpit'
+
 
 export default {
   name: 'Module1',
@@ -30,6 +32,10 @@ export default {
   },
   data() {
     return {
+      info: {
+        wasteGasNum: 0,
+        wasteWaterNum: 0
+      },
       chartOpt: {
         tooltip: {
           trigger: 'axis',
@@ -138,10 +144,24 @@ export default {
     }
   },
   mounted() {
-
+    this.info = {
+      wasteGasNum: 53,
+      wasteWaterNum: 5
+    }
+    // this.getInfo()
+    // this.getData()
   },
   methods: {
-
+    getInfo() {
+      getEntNum().then(res => {
+        this.info = res.data
+      })
+    },
+    getData() {
+      getEntCodeNum().then(res => {
+        console.log(res.data)
+      })
+    }
   },
 
 }

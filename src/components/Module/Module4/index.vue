@@ -18,6 +18,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import {getPatrolNum} from '@/api/cockpit';
 
 export default {
   name: 'Module4',
@@ -27,6 +28,7 @@ export default {
   },
   data() {
     return {
+      info: {},
       chartOpt: {
         legend: {
           data: ['累计巡检次数', '本年巡检次数'],
@@ -121,9 +123,21 @@ export default {
     }
   },
   mounted() {
+    this.info = {
 
+    }
+    this.getInfo()
   },
-  methods: {},
+  methods: {
+    getInfo() {
+      getPatrolNum().then(res => {
+        this.info = res.data
+      })
+    },
+    getData() {
+
+    }
+  },
 
 }
 </script>
