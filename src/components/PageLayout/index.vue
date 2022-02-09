@@ -54,10 +54,12 @@
       </div>
       <div class="right-action">
         <div
+          v-if="alarmBtn"
           class="right-item--btn right-item--btn1"
           @click="$emit('warning')"
         />
         <div
+          v-if="reportBtn"
           class="right-item--btn right-item--btn2"
           @click="$emit('error')"
         />
@@ -67,6 +69,7 @@
 </template>
 <script>
 import Select from './Select/index.vue'
+import {getAlarmUserHandle, getProblemReport} from '@/api/cockpit';
 
 export default {
   name: 'PageLayout',
@@ -76,11 +79,34 @@ export default {
   },
   data() {
     return {
+      alarmBtn: false, // 告警按钮
+      reportBtn: false, // 问题按钮
+
     }
+  },
+  mounted() {
+    this.getProblemReport()
+    this.getAlarmUserHandle()
   },
   methods: {
     changeType(type) {
       this.$emit('changeType', type)
+    },
+    getProblemReport() {
+      getProblemReport({
+        handleState: 1,
+        isProcessTask: 1
+      }).then(res => {
+        this.reportBtn = !!res.rows.length
+      })
+    },
+    getAlarmUserHandle() {
+      getAlarmUserHandle({
+        handleState: 1,
+        isProcessTask: 1
+      }).then(res => {
+        this.alarmBtn = !!res.rows.length
+      })
     }
   },
 }

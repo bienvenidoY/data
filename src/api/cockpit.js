@@ -1,4 +1,10 @@
-import {reqGet} from '@/api/request/api-request';
+import {reqGet, reqPost} from '@/api/request/api-request';
+
+// 事件归档
+export const getToken = data => {
+  return reqPost('/tempTokenToToken', data)
+}
+
 
 // 事件归档
 export const getArchives = data => {
@@ -32,12 +38,16 @@ export const getEntCodeNum = data => {
 
 // 智能感知
 export const getIntellisense = data => {
-  return reqGet('/cockpit/intellisense', data)
+  return reqGet('/cockpit/intellisenseAll', data)
 }
 
 // 巡检维护统计
 export const getPatrolNum = data => {
   return reqGet('/cockpit/patrol/num', data)
+}
+// 巡检维护统计
+export const getPatrolTotalNum = data => {
+  return reqGet('/cockpit/patrol/totalNum', data)
 }
 
 // 点位详情
@@ -45,7 +55,7 @@ export const getPatrolInfo = data => {
   return reqGet('/cockpit/patrol/info', data)
 }
 
-// 点位详情
+// 点位列表
 export const getPatrolList = data => {
   return reqGet('/cockpit/point/list', data)
 }
@@ -54,4 +64,20 @@ export const getPatrolList = data => {
 export const getWaterLevel = data => {
   return reqGet('/cockpit/water/level', data)
 }
+
+// 点位详情
+export const getAlarmAlarmNum = data => {
+  return reqGet('/cockpit/alarm/alarmNum', data)
+}
+
+// 上报
+export const getProblemReport = data => {
+  return reqGet('/biz/eventCenter/problemReport/list', data)
+}
+
+// 告警
+export const getAlarmUserHandle = data => {
+  return reqGet('/eventCenter/alarmUserHandle/list', data)
+}
+
 

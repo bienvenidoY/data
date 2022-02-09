@@ -13,6 +13,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import {getArchives} from '@/api/cockpit';
 
 export default {
   name: 'Module8',
@@ -49,8 +50,8 @@ export default {
               '11月',
               '12月'
             ],
-            '归档事件数': [3, 5, 12, 8, 9.2, 6.9, 25, 12, 8, 1.4, 8, 1.4],
-            '事件平均处理时效': [5.8, 1.4, 2, 6.9, 25, 12, 8, 6.9, 5, 1.4, 8, 1.4]
+            '归档事件数': [],
+            '事件平均处置时效': []
           }
         },
         xAxis: [{
@@ -114,9 +115,22 @@ export default {
     }
   },
   mounted() {
-
+    this.getArchives()
   },
-  methods: {},
+  methods: {
+    getArchives() {
+      getArchives().then(res => {
+        const data = {}
+        res.data.forEach(v => {
+          data[v.name] = v.data
+        })
+        this.chartOpt.dataset.source = {
+          ...this.chartOpt.dataset.source,
+          ...data
+        }
+      })
+    }
+  },
 
 }
 </script>

@@ -13,6 +13,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import {getSolve} from '@/api/cockpit';
 
 export default {
   name: 'Module7',
@@ -65,19 +66,19 @@ export default {
             name: '待处置',
             type: 'bar',
             stack: 'total',
-            data: [103, 489]
+            data: []
           },
           {
             name: '处置中',
             type: 'bar',
             stack: 'total',
-            data: [195, 438]
+            data: []
           },
           {
             name: '已完成',
             type: 'bar',
             stack: 'total',
-            data: [195, 238]
+            data: []
           }
         ]
       }
@@ -96,10 +97,43 @@ export default {
     }
   },
   mounted() {
-
+    this.getSolve()
   },
   methods: {
+    getSolve() {
+      getSolve().then(res => {
+        const series = [
+          {
+            name: '待处置',
+            type: 'bar',
+            stack: 'total',
+            data: [],
+          },
+          {
+            name: '处置中',
+            type: 'bar',
+            stack: 'total',
+            data: [],
+          },
+          {
+            name: '已完成',
+            type: 'bar',
+            stack: 'total',
+            data: [],
+          },
+        ]
+        series.map(v => {
+          res.data.forEach(item => {
+            const value = item.data.find(item => item.name === v.name).value
+            v.data.push(value)
+          })
+        })
+        const xData = res.data.map(v => v.name)
 
+        this.chartOpt.yAxis.data = xData
+        this.chartOpt.series = series
+      })
+    }
   },
 
 }

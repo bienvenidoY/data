@@ -2,10 +2,10 @@
   <div class="module4">
     <div class="module-top">
       <div class="module-top-item">
-        废水排放<span>55次</span>
+        累计巡检<span>{{ info['累计巡检'] }}次</span>
       </div>
       <div class="module-top-item">
-        废水排放<span>55次</span>
+        本年巡检<span>{{ info['本年巡检'] }}次</span>
       </div>
     </div>
     <ChartView
@@ -18,7 +18,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
-import {getPatrolNum} from '@/api/cockpit';
+import {getPatrolNum, getPatrolTotalNum} from '@/api/cockpit';
 
 export default {
   name: 'Module4',
@@ -49,13 +49,23 @@ export default {
         },
         tooltip: {},
         xAxis: {
-          type: 'time',
           axisLabel: {
             rotate: -45,
-            formatter: '{MMM}',
             hideOverlap: true,
             color: '#ffffff'
           },
+          data: ['1月',
+            '2月',
+            '3月',
+            '4月',
+            '5月',
+            '6月',
+            '7月',
+            '8月',
+            '9月',
+            '10月',
+            '11月',
+            '12月']
         },
         yAxis: {
           type: 'value',
@@ -70,7 +80,6 @@ export default {
             }
           },
         },
-
         series: [
           {
             symbol: 'circle',
@@ -78,13 +87,7 @@ export default {
             name: '累计巡检次数',
             type: 'line',
 
-            data: [
-              ['2017-6', 12],
-              ['2017-7', 17],
-              ['2017-8', 22],
-              ['2017-9', 35],
-              ['2017-10', 4]
-            ],
+            data: [],
             lineStyle: {
               width: 1.5
             }
@@ -94,14 +97,7 @@ export default {
             symbolSize: 10,
             name: '本年巡检次数',
             type: 'line',
-
-            data: [
-              ['2017-6', 22],
-              ['2017-7', 17],
-              ['2017-8', 2],
-              ['2017-9', 15],
-              ['2017-10', 5]
-            ],
+            data: [],
             lineStyle: {
               width: 1.5
             }
@@ -123,19 +119,28 @@ export default {
     }
   },
   mounted() {
-    this.info = {
-
-    }
     this.getInfo()
+    this.getData()
   },
   methods: {
     getInfo() {
-      getPatrolNum().then(res => {
-        this.info = res.data
+      getPatrolTotalNum().then(res => {
+        let data = {}
+        const responseData = res.data || []
+        responseData.forEach(item => {
+          data[item.name] = item.value
+        })
+        this.info = data
       })
     },
     getData() {
-
+      getPatrolNum().then(res => {
+        this.chartOpt.series = this.chartOpt.series.map(v => {
+          v.data = res.data.find(item => item.name === v.name).data
+          return v
+        })
+        console.log(this.chartOpt.series)
+      })
     }
   },
 

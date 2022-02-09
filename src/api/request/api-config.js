@@ -5,24 +5,16 @@
  * isToken是否需要token
  */
 import axios from 'axios'
-import store from '@/store/'
 import { Message } from 'element-ui'
 import { addPending, removePending } from './pending'
-import { getToken } from '@/util/auth'
-import website from '@/config/website'
-import { serialize } from '@/util/util'
-import { getBracketContent } from '@/util/util'
 
 // 创建 axios 实例
 // 使用代理时baseUrl只需要proxy，不需要前置http,http需要在vue.config.js设置
 const service = axios.create({
-  baseURL: '',// process.env.VUE_APP_API_BASE_URL, // api base_url
+  baseURL: 'http://park-api.kkx88.cn/',// process.env.VUE_APP_API_BASE_URL, // api base_url
   timeout: 10000, // 请求超时时间
   withCredentials: false, // 跨域请求，允许保存cookie
-  paramsSerializer: params => {
-    // headers中配置serialize为true开启序列化
-    return serialize(params)
-  },
+
 })
 
 // 请求拦截
@@ -32,14 +24,9 @@ service.interceptors.request.use(
     addPending(config) // 将当前请求添加到 pending 中
 
     // header authorization
-    if (getToken()) {
-      config.headers[website.Authorization] = getToken()
+    if (localStorage.getItem('tianditu-token')) {
+      config.headers['Authorization'] = localStorage.getItem('tianditu-token')
     }
-    config.headers['X-Biz-Type'] = 1
-    config.headers['X-Sub-Biz-Type'] = 101
-    // 规划师 -3
-    config.headers['X-Shop-Id'] = 95
-
     return config
   },
 
@@ -54,41 +41,15 @@ service.interceptors.response.use(
     // 重复请求栈
     removePending(response) // 在请求结束后，移除本次请求
 
-    const { success, error = '未知错误', code } = response.data
-    const ignoreUrl =
-      response.config.url.includes('oss-fg.feng-go.com') ||
-      response.config.url.includes('ossUpload')
+    const { code, error = '未知错误' } = response.data
     const isBlob = response.data instanceof Blob
-    if (success || ignoreUrl || isBlob) {
+    if (code === 200 || isBlob) {
       return response.data
     } else {
-      // console.log('请求错误')
-      // if (error && code != 45004) {
-      //   if (error && code === 6000001) {
-      //     Notification({
-      //       title: '错误',
-      //       message: error.toString(),
-      //       duration: 0,
-      //       type: 'error',
-      //       position: 'top-right',
-      //       offset: 100,
-      //     })
-      //   } else {
-      //     Message.error(error)
-      //   }
-      // }
-      if (code === 45004) {
-        const newError = getBracketContent(error)
-        Message({
-          type: 'error',
-          message: newError,
-        })
-      } else {
-        Message({
-          type: 'error',
-          message: error,
-        })
-      }
+      Message({
+        type: 'error',
+        message: error,
+      })
       // eslint-disable-next-line prefer-promise-reject-errors
       return Promise.reject({ ...response })
     }
@@ -102,7 +63,7 @@ service.interceptors.response.use(
     const status = Number(error.response && error.response.status)
     // 如果是401则跳转到登录页面
     if (status === 401) {
-      store.dispatch('LogOut').then(() => {})
+      // 登录
       // router.push({ path: '/login' })
       Message({
         type: 'error',

@@ -60,20 +60,18 @@ export default {
         grid: {
           top: '23',
           left: '3%',
-          right: '3%',
+          right: '5%',
           bottom: '30',
           containLabel: true
         },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: false,
-            axisLabel: {
-              color: '#ffffff'
-            },
-            data: ['12.16', '12.17', '12.18', '12.19']
-          }
-        ],
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          axisLabel: {
+            color: '#ffffff'
+          },
+          data: []
+        },
         yAxis: [
           {
             type: 'value',
@@ -100,7 +98,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [120, 132, 101, 134, 90]
+            data: []
           },
           {
             name: '黄码',
@@ -112,7 +110,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [220, 182, 191, 234, 290]
+            data: []
           },
           {
             name: '绿码',
@@ -124,7 +122,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [150, 232, 201, 154, 190]
+            data: []
           },
         ]
       }
@@ -132,7 +130,6 @@ export default {
   },
   computed: {
     chartSty() {
-      console.log(this.injectLayoutType() === 0)
       if(this.injectLayoutType() === 0) {
         return {
           height: 143,
@@ -144,12 +141,8 @@ export default {
     }
   },
   mounted() {
-    this.info = {
-      wasteGasNum: 53,
-      wasteWaterNum: 5
-    }
-    // this.getInfo()
-    // this.getData()
+    this.getInfo()
+    this.getData()
   },
   methods: {
     getInfo() {
@@ -159,7 +152,15 @@ export default {
     },
     getData() {
       getEntCodeNum().then(res => {
-        console.log(res.data)
+        const xData = res.data[0].data.map(item => item.name)
+        this.chartOpt.xAxis.data = xData
+        res.data.forEach(item => {
+          this.chartOpt.series.forEach(serie => {
+            if(serie.name === item.name) {
+              serie.data = item.data.map(v => v.value)
+            }
+          })
+        })
       })
     }
   },

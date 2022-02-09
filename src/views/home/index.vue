@@ -42,7 +42,10 @@
     </PageLayout>
 
     <!--  天地图  -->
-    <MapContainer @action="onAction" />
+    <MapContainer
+      :type="type"
+      @action="onAction"
+    />
 
     <WarningDialog
       ref="WarningDialog"
@@ -64,6 +67,7 @@
 </template>
 <script>
 import { options, largeOptions } from './options'
+import { getQueryString } from '@/utils/tool'
 import ModuleComponents from '@/components/Module/index'
 import HeaderContainer from '@/components/HeaderContainer/index.vue'
 import FooterContainer from '@/components/FooterContainer/index.vue'
@@ -75,6 +79,7 @@ import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
 import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
 import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
 import DotDialog from '@/components/DialogGroup/DotDialog/index.vue'
+import { getToken } from '@/api/cockpit';
 
 export default {
   components: {
@@ -94,6 +99,7 @@ export default {
     return {
       layoutType: -1,
       isLogin: false,
+      type: '', // 点位类型
     }
   },
   provide(){
@@ -147,13 +153,32 @@ export default {
         return
       }
     },
-    onChangeType() {
+    onChangeType(type) {
       //
-      console.log('触发类别修改')
+      console.log('触发类别修改', type)
+      this.type = type
     },
     getToken() {
+      // 定义两个参数 临时 tempToken 和 登录 token
       // 获取linshiToken -> token -> 本地存储 -> 重载
-      // this.isLogin = true
+      if(getQueryString('tempToken')) {
+        getToken({
+          tempToken: getQueryString('tempToken')
+        }).then(res => {
+          this.loginSuccess(res.data)
+        })
+      }else if(getQueryString('token')) {
+        this.loginSuccess(getQueryString('token'))
+      }else {
+        this.$message.error('没有token')
+      }
+    },
+    loginSuccess(token) {
+      localStorage.setItem('tianditu-token', token)
+      this.isLogin = true
+    },
+    loginError() {
+
     },
   }
 }

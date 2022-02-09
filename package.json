@@ -17,6 +17,7 @@
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
     "@vue/composition-api": "^1.4.4",
+    "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
     "echarts": "^5.2.2",

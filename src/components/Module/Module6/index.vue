@@ -8,6 +8,7 @@
 </template>
 <script>
 import ModuleCellCard from '@/components/ModuleCellCard/index.vue'
+import {getAlarmAlarmNum} from '@/api/cockpit';
 
 export default {
   name: 'Module6',
@@ -43,19 +44,32 @@ export default {
           suffix: '起'
         },
       ],
-      data: {
-        a: '1',
-        b: '2',
-        c: '2',
-        d: '2',
-        e: '2',
-      },
+      data: {},
     }
   },
   mounted() {
-
+    this.getAlarmAlarmNum()
   },
-  methods: {},
+  methods: {
+    getAlarmAlarmNum() {
+      getAlarmAlarmNum().then(res => {
+        let data = {}
+        const responseData = res.data || []
+
+        responseData.forEach(alarm => {
+          data[alarm.name] = alarm.value
+        })
+        this.options = responseData.map(alarm => {
+          return {
+            label: alarm.name,
+            prop: alarm.name,
+            suffix: '起',
+          }
+        })
+        this.data = data
+      })
+    }
+  },
 
 }
 </script>

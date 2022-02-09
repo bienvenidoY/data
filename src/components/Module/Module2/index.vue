@@ -25,7 +25,7 @@
           </div>
           <ChartView
             class="chart-content"
-            :chart-option="chartOpt"
+            :chart-option="item.chartOpt"
             :auto-resize="true"
             :height="`${chartSty.height}px`"
             :width="`${chartSty.width}px`"
@@ -37,6 +37,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import {getIntellisense} from '@/api/cockpit';
 
 export default {
   name: 'Module2',
@@ -59,40 +60,35 @@ export default {
             color: '#979797',
           },
         },
-        series: [
-          {
-            type: 'pie',
-            top: 'middle',
-            left: 0,
-            radius: ['70%', '90%'],
-            avoidLabelOverlap: true,
-            center: ['35%', 'center'],
+        series: {
+          type: 'pie',
+          top: 'middle',
+          left: 0,
+          radius: ['70%', '90%'],
+          avoidLabelOverlap: true,
+          center: ['35%', 'center'],
+          label: {
+            alignTo: 'none',
+            minMargin: 5,
+            edgeDistance: 10,
+            lineHeight: 15,
+            fontSize: 10,
+          },
+          emphasis: {
             label: {
-              alignTo: 'none',
-              minMargin: 5,
-              edgeDistance: 10,
-              lineHeight: 15,
-              fontSize: 10,
-            },
-            emphasis: {
-              label: {
-                show: true,
-                fontSize: '10',
-                fontWeight: 'bold'
-              }
-            },
-            labelLine: {
               show: true,
-              length: 0
-            },
-            data: [
-              { value: 1048, name: '报警' },
-              { value: 735, name: '在线' },
-              { value: 580, name: '离线' }
-            ]
-          }
-        ]
-      }
+              fontSize: '10',
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {
+            show: true,
+            length: 0
+          },
+          data: []
+        }
+      },
+      data: [],
     }
   },
   computed: {
@@ -114,8 +110,18 @@ export default {
           label: '视频监控',
           image: require('./image4.png')
         },
-      ].map(v =>  {
-        v.chartOpt = this.chartOpt
+      ].map((v, i) =>  {
+        const chartOpt = {
+          ...this.chartOpt
+        }
+        // 数据merge
+        chartOpt.series.data = this.data[i] ||  [
+          { value: 0, name: '报警' },
+          { value: 0, name: '在线' },
+          { value: 0, name: '离线' }
+        ]
+
+        v.chartOpt = chartOpt
         return v
       })
     },
@@ -133,9 +139,15 @@ export default {
     }
   },
   mounted() {
-
+    this.getIntellisense()
   },
-  methods: {},
+  methods: {
+    getIntellisense() {
+      getIntellisense().then(res => {
+        this.data = res.data
+      })
+    }
+  },
 
 }
 </script>

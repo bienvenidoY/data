@@ -80,13 +80,7 @@ export default {
     },
   },
   mounted() {
-    const data = new Array(4).fill({
-      'siteName': '说明a',
-      'riverName': '说明b',
-      'level': '说明c',
-    })
-    this.data = data
-    // this.getWaterLevel()
+    this.getWaterLevel()
   },
   methods: {
     getWaterLevel() {

@@ -94,15 +94,7 @@ export default {
     }
   },
   mounted() {
-    this.data = {
-      outletAwarePoint: 1,
-      pipeAwarePoint: 2,
-      rainOutlet: 3,
-      rainPipe: 4,
-      wasteOutlet: 5,
-      wastePipe: 6
-    }
-    // this.getDeviceNum()
+    this.getDeviceNum()
   },
   methods: {
     getDeviceNum() {
