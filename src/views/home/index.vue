@@ -143,11 +143,11 @@ export default {
     window.removeEventListener('resize', this.myEventHandler);
   },
   mounted() {
-    this.layoutType = document.documentElement.clientWidth <= 1920 ? 1 : 1
+    this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
   },
   methods: {
     myEventHandler() {
-      this.layoutType = document.documentElement.clientWidth <= 1920 ? 1 : 1
+      this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
     },
     onWarning() {
       this.$refs.WarningDialog.show()

@@ -22,7 +22,7 @@
             {{ chunk.label }}
           </div>
           <div class="column-item--value">
-            {{ data[chunk.prop] || 0 }}{{ chunk.suffix }}
+            {{ module3module9module10data[chunk.prop] || 0 }}{{ chunk.suffix }}
           </div>
         </div>
       </div>
@@ -30,12 +30,15 @@
   </div>
 </template>
 <script>
-
-import {getDeviceNum} from '@/api/cockpit';
-
 export default {
   name: 'Module3',
   components: {
+  },
+  props: {
+    module3module9module10data: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -94,14 +97,9 @@ export default {
     }
   },
   mounted() {
-    this.getDeviceNum()
   },
   methods: {
-    getDeviceNum() {
-      getDeviceNum().then(res => {
-        this.data = res.data
-      })
-    }
+
   },
 
 }
