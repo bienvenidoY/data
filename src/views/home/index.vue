@@ -36,7 +36,12 @@
           :title="item.title"
           :style="{ height: item.height}"
         >
-          <components :is="item.key" />
+          <components
+            :is="item.key"
+            :module9module10data="module9Module10Data"
+            :module11module12data="module11Module12Data"
+            :module3module9module10data="module3Module9Module10Data"
+          />
         </ModuleCard>
       </template>
     </PageLayout>
@@ -79,7 +84,7 @@ import ErrorDialog from '@/components/DialogGroup/ErrorDialog/index.vue'
 import ErrorReportDialog from '@/components/DialogGroup/ErrorReportDialog/index.vue'
 import AssignStaffDialog from '@/components/DialogGroup/AssignStaffDialog/index.vue'
 import DotDialog from '@/components/DialogGroup/DotDialog/index.vue'
-import { getToken } from '@/api/cockpit';
+import {getAlarmNum, getDeviceNum, getToken} from '@/api/cockpit';
 
 export default {
   components: {
@@ -100,6 +105,9 @@ export default {
       layoutType: -1,
       isLogin: false,
       type: '', // 点位类型
+      module9Module10Data: {}, // 模块9-10数据
+      module11Module12Data: [], // 模块11-12数据
+      module3Module9Module10Data: {}, // 模块3-9-10数据
     }
   },
   provide(){
@@ -135,11 +143,11 @@ export default {
     window.removeEventListener('resize', this.myEventHandler);
   },
   mounted() {
-    this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
+    this.layoutType = document.documentElement.clientWidth <= 1920 ? 1 : 1
   },
   methods: {
     myEventHandler() {
-      this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
+      this.layoutType = document.documentElement.clientWidth <= 1920 ? 1 : 1
     },
     onWarning() {
       this.$refs.WarningDialog.show()
@@ -176,10 +184,24 @@ export default {
     loginSuccess(token) {
       localStorage.setItem('tianditu-token', token)
       this.isLogin = true
+
+      this.getAlarmNum()
+      this.getDeviceNum()
     },
     loginError() {
 
     },
+    getAlarmNum() {
+      getAlarmNum().then(res => {
+        this.module11Module12Data = res.data
+        console.log('res.data', res.data)
+      })
+    },
+    getDeviceNum() {
+      getDeviceNum().then(res => {
+        this.module3Module9Module10Data = res.data
+      })
+    }
   }
 }
 </script>

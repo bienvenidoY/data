@@ -16,43 +16,37 @@ export default {
   components: {
     ModuleCellCard,
   },
+  props: {
+    module11module12data: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      options: [
-        {
-          label: '管网告警',
-          prop: 'a',
-          suffix: '起'
-        },
-        {
-          label: '排口告警',
-          prop: 'b',
-          suffix: '起'
-        },
-        {
-          label: '河道告警',
-          prop: 'c',
-          suffix: '起'
-        },
-        {
-          label: '巡检问题',
-          prop: 'd',
-          suffix: '起'
-        },
-        {
-          label: '监管问题',
-          prop: 'e',
-          suffix: '起'
-        },
-      ],
-      data: {
-        a: '1',
-        b: '2',
-        c: '2',
-        d: '2',
-        e: '2',
-      },
+      options: [],
+      data: {},
     }
+  },
+  watch: {
+    module11module12data: {
+      handler(val) {
+        if(val.length < 6) return
+        const arr = val.slice(6, val.length)
+        this.options = arr.map(v => {
+          v.suffix = '起'
+          v.label = v.name
+          v.prop = v.name
+          return v
+        })
+        const data = {}
+        arr.forEach(v => {
+          data[v.name] = v.value
+        })
+        this.data = data
+      },
+      immediate: true,
+    },
   },
   mounted() {
 

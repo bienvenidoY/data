@@ -10,6 +10,7 @@
 </template>
 <script>
 import ChartView from '@/components/ChartView/index.vue'
+import {getWaterStat} from '@/api/cockpit';
 
 export default {
   name: 'Module13',
@@ -50,7 +51,19 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['1月',
+              '2月',
+              '3月',
+              '4月',
+              '5月',
+              '6月',
+              '7月',
+              '8月',
+              '9月',
+              '10月',
+              '11月',
+              '12月'
+            ]
           }
         ],
         yAxis: [
@@ -59,7 +72,7 @@ export default {
           }
         ],
         series: [
-          {
+          /* {
             name: '用水量',
             smooth: true,
             type: 'line',
@@ -68,7 +81,7 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: []
           },
           {
             name: '排水量',
@@ -79,17 +92,32 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: [220, 182, 191, 234, 290, 330, 310]
-          }
+            data: []
+          } */
         ]
       }
     }
   },
   mounted() {
-
+    this.getWaterStat()
   },
   methods: {
-
+    getWaterStat() {
+      getWaterStat().then(res => {
+        this.chartOpt.series = res.data.map(v => {
+          return {
+            ...v,
+            type: 'line',
+            smooth: true,
+            stack: 'Total',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
+          }
+        })
+      })
+    }
   },
 
 }

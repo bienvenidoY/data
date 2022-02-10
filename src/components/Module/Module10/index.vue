@@ -25,28 +25,32 @@ export default {
     ChartView,
     ModuleCellCard,
   },
+  props: {
+    module3module9module10data: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
       options: [
         {
-          label: '雨水管网',
-          prop: 'a',
-          suffix: '个'
+          label: '雨水排口',
+          prop: 'rainOutlet',
+          suffix: '个',
         },
         {
-          label: '污水管网',
-          prop: 'b',
-          suffix: '个'
+          label: '污水排口',
+          prop: 'wasteOutlet',
+          suffix: '个',
         },
         {
           label: '感知点控',
-          prop: 'c',
+          prop: 'outletAwarePoint',
           suffix: '个'
         },
       ],
-      data: {
-
-      },
+      data: {},
       chartOpt: {
         tooltip: {},
         legend: {
@@ -82,19 +86,29 @@ export default {
         },
         yAxis: {
           type: 'category',
-          data: ['Brazil', 'Indonesia'],
+          data: [],
           axisLabel: {show: false},
           axisTick: {show: false},
         },
-        series: [
-          {
-            name: '点位数量',
-            type: 'bar',
-            data: [5, 4]
-          }
-        ]
+        series: {
+          name: '点位数量',
+          type: 'bar',
+          data: []
+        }
       }
     }
+  },
+  watch: {
+    module3module9module10data: {
+      handler(val) {
+        this.data = val
+        // outletAwarePoints : []
+        const { outletAwarePoints = [] } = val
+        this.chartOpt.yAxis.data = outletAwarePoints.map(v => v.name)
+        this.chartOpt.series.data = outletAwarePoints.map(v => v.value)
+      },
+      immediate: true,
+    },
   },
   mounted() {
 

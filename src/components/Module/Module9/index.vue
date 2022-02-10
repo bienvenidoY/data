@@ -25,22 +25,28 @@ export default {
     ChartView,
     ModuleCellCard,
   },
+  props: {
+    module3module9module10data: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
       options: [
         {
           label: '雨水管网',
-          prop: '1',
-          suffix: '个'
+          prop: 'rainPipe',
+          suffix: '公里',
         },
         {
           label: '污水管网',
-          prop: '2',
-          suffix: '个'
+          prop: 'wastePipe',
+          suffix: '公里',
         },
         {
           label: '感知点控',
-          prop: '3',
+          prop: 'pipeAwarePoint',
           suffix: '个'
         },
       ],
@@ -86,15 +92,25 @@ export default {
             }
           },
         },
-        series: [
-          {
-            name: '点位数量',
-            type: 'bar',
-            data: [1, 2, 3, 20]
-          }
-        ]
+        series: {
+          name: '点位数量',
+          type: 'bar',
+          data: []
+        }
       }
     }
+  },
+  watch: {
+    module3module9module10data: {
+      handler(val) {
+        this.data = val
+        // pipePoints: []
+        const { pipePoints = [] } = val
+        this.chartOpt.xAxis.data = pipePoints.map(v => v.name)
+        this.chartOpt.series.data = pipePoints.map(v => v.value)
+      },
+      immediate: true,
+    },
   },
   mounted() {
 

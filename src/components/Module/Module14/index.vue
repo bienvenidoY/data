@@ -25,6 +25,8 @@
 </template>
 <script>
 
+import {getDataCollection} from '@/api/cockpit';
+
 export default {
   name: 'Module14',
   components: {
@@ -35,42 +37,27 @@ export default {
         column: [
           {
             label: '归集类型',
-            prop: 'a',
+            prop: 'name',
           },
           {
             label: '数量',
-            prop: 'b',
+            prop: 'value',
           },
         ]
       },
-      data: [
-        {
-          'a': '说明a',
-          'b': '说明b',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-        },
-        {
-          'a': '说明a',
-          'b': '说明b',
-        },
-      ],
+      data: [],
     }
   },
   mounted() {
-
+    this.getDataCollection()
   },
-  methods: {},
+  methods: {
+    getDataCollection() {
+      getDataCollection().then(res => {
+        this.data = res.data;
+      })
+    }
+  },
 
 }
 </script>

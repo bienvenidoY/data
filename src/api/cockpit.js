@@ -11,7 +11,7 @@ export const getArchives = data => {
   return reqGet('/cockpit/alarm/archives', data)
 }
 
-// 异常情况
+// 设备告警&问题上报
 export const getAlarmNum = data => {
   return reqGet('/cockpit/alarm/num', data)
 }
@@ -78,6 +78,15 @@ export const getProblemReport = data => {
 // 告警
 export const getAlarmUserHandle = data => {
   return reqGet('/eventCenter/alarmUserHandle/list', data)
+}
+// 数据收集
+export const getDataCollection = data => {
+  return reqGet('/cockpit/dataCollection', data)
+}
+
+// 水量统计
+export const getWaterStat = data => {
+  return reqGet('/cockpit/water/waterStat', data)
 }
 
 
