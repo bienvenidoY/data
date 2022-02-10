@@ -38,7 +38,6 @@
         >
           <components
             :is="item.key"
-            :module9module10data="module9Module10Data"
             :module11module12data="module11Module12Data"
             :module3module9module10data="module3Module9Module10Data"
           />
@@ -105,7 +104,6 @@ export default {
       layoutType: -1,
       isLogin: false,
       type: '', // 点位类型
-      module9Module10Data: {}, // 模块9-10数据
       module11Module12Data: [], // 模块11-12数据
       module3Module9Module10Data: {}, // 模块3-9-10数据
     }
@@ -155,11 +153,13 @@ export default {
     onError() {
       this.$refs.ErrorDialog.show()
     },
-    onAction(type, info) {
-      if(type.includes('Dialog')) {
-        this.$refs.DotDialog.show(type, info)
+    onAction(markerData) {
+      const miniDialogEmus = [10, 20, 21, 22, 23, 30, 31, 32, 33]
+      if(miniDialogEmus.includes(markerData.pointType)) {
+        this.$refs.DotDialog.show(markerData)
         return
       }
+      this.$refs.ErrorDialog.show()
     },
     onChangeType(type) {
       //
@@ -194,7 +194,6 @@ export default {
     getAlarmNum() {
       getAlarmNum().then(res => {
         this.module11Module12Data = res.data
-        console.log('res.data', res.data)
       })
     },
     getDeviceNum() {

@@ -89,4 +89,9 @@ export const getWaterStat = data => {
   return reqGet('/cockpit/water/waterStat', data)
 }
 
+// 点位详情
+export const getPointInfo = data => {
+  return reqGet('/cockpit/point/info', data)
+}
+
 

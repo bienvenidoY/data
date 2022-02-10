@@ -91,63 +91,34 @@ export default {
         url: 'http://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=7f013d0186775b063d6a046977bbefc6'
       },
       currentMarker: {},
-      markers: [
-        { type: 'Dialog1', position: [113.280637, 23.125178], icon: require('./image/废气@2x.png') },
-        { type: 'text', position: [113.300637, 23.125178],icon: require('./image/废气@2x.png') },
-        { type: 'Dialog1', position: [113.320637, 23.125178],icon: require('./image/废气@2x.png') },
-        { type: 'text', position: [113.340637, 23.125178],icon: require('./image/废气@2x.png') }
-      ],
+      markers: [],
     }
   },
   watch: {
     type: {
       handler() {
-        // this.getPatrolList()
+        this.getPatrolList()
       },
       immediate: true,
     }
   },
   methods: {
     onAction(marker) {
-      const miniDialogEmus = [10, 20, 21, 22, 23, 30, 31, 32, 33]
-      if(miniDialogEmus.includes(marker.extData.pointType)) {
-        this.currentMarker = {}
-        this.$emit('action', marker.extData.pointType, {
-          title: '哈哈',
-          content: [
-            {
-              label: '这事',
-              value: '什么'
-            },{
-              label: '这事',
-              value: '什么'
-            },
-          ]
-        })
-      }else {
-        this.currentMarker = {
-          ...marker.extData,
-          title: '点位名称',
-          content: [
-            {
-              label: '这事',
-              value: '什么'
-            },{
-              label: '这事',
-              value: '什么'
-            },
-          ]
-        }
-      }
+      console.log(marker)
+      this.$emit('action', marker.extData)
     },
     getPatrolList() {
       getPatrolList({
         pointType: this.type
       }).then(res => {
-        this.markers = res.data.map(v => {
+        this.markers = [{pointType: 10, position: [113.280637, 23.125178]},{pointType: 20, position: [113.282434,23.125677]},
+          {pointType: 21, position: [113.290411,23.125743]},{pointType: 22, position: [113.291632,23.125677]},
+          {pointType: 23, position: [113.297381,23.127139]}, {pointType: 30, position: [113.251101,23.124679]}, {pointType: 31,  position: [113.251101,23.124679]},
+          {pointType: 32, position: [113.251101,23.124679]},{pointType: 33, position: [113.251101,23.124679]},].map(v => {
           const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude} = v
           v.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
-          v.position = [pointLongitude, pointLatitude]
+          console.log(res, [pointLongitude, pointLatitude])
+          v.position = v.position || [113.280637, 23.125178]
           return v
         })
       })
