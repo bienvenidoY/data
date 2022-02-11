@@ -51,25 +51,26 @@
 </template>
 <script>
 import ScrollBar from '@/components/ScrollBar/index.vue'
-import {getPatrolList} from '@/api/cockpit';
+import {getPatrolList, getPointInfo} from '@/api/cockpit';
+import { OPTIONS } from './options'
 
 const iconMap = {
-  10: require('./image/企业@2x.png'),
-  20: require('./image/入河排口@2x.png'),
-  21: require('./image/入河排口@2x.png'),
-  22: require('./image/雨污井@2x.png'),
-  23: require('./image/泵站@2x.png'),
-  30: require('./image/雨水管网@2x.png'),
-  31: require('./image/排口@2x.png'),
-  32: require('./image/污水管网@2x.png'),
-  33: require('./image/水质@2x.png'),
+  1000: require('./image/企业@2x.png'),
+  2001: require('./image/雨水管网@2x.png'),
+  2002: require('./image/污水管网@2x.png'),
+  2100: require('./image/入河排口@2x.png'),
+  2200: require('./image/雨污井@2x.png'),
+  2300: require('./image/泵站@2x.png'),
+  3000: require('./image/雨水管网@2x.png'),
+  3100: require('./image/排口@2x.png'),
+  3200: require('./image/污水管网@2x.png'),
+  3300: require('./image/水质@2x.png'),
 }
 const iconWaringMap = {
-  20: require('./image/入河排口@2x.png'),
-  30: require('./image/雨水管网告警@2x.png'),
-  31: require('./image/排口告警@2x.png'),
-  32: require('./image/污水管网告警@2x.png'),
-  33: require('./image/水质告警@2x.png'),
+  3000: require('./image/雨水管网告警@2x.png'),
+  3100: require('./image/排口告警@2x.png'),
+  3200: require('./image/污水管网告警@2x.png'),
+  3300: require('./image/水质告警@2x.png'),
 }
 
 export default {
@@ -104,17 +105,38 @@ export default {
   },
   methods: {
     onAction(marker) {
-      console.log(marker)
+      // 设备类型使用弹窗形式，点位类型使用接口过去并通过天地图显示，样式已经改好
+      const miniDialogEmus = [3000, 3100, 3200, 3300]
+      if(miniDialogEmus.includes(marker.extData.pointType)) {
+        this.getPointInfo(marker)
+        return
+      }
       this.$emit('action', marker.extData)
+    },
+    getPointInfo(marker) {
+      getPointInfo({
+        pointId: marker.extData.pointId,
+        pointType: marker.extData.pointType,
+      }).then(res => {
+
+        const { key, options } = OPTIONS[marker.extData.pointType]
+        const data = res.data[key]
+
+        this.currentMarker = {
+          ... marker.extData,
+          ...OPTIONS[marker.extData.pointType]
+        }
+        console.log(key, options, data, this.currentMarker)
+      })
     },
     getPatrolList() {
       getPatrolList({
         pointType: this.type
       }).then(res => {
-        this.markers = [{pointType: 10, position: [113.280637, 23.125178]},{pointType: 20, position: [113.282434,23.125677]},
-          {pointType: 21, position: [113.290411,23.125743]},{pointType: 22, position: [113.291632,23.125677]},
-          {pointType: 23, position: [113.297381,23.127139]}, {pointType: 30, position: [113.251101,23.124679]}, {pointType: 31,  position: [113.251101,23.124679]},
-          {pointType: 32, position: [113.251101,23.124679]},{pointType: 33, position: [113.251101,23.124679]},].map(v => {
+        this.markers = [{pointType: 1000, position: [113.280637, 23.125178]},
+          {pointType: 2100, position: [113.290411,23.125743]},{pointType: 2200, position: [113.291632,23.125677]},
+          {pointType: 2300, position: [113.297381,23.127139]}, {pointType: 3000, position: [113.251101,23.124679]}, {pointType: 3100,  position: [113.251101,23.124679]},
+          {pointType: 3200, position: [113.251101,23.124679]},{pointType: 3300, position: [113.251101,23.124679]},].map(v => {
           const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude} = v
           v.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
           console.log(res, [pointLongitude, pointLatitude])

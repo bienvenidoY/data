@@ -154,12 +154,7 @@ export default {
       this.$refs.ErrorDialog.show()
     },
     onAction(markerData) {
-      const miniDialogEmus = [10, 20, 21, 22, 23, 30, 31, 32, 33]
-      if(miniDialogEmus.includes(markerData.pointType)) {
-        this.$refs.DotDialog.show(markerData)
-        return
-      }
-      this.$refs.ErrorDialog.show()
+      this.$refs.DotDialog.show(markerData)
     },
     onChangeType(type) {
       //

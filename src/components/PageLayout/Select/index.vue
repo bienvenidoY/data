@@ -19,18 +19,16 @@ export default {
   data() {
     return {
       /*
-      * OTHER(0, "其他"),
-    COMPANY(10, "企业"),
-    EP_FACILITY(11, "企业环保设施"),
-    GW_ARCHIVE(20, "管网档案"),
-    RHPK_ARCHIVE(21, "入河排口档案"),
-    YWJ_ARCHIVE(22, "雨污井档案"),
-    BZ_ARCHIVE(23, "泵站档案"),
-    YSGW_MONITOR(30, "雨水管网监控"),
-    YPK_SYSTEM(31, "雨排口控制系统"),
-    WSGW_MONITOR(32, "污水管网监控"),
-    HDSZ_MONITOR(33, "河道水质监控"),
-
+      * COMPANY(1000, "企业"),
+    GW_WATER_ARCHIVE(2001, "档案-管网-雨水管网"),
+    GW_SEWAGE_ARCHIVE(2002, "档案-管网-污水管网"),
+    RHPK_ARCHIVE(2100, "档案-入河排口"),
+    YWJ_ARCHIVE(2200, "档案-雨污井"),
+    BZ_ARCHIVE(2300, "档案-泵站"),
+    YSGW_MONITOR(3000, "设备-雨水管网监控"),
+    YPK_SYSTEM(3100, "设备-雨排口控制系统"),
+    WSGW_MONITOR(3200, "设备-污水管网监控"),
+    HDSZ_MONITOR(3300, "设备-河道水质监控"),
       * */
       typeOptions: [
         {
@@ -39,41 +37,44 @@ export default {
         },
         {
           label: '企业',
-          value: 10,
+          value: 1000,
         },
         {
-          label: '管网档案',
-          value: 20,
+          label: '档案-管网-雨水管网',
+          value: 2001,
         },
         {
-          label: '入河排口档案',
-          value: 21,
+          label: '档案-管网-污水管网',
+          value: 2002,
         },
         {
-          label: '雨污井档案',
-          value: 22,
+          label: '档案-入河排口',
+          value: 2100,
         },
         {
-          label: '泵站档案',
-          value: 23,
+          label: '档案-雨污井',
+          value: 2200,
         },
         {
-          label: '雨水管网监控',
-          value: 30,
+          label: '档案-泵站',
+          value: 2300,
         },
         {
-          label: '雨排口控制系统',
-          value: 31,
+          label: '设备-雨水管网监控',
+          value: 3000,
         },
         {
-          label: '污水管网监控',
-          value: 32,
+          label: '设备-雨排口控制系统',
+          value: 3100,
         },
         {
-          label: '河道水质监控',
-          value: 33,
+          label: '设备-污水管网监控',
+          value: 3200,
         },
-
+        {
+          label: '设备-河道水质监控',
+          value: 3300,
+        },
       ],
       type: '',
     }
