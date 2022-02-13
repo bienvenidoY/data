@@ -5,9 +5,12 @@
       :center="state.center"
       :zoom="state.zoom"
     >
-      <tdt-mousetool
-        ref="mousetoolRef"
-        :mark-tool="{ follow: true }"
+      <tdt-polyline
+        v-for="(item, index) in lineList"
+        :key="index"
+        :path="item.path"
+        :color="item.color"
+        :opacity="1"
       />
       <tdt-tilelayer
         :url="state.url"
@@ -97,6 +100,7 @@ export default {
       },
       currentMarker: {},
       markers: [],
+      lineList: []
     }
   },
   watch: {
@@ -148,22 +152,23 @@ export default {
       getPatrolList({
         pointType: 3000, // this.type
       }).then(res => {
-        // this.markers = res.data.map(marker => {
-        //   const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude} = marker
-        //   marker.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
-        //   marker.position = [113.280637, 23.125178] || [pointLongitude, pointLatitude]
-        //   return marker
-        // })
-        this.markers.length &&  this.clearAll()
-        const { pointType = 10, pointId, pointIsAlarm} = res.data[0]
-        this.markers = [
-          {
-            position: [113.280637, 23.125178],
-            pointId,
-            pointType,
-            icon: pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
+        const markers = []
+        const lineList = []
+        res.data.forEach(marker => {
+          const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude, pointLatitudeEnd, pointLongitudeEnd} = marker
+          marker.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
+          marker.position = [pointLongitude, pointLatitude]
+          markers.push(marker)
+          if(marker.pointType ===  2001 || marker.pointType ===  2002) {
+            lineList.push({
+              ...marker,
+              path: [[pointLongitude, pointLongitudeEnd], [pointLatitude, pointLatitudeEnd]],
+              color: marker.pointType ===  2001 ? '#D4FBF1' : '#E7E7E7',
+            })
           }
-        ]
+        })
+        this.markers = markers
+        this.lineList = lineList
       })
     }
   },
