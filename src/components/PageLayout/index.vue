@@ -9,10 +9,10 @@
       <div class="gradient-header page-layout-header gradient-bg" />
       <div class="gradient-footer page-layout-footer gradient-bg" />
       <div class="gradient-left  gradient-bg" />
-      <div class="gradient-right page-layout-bg-container gradient-bg" />
+      <div class="gradient-right gradient-bg" />
 
       <!--  纯色层    -->
-      <div class="pure-header page-layout-header pure-bg" />
+      <div class="pure-header page-layout-header" />
       <div class="pure-footer page-layout-footer pure-bg" />
       <div class="pure-left  pure-bg" />
       <div class="pure-right pure-bg" />
@@ -373,6 +373,22 @@ $pageLayoutTop: 34px;
 }
 
 .large {
+  //.gradient-header{
+  //  background: url('./image/large/gradient-header-bg.png') no-repeat;
+  //  background-size: cover;
+  //}
+  //.gradient-footer{
+  //  background: url('./image/large/gradient-footer-bg.png') no-repeat;
+  //  background-size: cover;
+  //}
+  //.gradient-left{
+  //  background: url('./image/large/gradient-left-bg.png') no-repeat;
+  //  background-size: cover;
+  //}
+  //.gradient-right{
+  //  background: url('./image/large/gradient-right-bg.png') no-repeat;
+  //  background-size: cover;
+  //}
   .gradient-left, .pure-left {
     width: $pageLayoutItemLarge;
     left: 0;
