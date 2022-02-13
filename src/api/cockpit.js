@@ -94,4 +94,14 @@ export const getPointInfo = data => {
   return reqGet('/cockpit/point/info', data)
 }
 
+// 设备上报平均值
+export const getReportRecordMeanGroup = data => {
+  return reqGet('/cockpit/device/reportRecordMeanGroup', data)
+}
+
+// 设备上报记录
+export const getReportRecord = data => {
+  return reqGet('/cockpit/device/reportRecord', data)
+}
+
 

@@ -5,6 +5,10 @@
       :center="state.center"
       :zoom="state.zoom"
     >
+      <tdt-mousetool
+        ref="mousetoolRef"
+        :mark-tool="{ follow: true }"
+      />
       <tdt-tilelayer
         :url="state.url"
         :z-index="1"
@@ -105,9 +109,10 @@ export default {
   },
   methods: {
     onAction(marker) {
+      console.log(marker, marker.extData.pointType)
       // 设备类型使用弹窗形式，点位类型使用接口过去并通过天地图显示，样式已经改好
       const miniDialogEmus = [3000, 3100, 3200, 3300]
-      if(miniDialogEmus.includes(marker.extData.pointType)) {
+      if(!miniDialogEmus.includes(marker.extData.pointType)) {
         this.getPointInfo(marker)
         return
       }
@@ -119,30 +124,46 @@ export default {
         pointType: marker.extData.pointType,
       }).then(res => {
 
-        const { key, options } = OPTIONS[marker.extData.pointType]
+        const { key, options, title } = OPTIONS[marker.extData.pointType]
         const data = res.data[key]
 
+        const content = options.map(v => {
+          v.value = data[v.prop]
+          return v
+        })
         this.currentMarker = {
           ... marker.extData,
-          ...OPTIONS[marker.extData.pointType]
+          title,
+          content
         }
         console.log(key, options, data, this.currentMarker)
       })
     },
+    clearAll() {
+      console.log(this.$refs.mousetoolRef)
+
+      this.refs.mousetoolRef.clearAll()
+    },
     getPatrolList() {
       getPatrolList({
-        pointType: this.type
+        pointType: 3000, // this.type
       }).then(res => {
-        this.markers = [{pointType: 1000, position: [113.280637, 23.125178]},
-          {pointType: 2100, position: [113.290411,23.125743]},{pointType: 2200, position: [113.291632,23.125677]},
-          {pointType: 2300, position: [113.297381,23.127139]}, {pointType: 3000, position: [113.251101,23.124679]}, {pointType: 3100,  position: [113.251101,23.124679]},
-          {pointType: 3200, position: [113.251101,23.124679]},{pointType: 3300, position: [113.251101,23.124679]},].map(v => {
-          const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude} = v
-          v.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
-          console.log(res, [pointLongitude, pointLatitude])
-          v.position = v.position || [113.280637, 23.125178]
-          return v
-        })
+        // this.markers = res.data.map(marker => {
+        //   const {pointIsAlarm, pointType = 10, pointLongitude, pointLatitude} = marker
+        //   marker.icon = pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
+        //   marker.position = [113.280637, 23.125178] || [pointLongitude, pointLatitude]
+        //   return marker
+        // })
+        this.markers.length &&  this.clearAll()
+        const { pointType = 10, pointId, pointIsAlarm} = res.data[0]
+        this.markers = [
+          {
+            position: [113.280637, 23.125178],
+            pointId,
+            pointType,
+            icon: pointIsAlarm === 1 ? iconWaringMap[pointType] : iconMap[pointType]
+          }
+        ]
       })
     }
   },
