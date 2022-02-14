@@ -128,7 +128,7 @@ export default {
     top: 0;
   }
   .dot-dialog-table-header-cell {
-    background: rgba(71, 123, 41, 0.15);
+    background: rgb(19 26 15);
   }
   .dot-dialog-table-row {
     display: flex;
