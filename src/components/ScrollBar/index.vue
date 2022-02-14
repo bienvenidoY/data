@@ -39,5 +39,20 @@ export default {
     background-size: cover;
     left: -3px;
   }
+
+  .el-scrollbar__bar.is-horizontal {
+    height: 1px;
+    background-color: #406f30;
+    opacity: 1;
+    margin-bottom: 7px;
+    border-radius: 0;
+  }
+  .el-scrollbar__bar.is-horizontal>div {
+    height: 7px;
+    background-color: #ffb34f;
+    background-size: cover;
+    bottom: 3px;
+  }
+
 }
 </style>

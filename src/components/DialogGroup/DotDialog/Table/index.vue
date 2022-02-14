@@ -1,22 +1,27 @@
 <template>
   <div class="dot-dialog-table">
-    <div class="dot-dialog-table-header">
+    <ScrollBar
+      v-infinite-scroll="getReportRecord"
+      class="dot-dialog-table-content"
+    >
       <div
-        class="dot-dialog-table-cell dot-dialog-table-header-cell"
+        class="dot-dialog-table-header"
       >
-        序号
+        <div
+          class="dot-dialog-table-cell dot-dialog-table-header-cell"
+        >
+          序号
+        </div>
+        <div
+          v-for="item in options"
+          :key="item.prop"
+          class="dot-dialog-table-cell dot-dialog-table-header-cell"
+        >
+          {{ item.label }}
+        </div>
       </div>
       <div
-        v-for="item in options"
-        :key="item.prop"
-        class="dot-dialog-table-cell dot-dialog-table-header-cell"
-      >
-        {{ item.label }}
-      </div>
-    </div>
-    <div class="dot-dialog-table-content">
-      <div
-        v-for="(item, index) in data"
+        v-for="(item, index) in list"
         :key="index"
         class="dot-dialog-table-row"
       >
@@ -33,36 +38,80 @@
           {{ item[option.prop] }}
         </div>
       </div>
-    </div>
+    </ScrollBar>
   </div>
 </template>
 <script>
+import ScrollBar from '@/components/ScrollBar/index.vue'
+import {getReportRecord} from '@/api/cockpit';
+import dayjs from 'dayjs';
 
 export default {
   components: {
+    ScrollBar,
   },
   props: {
     options: {
       type: Array,
       default: () => [],
     },
-    data: {
-      type: Array,
-      default: () => [],
+    info: {
+      type: Object,
+      default: () => ({}),
     }
   },
   data() {
     return {
       list: [],
+      page: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 0,
+      },
+      loading: false
+    }
+  },
+  computed: {
+    noMore() {
+      return this.list.length && (this.list.length === this.page.total)
+    },
+    disabled() {
+      return this.loading || this.noMore
     }
   },
   mounted() {
   },
   methods: {
+    // 表格数据
+    getReportRecord() {
+      if(this.loading) return
+      this.loading = true;
+      getReportRecord({
+        deviceId: this.info.id,
+        ...this.page,
+      }).then(res => {
+        const list = res.rows.map(item => {
+          item.timestamp = dayjs(item.timestamp / 1000).format('YYYY-MM-DD HH:mm:ss')
+          return item
+        })
+        this.list = [...this.list, ...list]
+        this.loading = false
+        this.page.pageNum++
+      })
+    },
   },
 }
 </script>
 <style lang="scss" scoped>
+.dot-dialog-table-content {
+  position: relative;
+  box-sizing: border-box;
+}
+.table-absolute {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
 .dot-dialog-table {
   padding-left: 24px;
   padding-right: 23px;
@@ -70,12 +119,16 @@ export default {
 
   .dot-dialog-table-header {
     display: flex;
-    background: rgba(71, 123, 41, 0.15);
     font-size: 14px;
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: #EBFFEE;
     line-height: 20px;
+    position: sticky;
+    top: 0;
+  }
+  .dot-dialog-table-header-cell {
+    background: rgba(71, 123, 41, 0.15);
   }
   .dot-dialog-table-row {
     display: flex;

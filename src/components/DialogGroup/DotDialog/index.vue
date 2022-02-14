@@ -29,7 +29,7 @@
     <Chart :chart-data="chartData" />
 
     <Table
-      :data="list"
+      v-if="info.id"
       :options="options"
     />
 
@@ -42,7 +42,7 @@ import Dialog from '@/components/DialogBase/OversizeDialog/index.vue'
 import PlayerDialog from '@/components/DialogBase/PlayerDialog/index.vue'
 import Table from './Table/index.vue'
 import Chart from './Chart/index.vue'
-import {getPointInfo, getReportRecord, getReportRecordMeanGroup} from '@/api/cockpit';
+import {getPointInfo, getReportRecordMeanGroup} from '@/api/cockpit';
 import dayjs from 'dayjs'
 
 const DEVICE_TYPE_MAP = {
@@ -73,7 +73,6 @@ export default {
         series: [],
       },
       info: {},
-      list: [],
       options: [
         {
           label: '设备名称',
@@ -127,7 +126,6 @@ export default {
         })
         this.options = [...this.options, ...list, { label: '监测时间', prop: 'timestamp'}]
         this.getReportRecordMeanGroup()
-        this.getReportRecord()
       })
     },
     // 图表数据
@@ -153,17 +151,6 @@ export default {
           xAxis,
           series
         }
-      })
-    },
-    // 表格数据
-    getReportRecord() {
-      getReportRecord({
-        deviceId: this.info.id
-      }).then(res => {
-        this.list = res.rows.map(item => {
-          item.timestamp = dayjs(item.timestamp / 1000).format('YYYY-MM-DD HH:mm:ss')
-          return item
-        })
       })
     },
     // 取消事件 关闭弹窗

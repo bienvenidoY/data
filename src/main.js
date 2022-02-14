@@ -4,7 +4,9 @@ import './styles/index.scss'
 import VueCompositionApi from '@vue/composition-api'
 
 import VueTianditu from 'vue-tianditu';
-import { Button, Select, Table, Dialog, Message, Form, FormItem ,Carousel, CarouselItem, Option, DatePicker } from 'element-ui';
+import { Button, Select, Table, Dialog,
+  Message, Form, FormItem ,Carousel, CarouselItem,
+  Option, DatePicker, InfiniteScroll } from 'element-ui';
 
 Vue.config.productionTip = false
 
@@ -18,6 +20,7 @@ Vue.use(Button)
   .use(Carousel)
   .use(Form)
   .use(FormItem)
+  .use(InfiniteScroll)
   .use(CarouselItem)
 Vue.prototype.$ELEMENT = { size: 'small'};
 Vue.prototype.$message = Message;
