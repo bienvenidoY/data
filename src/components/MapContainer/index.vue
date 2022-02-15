@@ -4,7 +4,6 @@
     <tdt-map
       :center="state.center"
       :zoom="state.zoom"
-      @init="mapInit"
     >
       <tdt-polyline
         v-for="(item, index) in lineList"
