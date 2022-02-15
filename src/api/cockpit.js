@@ -104,4 +104,9 @@ export const getReportRecord = data => {
   return reqGet('/cockpit/device/reportRecord', data)
 }
 
+// 视频
+export const getVideoInfo = id => {
+  return reqGet(`/cockpit/device/video/${id}`)
+}
+
 

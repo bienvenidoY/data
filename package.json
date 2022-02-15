@@ -22,6 +22,7 @@
     "dayjs": "^1.10.7",
     "echarts": "^5.2.2",
     "element-ui": "^2.15.6",
+    "ezuikit-js": "^0.3.0",
     "vue": "^2.6.11",
     "vue-tianditu": "^2.7.1"
   },

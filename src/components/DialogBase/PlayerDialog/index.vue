@@ -19,60 +19,49 @@
       />
     </div>
     <div class="player-dialog-content">
-      <video
+      <!--      <video
         controls
         controlslist="nodownload nofullscreen noremoteplayback noplaybackrate"
         :disablePictureInPicture="true"
         οncοntextmenu="return false"
-        :src="src"
-      />
+      />-->
+      <div id="videoContainer" />
     </div>
   </el-dialog>
 </template>
 <script>
+// https://github.com/Ezviz-OpenBiz/EZUIKit-JavaScript-npm
+import  EZUIKit from 'ezuikit-js';
 
 export default {
   components: {
   },
   data() {
     return {
-      src: {},
+      info: {},
       isShowDialog: false,
-      isLoading: false,
     }
   },
   methods: {
     // 弹窗打开事件
-    show({src}) {
-      this.src = src
+    show(info) {
+      this.info = info
       this.isShowDialog = true
+      this.loadVideo()
     },
-    // 弹窗确认事件
-    confirm() {
-      this.$refs.form.validate(valid => {
-        if (!valid) return
-        const form = {}
-        this.$emit('confirm', form, this.loading, this.done)
-      })
-    },
-    // 取消loading事件
-    loading() {
-      this.isLoading = false
-    },
-    // 完成事件 传递给外部使用
-    done() {
-      this.loading()
-      this.isShowDialog = false
-    },
-    // 取消事件 关闭弹窗
-    hide() {
-      this.loading()
-      // 关闭且清空表单
-      this.isShowDialog = false
+    loadVideo() {
+      const {accessToken, url} = this.info
+      new EZUIKit.EZUIPlayer({
+        autoplay: true,
+        id: 'videoContainer',
+        accessToken,
+        url,
+        template: 'simple',
+        height: 374,
+      });
     },
     // 弹窗关闭按钮 关闭弹窗
     closeDialog() {
-      this.loading()
       this.isShowDialog = false
     },
   },

@@ -23,7 +23,7 @@
       <div
         v-if="info.deviceType === 3"
         class="dialog-action--icon"
-        @click="$refs.PlayerDialog.show({src: 'https://v.hunshehui.cn/mts/v/video2021121639038147558368071.mp4'})"
+        @click="openPlayerDialog"
       />
     </div>
     <Chart :chart-data="chartData" />
@@ -42,7 +42,7 @@ import Dialog from '@/components/DialogBase/OversizeDialog/index.vue'
 import PlayerDialog from '@/components/DialogBase/PlayerDialog/index.vue'
 import Table from './Table/index.vue'
 import Chart from './Chart/index.vue'
-import {getPointInfo, getReportRecordMeanGroup} from '@/api/cockpit';
+import {getPointInfo, getReportRecordMeanGroup, getVideoInfo} from '@/api/cockpit';
 import dayjs from 'dayjs'
 
 const DEVICE_TYPE_MAP = {
@@ -106,7 +106,11 @@ export default {
       this.$refs.dialog.show()
       this.getPointInfo(info)
     },
-
+    openPlayerDialog() {
+      getVideoInfo().then(res => {
+        this.$refs.PlayerDialog.show(res.data)
+      })
+    },
     getPointInfo(marker) {
       getPointInfo({
         pointId: marker.pointId,
