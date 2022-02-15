@@ -4,6 +4,7 @@
     <tdt-map
       :center="state.center"
       :zoom="state.zoom"
+      @init="mapInit"
     >
       <tdt-polyline
         v-for="(item, index) in lineList"
@@ -18,8 +19,8 @@
       />
 
       <tdt-marker
-        v-for="(marker, markerIndex) in markers"
-        :key="markerIndex"
+        v-for="(marker) in markers"
+        :key="marker.pointId + marker.pointType"
         :position="marker.position"
         :ext-data="marker"
         :icon="{
@@ -100,12 +101,15 @@ export default {
       },
       currentMarker: {},
       markers: [],
-      lineList: []
+      lineList: [],
+      map: null,
     }
   },
   watch: {
     type: {
       handler() {
+        this.markers = []
+        this.lineList = []
         this.getPatrolList()
       },
       immediate: true,
@@ -140,17 +144,11 @@ export default {
           title,
           content
         }
-        console.log(key, options, data, this.currentMarker)
       })
-    },
-    clearAll() {
-      console.log(this.$refs.mousetoolRef)
-
-      this.refs.mousetoolRef.clearAll()
     },
     getPatrolList() {
       getPatrolList({
-        pointType: 3000, // this.type
+        pointType: this.type
       }).then(res => {
         const markers = []
         const lineList = []
