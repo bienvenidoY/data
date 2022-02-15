@@ -54,19 +54,19 @@ export default {
       column: [
         {
           label: '设备名称',
-          prop: 'a',
+          prop: 'deviceName',
         },
         {
           label: '设备类型',
-          prop: 'b',
+          prop: 'deviceType',
         },
         {
           label: '报警指标值',
-          prop: 'c',
+          prop: 'content',
         },
         {
           label: '监测时间',
-          prop: 'd',
+          prop: 'time',
         },
       ]
     }

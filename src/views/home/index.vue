@@ -53,13 +53,13 @@
 
     <WarningDialog
       ref="WarningDialog"
-      @report="$refs.ErrorReportDialog.show()"
-      @assign="$refs.AssignStaffDialog.show()"
+      @report="openErrorReportDialog"
+      @assign="openAssignStaffDialog"
     />
     <ErrorDialog
       ref="ErrorDialog"
-      @report="$refs.ErrorReportDialog.show()"
-      @assign="$refs.AssignStaffDialog.show()"
+      @report="openErrorReportDialog"
+      @assign="openAssignStaffDialog"
     />
     <!--  弹窗内事件  -->
     <ErrorReportDialog ref="ErrorReportDialog" />
@@ -144,6 +144,12 @@ export default {
     this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
   },
   methods: {
+    openErrorReportDialog(type, current) {
+      this.$refs.ErrorReportDialog.show(current)
+    },
+    openAssignStaffDialog(type, current) {
+      this.$refs.AssignStaffDialog.show(current)
+    },
     myEventHandler() {
       this.layoutType = document.documentElement.clientWidth <= 1920 ? 0 : 1
     },

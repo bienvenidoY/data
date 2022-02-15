@@ -79,6 +79,11 @@ export const getProblemReport = data => {
 export const getAlarmUserHandle = data => {
   return reqGet('/eventCenter/alarmUserHandle/list', data)
 }
+
+// 告警
+export const getAlarmUserHandleInfo = id => {
+  return reqGet(`/eventCenter/alarmUserHandle/${id}`)
+}
 // 数据收集
 export const getDataCollection = data => {
   return reqGet('/cockpit/dataCollection', data)

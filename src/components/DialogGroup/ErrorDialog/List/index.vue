@@ -2,19 +2,20 @@
   <div class="error-list">
     <ScrollBar>
       <div
-        v-for="(item, index) in data"
-        :key="index"
+        v-for="(item) in data"
+        :key="item.alarmId"
         class="warning-item"
-        :class="{ 'is-active': index === 1 }"
+        :class="{ 'is-active': item.alarmId === current.alarmId }"
+        @click="handleClick(item)"
       >
         <div class="warning-item--title">
-          {{ item.title }}
+          {{ item.devicePlace }}
         </div>
         <div class="warning-item--content text-ellipsis">
-          {{ item.content }}
+          {{ item.sensorValue }}
         </div>
         <div class="warning-item--time">
-          {{ dayjs().format('YYYY-MM-DD HH:mm:ss') }}
+          {{ dayjs(item.reportTime).format('YYYY-MM-DD HH:mm:ss') }}
         </div>
       </div>
     </ScrollBar>
@@ -32,6 +33,10 @@ export default {
     data: {
       type: Array,
       default: () => []
+    },
+    current: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -41,6 +46,9 @@ export default {
   },
   methods: {
     dayjs,
+    handleClick(item) {
+      this.$emit('handleClick', item)
+    },
   }
 }
 </script>

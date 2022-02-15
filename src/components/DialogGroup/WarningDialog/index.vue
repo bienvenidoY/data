@@ -8,11 +8,11 @@
       <div class="header-action">
         <div
           class="warning-btn1 header-action-btn"
-          @click="$emit('assign')"
+          @click="$emit('assign','warning', current)"
         />
         <div
           class="warning-btn2 header-action-btn"
-          @click="$emit('report')"
+          @click="$emit('report','warning', current)"
         />
       </div>
     </template>
@@ -22,7 +22,11 @@
         <div class="content-left-title content-title">
           待处理告警列表
         </div>
-        <List :data="list" />
+        <List
+          :current="current"
+          :data="list"
+          @handleClick="handleClick"
+        />
       </div>
       <div class="content-right">
         <div class="content-right-title content-title">
@@ -37,6 +41,8 @@
 import Dialog from '@/components/DialogBase/BigDialog/index.vue'
 import List from './components/List/index.vue'
 import Table from './components/Table/index.vue'
+import {getAlarmUserHandle, getAlarmUserHandleInfo} from '@/api/cockpit';
+import dayjs from 'dayjs'
 
 export default {
   components: {
@@ -44,63 +50,50 @@ export default {
     List,
     Table,
   },
-  props: {
-    title: {
-      type: String,
-      default: '提示',
-    },
-  },
   data() {
     return {
       list: [],
       data: [],
+      current: {},
     }
   },
   mounted() {
-    const list = new Array(20).fill({
-      title: '设备名称',
-      content: '1号楼二层楼梯转角处设1号楼二层楼梯转角处设'
-    })
-    this.list = list
-    const data = new Array(20).fill( {
-      'a': '说明a',
-      'b': '说明b',
-      'c': '说明c',
-      'd': '说明c',
-    })
-    this.data = data
+    this.getAlarmUserHandle()
   },
   methods: {
     // 弹窗打开事件
     show() {
       this.$refs.dialog.show()
     },
-    // 弹窗确认事件
-    confirm() {
-      this.$refs.form.validate(valid => {
-        if (!valid) return
-        const form = {}
-        this.$emit('confirm', form, this.loading, this.done)
+    getAlarmUserHandle() {
+      getAlarmUserHandle({
+        isProcessTask: 1,
+        handleState: 1,
+      }).then(res => {
+        this.list = res.rows
       })
     },
-    // 取消loading事件
-    loading() {
-      this.isLoading = false
+    handleClick(item) {
+      this.current = item
+      this.getAlarmUserHandleInfo()
     },
-    // 完成事件 传递给外部使用
-    done() {
-      this.loading()
-      this.$refs.dialog.hide()
+    getAlarmUserHandleInfo() {
+      getAlarmUserHandleInfo(this.current.alarmId).then(res => {
+        this.data = res.data.deviceAlarmInfos.map(v => {
+          v.deviceName = res.data.deviceName
+          v.deviceType = res.data.deviceType
+          v.time = dayjs(v.time).format('YYYY-MM-DD HH:mm:ss')
+          return v
+        })
+      })
     },
     // 取消事件 关闭弹窗
     hide() {
-      this.loading()
       // 关闭且清空表单
       this.$refs.dialog.hide()
     },
     // 弹窗关闭按钮 关闭弹窗
     closeDialog() {
-      this.loading()
       this.$refs.dialog.hide()
     },
   },
