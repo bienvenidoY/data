@@ -107,7 +107,7 @@ export default {
       this.getPointInfo(info)
     },
     openPlayerDialog() {
-      getVideoInfo().then(res => {
+      getVideoInfo(this.info.id).then(res => {
         this.$refs.PlayerDialog.show(res.data)
       })
     },
