@@ -1,6 +1,6 @@
 import {reqGet, reqPost} from '@/api/request/api-request';
 
-// 事件归档
+// 获取token
 export const getToken = data => {
   return reqPost('/tempTokenToToken', data)
 }
@@ -31,7 +31,7 @@ export const getEntNum = data => {
   return reqGet('/cockpit/ent/num', data)
 }
 
-// 企业概况-数量统计
+// 企业概况-近一周各状态码数量
 export const getEntCodeNum = data => {
   return reqGet('/cockpit/ent/codeNum', data)
 }
@@ -45,14 +45,9 @@ export const getIntellisense = data => {
 export const getPatrolNum = data => {
   return reqGet('/cockpit/patrol/num', data)
 }
-// 巡检维护统计
+// 巡检维护统计-累计巡检
 export const getPatrolTotalNum = data => {
   return reqGet('/cockpit/patrol/totalNum', data)
-}
-
-// 点位详情
-export const getPatrolInfo = data => {
-  return reqGet('/cockpit/patrol/info', data)
 }
 
 // 点位列表
@@ -60,27 +55,27 @@ export const getPatrolList = data => {
   return reqGet('/cockpit/point/list', data)
 }
 
-// 点位详情
+// 水质监测
 export const getWaterLevel = data => {
   return reqGet('/cockpit/water/level', data)
 }
 
-// 点位详情
+// 异常概况
 export const getAlarmAlarmNum = data => {
   return reqGet('/cockpit/alarm/alarmNum', data)
 }
 
-// 上报
+// 上报 查询问题上报用户处理数据列表
 export const getProblemReport = data => {
   return reqGet('/biz/eventCenter/problemReport/list', data)
 }
 
-// 告警
+// 告警 查询告警信息用户处理数据列表
 export const getAlarmUserHandle = data => {
   return reqGet('/eventCenter/alarmUserHandle/list', data)
 }
 
-// 告警
+// 告警 获取告警信息用户处理数据详细信息
 export const getAlarmUserHandleInfo = id => {
   return reqGet(`/eventCenter/alarmUserHandle/${id}`)
 }
